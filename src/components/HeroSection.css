@@ -1,0 +1,73 @@
+.HeroSection {
+  padding: 7.9rem 0;
+  position: relative;
+}
+
+.HeroSection .lines-bg {
+  width: 100%;
+
+  position: absolute;
+  top: 0;
+
+  display: grid;
+  grid-template-columns: 5fr 5fr 7fr 3fr;
+}
+
+.HeroSection .lines-bg .lines {
+  height: 7.8rem;
+}
+
+.HeroSection .lines-bg .lines:nth-child(4n + 1),
+.HeroSection .lines-bg .lines:nth-child(4n + 2),
+.HeroSection .lines-bg .lines:nth-child(3),
+.HeroSection .lines-bg .lines:nth-child(7) {
+  border-right: 2px solid #000;
+}
+
+.hero-heading {
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  position: relative;
+}
+
+.HeroSection .hero-heading h1 {
+  max-width: fit-content;
+  padding: 0 2rem 0 5rem;
+  font-size: 6rem;
+  letter-spacing: -10px;
+  border-right: 2px solid #000;
+  z-index: 2;
+  /* border-top: 2px solid #000; */
+}
+
+.HeroSection .hero-heading .grey-block {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 14.9vw;
+  background-color: #306beb;
+  height: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .HeroSection .hero-heading h1 {
+    padding: 0 1rem 0 1rem;
+    font-size: 4rem;
+    letter-spacing: -6px;
+    z-index: 1;
+  }
+  .HeroSection .lines-bg .lines {
+    height: 6.6rem;
+  }
+}
+
+@media screen and (max-width: 526px) {
+    .HeroSection .hero-heading h1 {
+    font-size: 3rem;
+    letter-spacing: -5px;
+  }
+
+  .HeroSection .lines-bg .lines {
+    height: 5.95rem;
+  }
+}
