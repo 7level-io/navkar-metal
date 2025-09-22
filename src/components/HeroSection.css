@@ -50,6 +50,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .HeroSection {
+    padding: 8rem 0;
+  }
+
   .HeroSection .hero-heading h1 {
     padding: 0 1rem 0 1rem;
     font-size: 4rem;
@@ -62,7 +66,7 @@
 }
 
 @media screen and (max-width: 526px) {
-    .HeroSection .hero-heading h1 {
+  .HeroSection .hero-heading h1 {
     font-size: 3rem;
     letter-spacing: -5px;
   }

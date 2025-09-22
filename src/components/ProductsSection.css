@@ -1,4 +1,18 @@
 .ProductsSection {
-    margin-top: -0.1rem;
-    margin: 0 auto;
+  margin-top: -1rem;
+  margin: 0 auto;
+  max-width: 60vw;
+}
+
+@media screen and (max-width: 767px) {
+  .ProductsSection {
+    margin-top: -1.5rem;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 526px) {
+  .ProductsSection {
+    margin-top: -2.1rem;
+  }
 }
