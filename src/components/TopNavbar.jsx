@@ -59,7 +59,7 @@ export default function TopNavbar() {
     >
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="/7level-revamp">7Level{getPageLabel(location.pathname)}</Link>
+          <Link to="https://7level.in">7Level{getPageLabel(location.pathname)}</Link>
         </div>
 
         <nav className={`navbar-links ${isOpen ? "active" : ""}`}>
