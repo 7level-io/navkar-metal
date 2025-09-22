@@ -65,7 +65,6 @@ export default function TopNavbar() {
         <nav className={`navbar-links ${isOpen ? "active" : ""}`}>
           <a href="#about">About</a>
           <a href="#services">Services</a>
-          <a href="#contact">Contact</a>
         </nav>
 
         <button
