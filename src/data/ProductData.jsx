@@ -33,7 +33,7 @@ const sectionsData = [
   {
     image: flat,
     heading: "Section 6",
-    description: "This is the six section",
+    description: "",
   },
 ];
 
