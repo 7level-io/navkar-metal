@@ -73,16 +73,16 @@
   padding: 0 2rem 0 5rem;
   font-size: 6rem;
   letter-spacing: -10px;
-  z-index: 2;
 }
 
 .HeroSection .hero-heading .grey-block {
   position: absolute;
   right: 0;
   top: 0;
-  width: 14.82vw;
+  width: 15.6vw;
   background-color: #306beb;
   height: 100%;
+  z-index: -1;
 }
 
 @media screen and (max-width: 767px) {
