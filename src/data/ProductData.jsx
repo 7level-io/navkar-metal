@@ -30,11 +30,6 @@ const sectionsData = [
     heading: "Roofing",
     description: "",
   },
-  {
-    image: flat,
-    heading: "Section 6",
-    description: "",
-  },
 ];
 
 export default sectionsData;
