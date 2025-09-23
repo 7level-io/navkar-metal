@@ -14,12 +14,10 @@ export default function HeroSection() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      tl.from(".heading-content",
-        {
-          duration: 3,
-          opacity:0
-        }
-      )
+      tl.from(".heading-content", {
+        duration: 3,
+        opacity: 0,
+      });
       tl.to(
         ".lines-bg .lines:nth-child(4n+1), .lines-bg .lines:nth-child(4n+2), .lines-bg .lines:nth-child(3), .lines-bg .lines:nth-child(7)",
         {
@@ -28,7 +26,7 @@ export default function HeroSection() {
           stagger: 0.2,
           ease: "expoScale",
         },
-        0 
+        0
       );
 
       tl.to(
@@ -47,15 +45,20 @@ export default function HeroSection() {
           scaleY: 1,
           duration: 1,
           ease: "expoScale",
+          delay: 0.5
         },
         1
       );
 
-      tl.from(".grey-block", {
-        duration: 2,
-        x: "100vw",
-        ease: "back",
-      }, 0);
+      tl.from(
+        ".grey-block",
+        {
+          duration: 2,
+          x: "100vw",
+          ease: "back",
+        },
+        0
+      );
     }, sectionRef);
 
     return () => ctx.revert();
