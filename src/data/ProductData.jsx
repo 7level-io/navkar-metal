@@ -11,31 +11,31 @@ const sectionsData = [
     image: pipe,
     heading: "Pipe",
     description: "",
-    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl}/pipe`
+    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl}pipe`
   },
   {
     image: angle,
     heading: "Angle",
     description: "",
-    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl}/angle`
+    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl}angle`
   },
   {
     image: flat,
     heading: "Flat",
     description: "",
-    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }/flat`
+    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }flat`
   },
   {
     image: sheet,
     heading: "Sheet",
     description: "",
-    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }/sheet`
+    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }sheet`
   },
   {
     image: roofing,
     heading: "Roofing",
     description: "",
-    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }/roofing`
+    message: `Check this out: Cool Item \nThis is an awesome product \n${window.location.origin + baseUrl }roofing`
   },
 ];
 
