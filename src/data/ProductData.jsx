@@ -1,8 +1,8 @@
-import pipe from "../assets/imgs/pipe.png"
-import angle from "../assets/imgs/angle.png"
-import flat from "../assets/imgs/flat.png"
-import sheet from "../assets/imgs/sheet.png"
-import roofing from "../assets/imgs/roofing.png"
+import pipe from "../assets/imgs/pipe.webp"
+import angle from "../assets/imgs/angle.webp"
+import flat from "../assets/imgs/flat.webp"
+import sheet from "../assets/imgs/sheet.webp"
+import roofing from "../assets/imgs/roofing.webp"
 
 const sectionsData = [
   {
