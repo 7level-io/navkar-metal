@@ -1,18 +1,22 @@
 .ProductsSection {
-  margin-top: -1rem;
-  margin: 0 auto;
-  max-width: 60vw;
+  margin-top: -0.3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 0 3rem 3rem;
+  gap: 1.5rem;
+  /* border-top: 2px solid #1f1f1f; */
 }
 
 @media screen and (max-width: 767px) {
   .ProductsSection {
     margin-top: -1.5rem;
-    max-width: 100%;
+    display: block;
+    padding: 0;
   }
 }
 
 @media screen and (max-width: 526px) {
   .ProductsSection {
-    margin-top: -2.1rem;
+    margin-top: -2.2rem;
   }
 }
