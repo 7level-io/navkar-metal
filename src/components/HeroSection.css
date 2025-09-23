@@ -1,33 +1,71 @@
 .HeroSection {
   padding: 7.9rem 0;
   position: relative;
+  overflow: hidden;
 }
 
 .HeroSection .lines-bg {
   width: 100%;
+  pointer-events: none;
 
   position: absolute;
   top: 0;
 
   display: grid;
-  grid-template-columns: 5fr 5fr 7fr 3fr;
+  grid-template-columns: 5fr 5fr 6fr 3fr;
 }
 
 .HeroSection .lines-bg .lines {
-  height: 7.8rem;
+  height: 7.7rem;
+  border-right: none;
+  transform-origin: top center;
+  transform: scaleY(0);
 }
 
 .HeroSection .lines-bg .lines:nth-child(4n + 1),
 .HeroSection .lines-bg .lines:nth-child(4n + 2),
 .HeroSection .lines-bg .lines:nth-child(3),
 .HeroSection .lines-bg .lines:nth-child(7) {
-  border-right: 2px solid #000;
+  border-right: 2px solid #1f1f1f;
 }
 
 .hero-heading {
-  border-top: 2px solid #000;
-  border-bottom: 2px solid #000;
   position: relative;
+}
+
+.hero-heading .border {
+  position: absolute;
+  background: #1f1f1f;
+  transform-origin: left top;
+}
+
+.hero-heading .border.top,
+.hero-heading .border.bottom {
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0); /* collapsed */
+}
+
+.hero-heading .border.top {
+  top: 0;
+}
+.hero-heading .border.bottom {
+  bottom: 0;
+}
+
+.hero-heading h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-heading h1 .border.right {
+  top: 0;
+  right: -2px; /* adjust to align with h1 */
+  width: 2px;
+  height: 100%;
+  transform: scaleY(0);
+  position: absolute;
 }
 
 .HeroSection .hero-heading h1 {
@@ -35,16 +73,14 @@
   padding: 0 2rem 0 5rem;
   font-size: 6rem;
   letter-spacing: -10px;
-  border-right: 2px solid #000;
   z-index: 2;
-  /* border-top: 2px solid #000; */
 }
 
 .HeroSection .hero-heading .grey-block {
   position: absolute;
   right: 0;
   top: 0;
-  width: 14.9vw;
+  width: 14.82vw;
   background-color: #306beb;
   height: 100%;
 }
@@ -61,7 +97,7 @@
     z-index: 1;
   }
   .HeroSection .lines-bg .lines {
-    height: 6.6rem;
+    height: 6.5rem;
   }
 }
 
@@ -72,6 +108,6 @@
   }
 
   .HeroSection .lines-bg .lines {
-    height: 5.95rem;
+    height: 5.85rem;
   }
 }
