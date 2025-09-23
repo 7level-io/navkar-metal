@@ -1,6 +1,6 @@
 import sectionsData from "../data/ProductData";
 import Product from "./Product";
-import "../components/ProductsSection.css"
+import "../components/ProductsSection.css";
 
 export default function ProductsSection() {
   return (
@@ -12,6 +12,7 @@ export default function ProductsSection() {
           image={section.image}
           heading={section.heading}
           description={section.description}
+          message={section.message}
         />
       ))}
     </div>

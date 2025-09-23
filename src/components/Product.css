@@ -23,6 +23,10 @@
 
 .product-content.image-left {
   background-color: #306beb;
+}
+
+.product-content.image-left,
+.product-content.image-left a {
   color: #fff;
 }
 
