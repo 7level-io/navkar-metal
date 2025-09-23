@@ -1,4 +1,5 @@
 import "../components/Product.css";
+import RightArrow from "./RightArrow";
 
 export default function Product({
   image,
@@ -31,7 +32,7 @@ export default function Product({
           rel="noopener noreferrer"
           className="whatsapp-button"
         >
-          Enquire
+          Enquire<RightArrow />
         </a>
       </div>
     </div>
