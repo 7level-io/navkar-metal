@@ -692,12 +692,10 @@
         </div>
       </div>
     </main>
-    <div
-      id="cartDrawer"
-    >
+    <div id="cartDrawer">
       <h3>Cart</h3>
       <ul id="cartItems"></ul>
-      <a id="list-enquiry" target="_blank">Share on WhatsApp</a>
+      <a id="list-enquiry" target="_blank">Enquire on WhatsApp</a>
       <button id="closeCart">x</button>
     </div>
 
@@ -723,27 +721,23 @@
           }
 
           console.log("Cart updated:", cart);
-          updateWhatsAppLink();
+          sendInquiry();
         });
       });
 
-      function updateWhatsAppLink() {
-        let message = "🛒 My Cart:\n\n";
-        let total = 0;
+      function sendEnquiry() {
+        let message = "Enquiry List:\n\n";
+
+        let cart = loadCart();
 
         cart.forEach((item) => {
-          const subtotal = item.price * item.qty;
-          message += `${item.name} (Size: ${item.size}, Weight: ${item.weight}) x${item.qty} - ₹${subtotal}\n`;
-          total += subtotal;
+          message += `${item.name} (Size: ${item.size}, Weight: ${item.weight}) x${item.quantity} \n`;
         });
-
-        message += `\nTotal: ₹${total}\n\nCheckout here: https://navkarmetal.7level.in/cart`;
 
         // Encode and apply
         const encoded = encodeURIComponent(message);
-        document
-          .getElementById("list-enquiry")
-          .setAttribute("href", `https://wa.me/?text=${encoded}`);
+        enquiryList.setAttribute("href", `https://wa.me/?text=${encoded}`);
+        console.log(cart);
       }
     </script>
 
