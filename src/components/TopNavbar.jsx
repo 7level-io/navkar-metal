@@ -62,10 +62,10 @@ export default function TopNavbar() {
           <Link to="https://7level.in">7Level{getPageLabel(location.pathname)}</Link>
         </div>
 
-        <nav className={`navbar-links ${isOpen ? "active" : ""}`}>
+        {/* <nav className={`navbar-links ${isOpen ? "active" : ""}`}>
           <a href="#about">About</a>
           <a href="#services">Services</a>
-        </nav>
+        </nav> */}
 
         <button
           className="navbar-toggle"
