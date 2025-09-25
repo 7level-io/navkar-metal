@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pipe</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
     <meta
       name="description"
       content="Different types of pipe: Square pipes, Round and Rectangular"
@@ -21,7 +26,10 @@
     <meta property="og:url" content="https://navkarmetal.7level.in/pipe" />
     <meta property="og:type" content="website" />
 
-    <meta name="twitter:card" content="https://navkarmetal.7level.in/pipe.png" />
+    <meta
+      name="twitter:card"
+      content="https://navkarmetal.7level.in/pipe.png"
+    />
     <meta name="twitter:title" content="Pipe" />
     <meta
       name="twitter:description"
@@ -33,14 +41,712 @@
     />
     <meta name="twitter:url" content="https://navkarmetal.7level.in/pipe" />
 
-    <!-- Optional: Author -->
     <meta name="author" content="Navkar Metal" />
   </head>
   <body>
-    <div>
-        <div>
-            <img src="../pipe.png" alt="">
+    <nav class="top-navbar">
+      <div class="logo">
+        <a href="https://navkarmetal.7level.in">Navkar Metals</a>
+      </div>
+      <div class="product-links">
+        <a href="../cart">Cart</a>
+        <a href="../angle">Angle</a>
+        <a href="../flat">Flat</a>
+        <a href="../sheet">Sheet</a>
+        <a href="../roofing">Roofing</a>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="page-title-container">
+        <h1>Pipes</h1>
+
+        <button id="cartBtn">View Cart</button>
+      </div>
+      <div class="container">
+        <div id="square-pipes" class="table-container">
+          <h2>Square Pipes</h2>
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Serial</th>
+                <th>Size</th>
+                <th>Weight</th>
+                <th>Quantity</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>Sut 4</td>
+                <td>4kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="01"
+                    data-name="Square Pipe"
+                    data-size="Sut 4"
+                    data-weight="4kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>Sut 6</td>
+                <td>5kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="02"
+                    data-name="Square Pipe"
+                    data-size="Sut 6"
+                    data-weight="5kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Sut 6</td>
+                <td>7kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="03"
+                    data-name="Square Pipe"
+                    data-size="Sut 6"
+                    data-weight="7kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>1 Inch</td>
+                <td>6.5kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="04"
+                    data-name="Square Pipe"
+                    data-size="1 Inch"
+                    data-weight="6.5kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>05</td>
+                <td>1 Inch</td>
+                <td>8kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="05"
+                    data-name="Square Pipe"
+                    data-size="1 Inch"
+                    data-weight="8kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>06</td>
+                <td>1.2 Inch</td>
+                <td>8kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="06"
+                    data-name="Square Pipe"
+                    data-size="1.2 Inch"
+                    data-weight="8kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>07</td>
+                <td>1.2 Inch</td>
+                <td>12kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="07"
+                    data-name="Square Pipe"
+                    data-size="1.2 Inch"
+                    data-weight="12kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>08</td>
+                <td>1.5 Inch</td>
+                <td>11.5kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="08"
+                    data-name="Square Pipe"
+                    data-size="1.5 Inch"
+                    data-weight="11.5kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>09</td>
+                <td>1.5 Inch</td>
+                <td>14kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="09"
+                    data-name="Square Pipe"
+                    data-size="1.5 Inch"
+                    data-weight="14kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>2 Inch</td>
+                <td>19kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="10"
+                    data-name="Square Pipe"
+                    data-size="2 Inch"
+                    data-weight="19kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>2 Inch</td>
+                <td>24kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="11"
+                    data-name="Square Pipe"
+                    data-size="2 Inch"
+                    data-weight="24kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
+        <div id="rectangle-pipes" class="table-container">
+          <h2>Rectangle Pipes</h2>
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Serial</th>
+                <th>Size</th>
+                <th>Weight</th>
+                <th>Quantity</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>12</td>
+                <td>1.5 Inch X 1 Inch</td>
+                <td>8kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="01"
+                    data-name="Rectangle Pipe"
+                    data-size="1.5 Inch X 1 Inch"
+                    data-weight="8kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>13</td>
+                <td>1.5 Inch X 1 Inch</td>
+                <td>12kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="02"
+                    data-name="Rectangle Pipe"
+                    data-size="1.5 Inch X 1 Inch"
+                    data-weight="12kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>14</td>
+                <td>2 Inch X 1 Inch</td>
+                <td>11.5kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="02"
+                    data-name="Rectangle Pipe"
+                    data-size="2 Inch X 1 Inch"
+                    data-weight="11.5kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>15</td>
+                <td>2 Inch X 1 Inch</td>
+                <td>15kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="03"
+                    data-name="Rectangle Pipe"
+                    data-size="2 Inch X 1 Inch"
+                    data-weight="15kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>16</td>
+                <td>2.3 Inch X 1.5 Inch</td>
+                <td>14kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="04"
+                    data-name="Rectangle Pipe"
+                    data-size="2.3 Inch X 1.5 Inch"
+                    data-weight="14kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>17</td>
+                <td>2.3Inch X 1.5 Inch</td>
+                <td>18kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="05"
+                    data-name="Rectangle Pipe"
+                    data-size="2.3Inch X 1.5 Inch"
+                    data-weight="18kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="round-pipes" class="table-container">
+          <h2>Round Pipes</h2>
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Serial</th>
+                <th>Size</th>
+                <th>Weight</th>
+                <th>Quantity</th>
+                <th>Add</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>18</td>
+                <td>26 OD(6kg)</td>
+                <td>6kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="01"
+                    data-name="Round Pipe"
+                    data-size="26 OD(6kg)"
+                    data-weight="6kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>19</td>
+                <td>33 OD(6kg)</td>
+                <td>6kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="02"
+                    data-name="Round Pipe"
+                    data-size="33 OD(6kg)"
+                    data-weight="6kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>20</td>
+                <td>33 OD(8kg)</td>
+                <td>8kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="02"
+                    data-name="Round Pipe"
+                    data-size="33 OD(8kg)"
+                    data-weight="8kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>21</td>
+                <td>42 OD(12kg)</td>
+                <td>12kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="03"
+                    data-name="Round Pipe"
+                    data-size="42 OD(12kg)"
+                    data-weight="12kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>22</td>
+                <td>42 OD(15kg)</td>
+                <td>15kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="04"
+                    data-name="Round Pipe"
+                    data-size="42 OD(15kg)"
+                    data-weight="15kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>23</td>
+                <td>48 OD(15kg)</td>
+                <td>15kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="05"
+                    data-name="Round Pipe"
+                    data-size="48 OD(15kg)"
+                    data-weight="15kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>24</td>
+                <td>48 OD(20kg)</td>
+                <td>20kg</td>
+                <td>
+                  <div class="qty-control">
+                    <input type="number" min="0" value="0" />
+                    <button class="decrease">-</button>
+                    <button class="increase">+</button>
+                  </div>
+                </td>
+
+                <td>
+                  <button
+                    class="add-to-cart"
+                    data-id="05"
+                    data-name="Round Pipe"
+                    data-size="48 OD(20kg)"
+                    data-weight="20kg"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <div
+      id="cartDrawer"
+    >
+      <h3>Cart</h3>
+      <ul id="cartItems"></ul>
+      <a id="list-enquiry" target="_blank">Share on WhatsApp</a>
+      <button id="closeCart">x</button>
     </div>
+
+    <script>
+      const cart = [];
+      document.querySelectorAll(".add-to-cart").forEach((button) => {
+        button.addEventListener("click", () => {
+          const product = {
+            id: button.dataset.id,
+            name: button.dataset.name,
+            size: button.dataset.size,
+            weight: button.dataset.weight,
+            price: parseFloat(button.dataset.price),
+            qty: 1,
+          };
+
+          // Check if already in cart → increase qty
+          const existing = cart.find((item) => item.id === product.id);
+          if (existing) {
+            existing.qty += 1;
+          } else {
+            cart.push(product);
+          }
+
+          console.log("Cart updated:", cart);
+          updateWhatsAppLink();
+        });
+      });
+
+      function updateWhatsAppLink() {
+        let message = "🛒 My Cart:\n\n";
+        let total = 0;
+
+        cart.forEach((item) => {
+          const subtotal = item.price * item.qty;
+          message += `${item.name} (Size: ${item.size}, Weight: ${item.weight}) x${item.qty} - ₹${subtotal}\n`;
+          total += subtotal;
+        });
+
+        message += `\nTotal: ₹${total}\n\nCheckout here: https://navkarmetal.7level.in/cart`;
+
+        // Encode and apply
+        const encoded = encodeURIComponent(message);
+        document
+          .getElementById("list-enquiry")
+          .setAttribute("href", `https://wa.me/?text=${encoded}`);
+      }
+    </script>
+
+    <script src="../script.js"></script>
   </body>
 </html>

@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.top-navbar {
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-navbar .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.product-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.product-links a:hover {
+  text-decoration: underline;
+  color: #007bff;
+}
+
+.page-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  padding: 1rem 0;
+  top: 0;
+  background-color: #fff;
+}
+
+.page-title-container .onpage-links {
+  display: flex;
+  gap: 1rem;
+}
+
+#cartBtn {
+  background-color: #306beb;
+  color: #fff;
+  padding: 0.5rem 2rem;
+}
+
+.main {
+  padding: 1rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  gap: 3rem;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.qty-control {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.qty-control input {
+  text-align: center;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+td:nth-child(5n) {
+  text-align: center;
+}
+
+#cartDrawer {
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 450px;
+  height: 100%;
+  background: #f0f0f0;
+  border-left: 1px solid #ccc;
+  padding: 5rem 2.5rem;
+  overflow: auto;
+}
+
+
+#cartDrawer.open {
+  display: block;
+}
+
+#cartDrawer h3 {
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+#cartItems {
+  margin-bottom: 2rem;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+#list-enquiry {
+  background-color: #25D366;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+#list-enquiry:hover {
+  cursor: pointer;
+}
+
+.remove-btn {
+  color: #a51c1c;
+}
+
+.remove-btn:hover {
+ text-decoration: underline;
+}
+
+#closeCart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+}
