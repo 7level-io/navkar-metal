@@ -31,7 +31,7 @@
 }
 
 .product-content h2 {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
 }
 
 .product-content a {
@@ -43,6 +43,11 @@
 .product-content.product-content.image-left svg {
   fill: #fff;
 }
+
+.product-content.product-content.image-right svg {
+  fill: #0000ee;
+}
+
 .product-content.product-content svg {
   margin-bottom: -4px;
 }
