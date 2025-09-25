@@ -695,7 +695,7 @@
     <div id="cartDrawer">
       <h3>Cart</h3>
       <ul id="cartItems"></ul>
-      <a id="list-enquiry" target="_blank">Enquire on WhatsApp</a>
+      <a id="list-enquiry" target="_blank">Share on WhatsApp</a>
       <button id="closeCart">x</button>
     </div>
 
@@ -724,6 +724,8 @@
           sendInquiry();
         });
       });
+
+      const enquiryList = document.getElementById("list-enquiry");
 
       function sendEnquiry() {
         let message = "Enquiry List:\n\n";
