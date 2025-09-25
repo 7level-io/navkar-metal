@@ -727,6 +727,10 @@
 
       const enquiryList = document.getElementById("list-enquiry");
 
+      enquiryList.addEventListener("click", () => {
+        sendEnquiry();
+      });
+
       function sendEnquiry() {
         let message = "Enquiry List:\n\n";
 
@@ -738,7 +742,10 @@
 
         // Encode and apply
         const encoded = encodeURIComponent(message);
-        enquiryList.setAttribute("href", `https://wa.me/9860140359?text=${encoded}`);
+        enquiryList.setAttribute(
+          "href",
+          `https://wa.me/9860140359?text=${encoded}`
+        );
         console.log(cart);
       }
     </script>
