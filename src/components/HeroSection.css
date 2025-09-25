@@ -26,7 +26,7 @@
 .HeroSection .lines-bg .lines:nth-child(4n + 2),
 .HeroSection .lines-bg .lines:nth-child(3),
 .HeroSection .lines-bg .lines:nth-child(7) {
-  border-right: 2px solid #1f1f1f;
+  border-right: 1.75px solid #1f1f1f;
 }
 
 .hero-heading {
@@ -42,7 +42,7 @@
 .hero-heading .border.top,
 .hero-heading .border.bottom {
   left: 0;
-  height: 2px;
+  height: 1.5px;
   width: 100%;
   transform: scaleX(0); /* collapsed */
 }
@@ -61,7 +61,7 @@
 
 .hero-heading h1 .border.right {
   top: 0;
-  right: -2px; /* adjust to align with h1 */
+  right: -2px;
   width: 2px;
   height: 100%;
   transform: scaleY(0);
@@ -87,7 +87,7 @@
 
 @media screen and (max-width: 767px) {
   .HeroSection {
-    padding: 8rem 0;
+    padding: 5rem 0 6.5rem;
   }
 
   .HeroSection .hero-heading h1 {
@@ -97,17 +97,24 @@
     z-index: 1;
   }
   .HeroSection .lines-bg .lines {
-    height: 6.5rem;
+    height: 5rem;
   }
 }
 
 @media screen and (max-width: 526px) {
+  .HeroSection {
+    padding: 2rem 0 8.25rem;
+  }
+
   .HeroSection .hero-heading h1 {
     font-size: 3rem;
     letter-spacing: -5px;
   }
 
   .HeroSection .lines-bg .lines {
-    height: 5.85rem;
+    height: 2.85rem;
+  }
+  .HeroSection .lines-bg .lines:nth-last-child(-n + 4) {
+    height: 9rem;
   }
 }
