@@ -24,9 +24,11 @@ function renderCart() {
   } else {
     cart.forEach((item) => {
       const li = document.createElement("li");
-      li.textContent = `${item.name} (${item.size}, ${item.weight}) x ${item.quantity} `;
+      li.classList.add("cart-item");
+      li.innerHTML = `<span>${item.name} (${item.size}, ${item.weight}) x ${item.quantity} <span>`;
 
       const removeBtn = document.createElement("button");
+      removeBtn.classList.add("remove-btn");
       removeBtn.textContent = "Remove";
       removeBtn.addEventListener("click", () => {
         removeFromCart(item.id);
