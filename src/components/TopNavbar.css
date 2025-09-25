@@ -1,16 +1,13 @@
-/* Default color */
 .navbar-default {
   background-color: #ffffff;
   color: #333;
 }
 
-/* Your RGB brown color */
 .navbar-brown {
   background-color: rgb(176, 115, 43);
-  color: white; /* text color */
+  color: white;
 }
 
-/* Make sure links inherit the navbar text color */
 .navbar a {
   color: inherit;
   text-decoration: none;
@@ -27,11 +24,11 @@
 .navbar {
   width: 100%;
   background-color: #ffffff;
-  position: sticky;
   top: 0;
   z-index: 1000;
   transition: background-color 0.3s ease, border-radius 0.3s ease;
   background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .navbar.navbar-scrolled {
