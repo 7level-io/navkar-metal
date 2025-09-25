@@ -59,21 +59,24 @@ export default function TopNavbar() {
     >
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="https://7level.in">7Level{getPageLabel(location.pathname)}</Link>
+          <Link to="https://7level.in">
+            7Level{getPageLabel(location.pathname)}
+          </Link>
         </div>
 
-        {/* <nav className={`navbar-links ${isOpen ? "active" : ""}`}>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-        </nav> */}
+        <nav class="navbar-links">
+          <a href="../pipe">Pipe</a>
+          <a href="../angle">Angle</a>
+          <a href="../flat">Flat</a>
+          <a href="../sheet">Sheet</a>
+          <a href="../roofing">Roofing</a>
+        </nav>
 
         <button
           className="navbar-toggle"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
-        >
-          {/* {isOpen ? <X size={28} /> : <Menu size={28} />} */}
-        </button>
+        ></button>
       </div>
     </header>
   );
