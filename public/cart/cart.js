@@ -57,6 +57,6 @@ function sendEnquiry() {
 
   // Encode and apply
   const encoded = encodeURIComponent(message);
-  enquiryList.setAttribute("href", `https://wa.me/?text=${encoded}`);
+  enquiryList.setAttribute("href", `https://wa.me/9860140359?text=${encoded}`);
   console.log(cart);
 }
