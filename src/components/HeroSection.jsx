@@ -38,27 +38,6 @@ export default function HeroSection() {
         },
         0
       );
-
-      tl.to(
-        ".hero-heading h1 .border.right",
-        {
-          scaleY: 1,
-          duration: 1,
-          ease: "expoScale",
-          delay: 0.5
-        },
-        1
-      );
-
-      tl.from(
-        ".grey-block",
-        {
-          duration: 2,
-          x: "100vw",
-          ease: "back",
-        },
-        0
-      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -71,7 +50,7 @@ export default function HeroSection() {
         <span className="border top"></span>
         <span className="border bottom"></span>
         <h1 className="heading-content">
-          Navkar Metal
+          Navkar Metals
           <span className="border right"></span>
         </h1>
         <div className="grey-block"></div>
