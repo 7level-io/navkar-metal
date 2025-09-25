@@ -27,7 +27,7 @@ export default function Product({
         <h2>{heading}</h2>
         {description && <p>{description}</p>}
         <a
-          href={`https://wa.me/?text=${encodeURIComponent(message)}`}
+          href={`https://wa.me/9860140359?text=${encodeURIComponent(message)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="whatsapp-button"
