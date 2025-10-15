@@ -176,7 +176,7 @@ button {
 .tabs {
   display: flex;
   gap: 0;
-  /* background: #f0f0f0; */
+  background: #f0f0f0;
   border-radius: 1.5rem;
   margin: 1rem 5rem 1rem;
   padding: 0.25rem;
@@ -185,6 +185,7 @@ button {
 .tab {
   flex: 1;
   cursor: pointer;
+  border-radius: 1.5rem;
   transition: all 0.3s ease;
 }
 
@@ -245,7 +246,7 @@ button {
 }
 
 .product-table .table-body .table-row:hover {
-  /* background: #f0f0f0; */
+  background: #f0f0f0;
 }
 
 .table-row .qty-input,
@@ -313,7 +314,7 @@ button {
 }
 
 .qty-btn:hover {
-  /* background: #f0f0f0; */
+  background: #f0f0f0;
 }
 
 .qty-input {
@@ -415,6 +416,7 @@ button {
 }
 
 .cart-header {
+  margin-bottom: 0;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
@@ -426,10 +428,9 @@ button {
 }
 
 .close-btn {
-  width: 32px;
-  height: 32px;
+  padding: 4px 10px 5px 10px;
   border: none;
-  /* background: #f0f0f0; */
+  background: #f0f0f0;
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
@@ -467,13 +468,13 @@ button {
   font-size: 18px;
   font-weight: 600;
   border-bottom: 2px solid #e0e0e0;
-  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .cart-subcategory {
   border-radius: 0.5rem;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   display: inline-block;
   margin: 0.5rem 0;
   background-color: #fff;
@@ -484,6 +485,7 @@ button {
 .cart-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr auto;
+  align-items: center;
   gap: 1rem;
   padding: 0.25rem 0;
   border-bottom: 1px solid #e0e0e0;
@@ -511,6 +513,7 @@ button {
 
 .btn.cart-item-remove:hover {
   cursor: pointer;
+  color: #6b0317;
 }
 
 .btn.cart-item-remove svg {
