@@ -212,7 +212,7 @@ button {
 
 .sub-tab.active {
   background: #fff;
-  color: #000;
+  color: #306beb;
   transform: scale(1.05);
   border-radius: 0.5rem;
 }
@@ -476,6 +476,7 @@ button {
   display: inline-block;
   margin: 0.5rem 0;
   background-color: #fff;
+  color: #306beb;
   padding: 0.25rem;
 }
 
