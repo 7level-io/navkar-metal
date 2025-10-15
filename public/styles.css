@@ -36,7 +36,7 @@ input[type="number"] {
 }
 
 .mr-2 {
-    margin-right: calc(var(--spacing) * 2);
+  margin-right: calc(var(--spacing) * 2);
 }
 
 .py-12 {
@@ -44,7 +44,7 @@ input[type="number"] {
 }
 
 .w-5 {
-    width: calc(var(--spacing) * 5);
+  width: calc(var(--spacing) * 5);
 }
 
 .w-12 {
@@ -60,7 +60,7 @@ input[type="number"] {
 }
 
 .h-5 {
-    height: calc(var(--spacing) * 5);
+  height: calc(var(--spacing) * 5);
 }
 
 .h-12 {
@@ -164,71 +164,6 @@ button {
   padding: 0.75rem 1.5rem;
 }
 
-td:nth-child(5n) {
-  text-align: center;
-}
-
-#cartDrawer {
-  display: none;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 450px;
-  height: 100%;
-  background: #f0f0f0;
-  border-left: 1px solid #ccc;
-  padding: 5rem 2.5rem;
-  overflow: auto;
-}
-
-#cartDrawer.open {
-  padding: 5rem 1.75rem;
-  display: block;
-}
-
-#cartDrawer h3 {
-  text-decoration: underline;
-  margin-bottom: 1rem;
-}
-
-#cartItems {
-  margin-bottom: 2rem;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid #1e1e1e;
-}
-
-#list-enquiry {
-  background-color: #25d366;
-  color: #fff;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
-#list-enquiry:hover {
-  cursor: pointer;
-}
-
-.remove-btn {
-  color: #a51c1c;
-}
-
-.remove-btn:hover {
-  text-decoration: underline;
-}
-
-#closeCart {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-}
-
 /* Product page */
 .product-list.container {
   max-width: 1400px;
@@ -240,7 +175,7 @@ td:nth-child(5n) {
 .tabs {
   display: flex;
   gap: 0;
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
   border-radius: 1.5rem;
   margin: 1rem 5rem 1rem;
   padding: 0.25rem;
@@ -309,7 +244,7 @@ td:nth-child(5n) {
 }
 
 .product-table .table-body .table-row:hover {
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
 }
 
 .table-row .qty-input,
@@ -334,12 +269,8 @@ td:nth-child(5n) {
   color: #666;
 }
 
-.product-table .table-data {
-}
-
 .unit-toggle {
   display: inline-flex;
-  background: #f0f0f0;
   border-radius: 0.25rem;
   overflow: hidden;
   margin-left: 8px;
@@ -381,7 +312,7 @@ td:nth-child(5n) {
 }
 
 .qty-btn:hover {
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
 }
 
 .qty-input {
@@ -395,7 +326,6 @@ td:nth-child(5n) {
   border-color: #306beb;
 }
 
-/* Add to Cart Button */
 .add-to-cart-btn {
   font-family: "Lexand", sans-serif;
   background: #818089;
@@ -408,7 +338,6 @@ td:nth-child(5n) {
   align-items: center;
   justify-content: center;
   transition: all 0.3s;
-
 }
 
 .add-to-cart-btn.enabled {
@@ -420,12 +349,11 @@ td:nth-child(5n) {
   background: #1a4db8;
 }
 
-/* Cart Button */
 .cart-button.btn {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  padding: 1rem 1.5rem ;
+  padding: 1rem 1.5rem;
   background: #000;
   color: #fff;
   cursor: pointer;
@@ -470,9 +398,8 @@ td:nth-child(5n) {
   position: fixed;
   top: 0;
   gap: 0.5rem;
-  right: -600px;
-  width: 600px;
-  height: 100vh;
+  right: -700px;
+  width: 700px;
   background: #fff;
   box-shadow: -2px 0 12px rgba(0, 0, 0, 0.2);
   transition: right 0.3s ease;
@@ -501,7 +428,7 @@ td:nth-child(5n) {
   width: 32px;
   height: 32px;
   border: none;
-  background: #f0f0f0;
+  /* background: #f0f0f0; */
   border-radius: 50%;
   font-size: 20px;
   cursor: pointer;
@@ -538,7 +465,7 @@ td:nth-child(5n) {
 .cart-category-title {
   font-size: 18px;
   font-weight: 600;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #e0e0e0;
   margin-bottom: 0.5rem;
 }
 
@@ -556,6 +483,8 @@ td:nth-child(5n) {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr auto;
   gap: 1rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .cart-item-size {
@@ -578,8 +507,12 @@ td:nth-child(5n) {
   color: #d4183d;
 }
 
+.btn.cart-item-remove:hover {
+  cursor: pointer;
+}
+
 .btn.cart-item-remove svg {
-  width: calc(var(--spacing) * 5)
+  width: calc(var(--spacing) * 5);
 }
 
 .cart-qty-input {
@@ -620,9 +553,6 @@ td:nth-child(5n) {
 }
 
 @media (max-width: 768px) {
-  .container {
-  }
-
   .tabs {
     margin: 1rem 2rem 1rem;
   }
@@ -646,7 +576,14 @@ td:nth-child(5n) {
     right: -100%;
   }
 
-  .cart-button {
+  .cart-drawer.active {
+    right: 0;
+    padding: 1rem;
+  }
+
+  .cart-item {
+    gap: 0.5rem;
+    font-size: 14px;
   }
 }
 

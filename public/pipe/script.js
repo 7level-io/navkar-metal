@@ -189,6 +189,9 @@ const products = {
   ],
 };
 
+const element = document.querySelector('.cart-drawer');
+element.style.height = `${window.innerHeight}px`;
+
 let cart = {};
 let currentUnit = "in";
 let currentCartUnit = "in";
@@ -482,9 +485,7 @@ function renderCartItem(item) {
                         }', 1)">+</button>
                         
                     </div>
-                    <button data-slot="button" class="btn cart-item-remove" onclick="removeFromCart('${
-                      item.id
-                    }' class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-9 rounded-md text-destructive h-6 w-6 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 lucide-trash-2 h-3 w-3" aria-hidden="true"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                    <button data-slot="button" onclick="removeFromCart('${item.id}')" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-9 rounded-md text-destructive h-6 w-6 shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 lucide-trash-2 h-3 w-3" aria-hidden="true"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
                 </div>
             `;
 }
@@ -608,7 +609,6 @@ document
   .getElementById("flat-add-btn")
   .addEventListener("click", () => addToCart("flat"));
 
-  // Add this function to handle checkout
 function handleCheckout() {
     if (Object.keys(cart).length === 0) {
         alert('Your cart is empty!');
@@ -617,7 +617,6 @@ function handleCheckout() {
 
     let message = "Enquiry List:\n\n";
     
-    // Group by category and subcategory (same as cart display)
     const grouped = {};
     Object.entries(cart).forEach(([id, item]) => {
         const cat = item.category;
@@ -633,7 +632,6 @@ function handleCheckout() {
         }
     });
 
-    // Sort items by size
     const sortItems = (items) => {
         return items.sort((a, b) => {
             const aNum = parseFloat(a.sizeIn.split('x')[0]);
@@ -642,29 +640,32 @@ function handleCheckout() {
         });
     };
 
-    // Build message
     Object.entries(grouped).forEach(([category, data]) => {
         message += `${category}:\n`;
 
         if (category === 'Pipe') {
             ['Square', 'Rectangle', 'Round'].forEach(sub => {
                 if (data[sub]) {
-                    message += `  ${sub}:\n`;
+                    message += `${sub}:\n`;
+                    let counter = 1;
                     sortItems(data[sub]).forEach(item => {
                         const size = currentCartUnit === 'in' ? item.sizeIn : item.sizeMm;
                         const unit = currentCartUnit === 'in' ? 'Inch' : 'mm';
                         const extra = item.extra ? ` ${item.extra}` : '';
-                        message += `    ${item.name}${extra} (Size: ${size} ${unit}, Weight: ${item.weight}kg) x${item.quantity}\n`;
+                        message += `${counter}. ${item.name}${extra} (Size: ${size} ${unit}, Weight: ${item.weight}kg) x${item.quantity}\n`;
+                        counter++;
                     });
                 }
             });
         } else {
             if (data.items) {
+                let counter = 1;
                 sortItems(data.items).forEach(item => {
                     const size = currentCartUnit === 'in' ? item.sizeIn : item.sizeMm;
                     const unit = currentCartUnit === 'in' ? 'Inch' : 'mm';
                     const extra = item.extra ? ` ${item.extra}` : '';
-                    message += `  ${item.name}${extra} (Size: ${size} ${unit}, Weight: ${item.weight}kg) x${item.quantity}\n`;
+                    message += `${counter}. ${item.name}${extra} (Size: ${size} ${unit}, Weight: ${item.weight}kg) x${item.quantity}\n`;
+                    counter++;
                 });
             }
         }
