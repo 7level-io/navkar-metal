@@ -391,19 +391,19 @@ export const products = {
       name: "Channel 75X40",
       sizeIn: "",
       sizeMm: "75X40",
-      weight: "",
+      weight: 45,
     },
     {
       name: "Channel 100X50",
       sizeIn: "",
       sizeMm: "100X50",
-      weight: "",
+      weight: 58,
     },
     {
       name: "Channel 125X65",
       sizeIn: "",
       sizeMm: "125X65",
-      weight: "",
+      weight: 80,
     },
   ],
   sheet: [
