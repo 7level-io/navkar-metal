@@ -381,9 +381,9 @@ const Cart = {
         <div class="cart-category">
           <div class="cart-category-title inline-block w-100">
             <span class="cart-category-title-text">${category}</span>
-            <div class="cart-unit-toggle inline-block ml-2">
+            <div class="cart-unit-toggle inline-block ml-10">
               <div>
-                <span style="font-size: 14px; font-weight: 500">Size</span>
+                <span style="font-size: 14px; font-weight: 500">Size:</span>
                 <div class="unit-toggle">
                   <button class="unit-btn active" data-unit="mm" id="cart-unit-mm">
                     mm
