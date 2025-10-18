@@ -6,7 +6,7 @@ export default function Product({
   heading,
   description,
   index,
-  message,
+  // message,
 }) {
   const isImageRight = index % 2 === 0;
 
@@ -27,7 +27,8 @@ export default function Product({
         <h2>{heading}</h2>
         {description && <p>{description}</p>}
         <a
-          href={`https://wa.me/9860140359?text=${encodeURIComponent(message)}`}
+          // href={`https://wa.me/9860140359?text=${encodeURIComponent(message)}`}
+          href="https://navkarmetal.7level.in/products"
           target="_blank"
           rel="noopener noreferrer"
           className="whatsapp-button"

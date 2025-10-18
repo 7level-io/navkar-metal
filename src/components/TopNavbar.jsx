@@ -65,11 +65,12 @@ export default function TopNavbar() {
         </div>
 
         <nav class="navbar-links">
-          <a href="../pipe">Pipe</a>
+          <a href="../products">Products</a>
+          {/* <a href="../pipe">Pipe</a>
           <a href="../angle">Angle</a>
           <a href="../flat">Flat</a>
           <a href="../sheet">Sheet</a>
-          <a href="../roofing">Roofing</a>
+          <a href="../roofing">Roofing</a> */}
         </nav>
 
         <button
