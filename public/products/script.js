@@ -383,7 +383,7 @@ const Cart = {
             <span class="cart-category-title-text">${category}</span>
             <div class="cart-unit-toggle inline-block ml-10">
               <div>
-                <span style="font-size: 14px; font-weight: 500">Size:</span>
+                <span class="text-muted-foreground" style="font-size: 14px; font-weight: 500">Size:</span>
                 <div class="unit-toggle">
                   <button class="unit-btn active" data-unit="mm" id="cart-unit-mm">
                     mm
@@ -653,7 +653,7 @@ const Checkout = {
       const weight = parseFloat(item.weight) || 0;
       const itemTotalWeight = weight * quantity;
 
-      result += `${counter}. ${displayValue} ${unitLabel}${extra} x${quantity} | Total Item Weight: ${itemTotalWeight}}\n`;
+      result += `${counter}. ${displayValue} ${unitLabel}${extra} x${quantity} | Total Item Weight: ${itemTotalWeight.toFixed(2)}\n`;
       counter++;
       
       subWeight += itemTotalWeight;
