@@ -754,8 +754,6 @@ function init() {
   Storage.load();
 
   Events.init();
-
-  console.log("✅ Construction Metals Cart V2.1 Initialized (MM-based IDs)");
 }
 
 init();

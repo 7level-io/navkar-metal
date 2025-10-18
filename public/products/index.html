@@ -14,283 +14,301 @@
     <link rel="stylesheet" href="../styles.css" />
   </head>
   <body>
-    <div class="product-list container">
-      <div class="tabs">
-        <button class="tab btn p-md fw-500 font-size-md active" data-tab="pipe">
-          Pipe
-        </button>
-        <button class="tab btn p-md fw-500 font-size-md" data-tab="angle">
-          Angle
-        </button>
-        <button class="tab btn p-md fw-500 font-size-md" data-tab="flat">
-          Flat
-        </button>
-        <button class="tab btn p-md fw-500 font-size-md" data-tab="channel">
-          Channel
-        </button>
-        <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet">
-          Sheet
-        </button>
+    <header class="navbar">
+      <div class="navbar-container">
+        <div class="navbar-logo">
+          <a href="https://navkarmetal.7level.in/">Navkar Metals</a>
+        </div>
+        <nav class="navbar-links">
+          <a class="active" href="../products/">Products</a>
+        </nav>
       </div>
-
-      <div id="pipe-content" class="tab-content">
-        <div class="sub-tabs-container">
-          <div class="sub-tabs">
-            <button class="sub-tab btn p-md fw-500 active" data-subtab="square">
-              Square
-            </button>
-            <button class="sub-tab btn p-md fw-500" data-subtab="rectangle">
-              Rectangle
-            </button>
-            <button class="sub-tab btn p-md fw-500" data-subtab="round">
-              Round
-            </button>
-          </div>
+    </header>
+    <main>
+      <div class="product-list container">
+        <div class="tabs">
+          <button
+            class="tab btn p-md fw-500 font-size-md active"
+            data-tab="pipe"
+          >
+            Pipe
+          </button>
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="angle">
+            Angle
+          </button>
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="flat">
+            Flat
+          </button>
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="channel">
+            Channel
+          </button>
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet">
+            Sheet
+          </button>
         </div>
 
-        <div id="square-content" class="subtab-content product-card">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size
-                  <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="mm">mm</button>
-                    <button class="unit-btn" data-unit="in">in</button>
+        <div id="pipe-content" class="tab-content">
+          <div class="sub-tabs-container">
+            <div class="sub-tabs">
+              <button
+                class="sub-tab btn p-md fw-500 active"
+                data-subtab="square"
+              >
+                Square
+              </button>
+              <button class="sub-tab btn p-md fw-500" data-subtab="rectangle">
+                Rectangle
+              </button>
+              <button class="sub-tab btn p-md fw-500" data-subtab="round">
+                Round
+              </button>
+            </div>
+          </div>
+
+          <div id="square-content" class="subtab-content product-card">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">
+                    Size
+                    <div class="unit-toggle">
+                      <button class="unit-btn active" data-unit="mm">mm</button>
+                      <button class="unit-btn" data-unit="in">in</button>
+                    </div>
+                  </div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center text-center">
+                    Quantity
                   </div>
                 </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center text-center">Quantity</div>
               </div>
+              <div class="table-body" id="square-items"></div>
             </div>
-            <div class="table-body" id="square-items"></div>
           </div>
-        </div>
 
-        <div id="rectangle-content" class="subtab-content product-card hidden">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size
-                  <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="mm">mm</button>
-                    <button class="unit-btn" data-unit="in">in</button>
+          <div
+            id="rectangle-content"
+            class="subtab-content product-card hidden"
+          >
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">
+                    Size
+                    <div class="unit-toggle">
+                      <button class="unit-btn active" data-unit="mm">mm</button>
+                      <button class="unit-btn" data-unit="in">in</button>
+                    </div>
                   </div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
                 </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
               </div>
+              <div class="table-body" id="rectangle-items"></div>
             </div>
-            <div class="table-body" id="rectangle-items"></div>
           </div>
-        </div>
 
-        <div id="round-content" class="subtab-content product-card hidden">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size
-                  <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="mm">mm</button>
-                    <button class="unit-btn" data-unit="in">in</button>
+          <div id="round-content" class="subtab-content product-card hidden">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">
+                    Size
+                    <div class="unit-toggle">
+                      <button class="unit-btn active" data-unit="mm">mm</button>
+                      <button class="unit-btn" data-unit="in">in</button>
+                    </div>
                   </div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
                 </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
               </div>
+              <div class="table-body" id="round-items"></div>
             </div>
-            <div class="table-body" id="round-items"></div>
           </div>
+
+          <button class="add-to-cart-btn btn p-lg w-100" id="pipe-add-btn">
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                ></path></svg></span>
+            Add Selected to Cart
+          </button>
         </div>
 
-        <button class="add-to-cart-btn btn p-lg w-100" id="pipe-add-btn">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg></span>
-          Add Selected to Cart
-        </button>
-      </div>
+        <div id="angle-content" class="tab-content hidden">
+          <div class="product-card">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">Size (mm)</div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
+                </div>
+              </div>
+              <div class="table-body" id="angle-items"></div>
+            </div>
+          </div>
+          <button class="add-to-cart-btn btn p-lg w-100" id="angle-add-btn">
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                ></path></svg></span>
+            Add Selected to Cart
+          </button>
+        </div>
 
-      <div id="angle-content" class="tab-content hidden">
-        <div class="product-card">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size (mm)
+        <div id="flat-content" class="tab-content hidden">
+          <div class="product-card">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">Size (mm)</div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
                 </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
               </div>
+              <div class="table-body" id="flat-items"></div>
             </div>
-            <div class="table-body" id="angle-items"></div>
           </div>
+          <button class="add-to-cart-btn btn p-lg w-100" id="flat-add-btn">
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                ></path></svg></span>
+            Add Selected to Cart
+          </button>
         </div>
-        <button class="add-to-cart-btn btn p-lg w-100" id="angle-add-btn">
-          <span><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg></span>
-          Add Selected to Cart
-        </button>
-      </div>
+        <div id="channel-content" class="tab-content hidden">
+          <div class="product-card">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">Size (mm)</div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
+                </div>
+              </div>
+              <div class="table-body" id="channel-items"></div>
+            </div>
+          </div>
+          <button class="add-to-cart-btn btn p-lg w-100" id="channel-add-btn">
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                ></path></svg></span>
+            Add Selected to Cart
+          </button>
+        </div>
 
-      <div id="flat-content" class="tab-content hidden">
-        <div class="product-card">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size (mm)
-                </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
-              </div>
-            </div>
-            <div class="table-body" id="flat-items"></div>
+        <div id="sheet-content" class="tab-content hidden">
+          <div class="mb-2 mobile-only text-center text-muted-foreground">
+            8X4 Sheet
           </div>
-        </div>
-        <button class="add-to-cart-btn btn p-lg w-100" id="flat-add-btn">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg></span>
-          Add Selected to Cart
-        </button>
-      </div>
-      <div id="channel-content" class="tab-content hidden">
-        <div class="product-card">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Size (mm)
+          <div class="product-card">
+            <div class="product-table">
+              <div class="table-head">
+                <div class="table-row">
+                  <div class="table-header">Item Name</div>
+                  <div class="table-header">Thickness (mm)</div>
+                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header text-center">Quantity</div>
                 </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
               </div>
+              <div class="table-body" id="sheet-items"></div>
             </div>
-            <div class="table-body" id="channel-items"></div>
           </div>
+          <button class="add-to-cart-btn btn p-lg w-100" id="sheet-add-btn">
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+                aria-hidden="true"
+              >
+                <circle cx="8" cy="21" r="1"></circle>
+                <circle cx="19" cy="21" r="1"></circle>
+                <path
+                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+                ></path></svg></span>
+            Add Selected to Cart
+          </button>
         </div>
-        <button class="add-to-cart-btn btn p-lg w-100" id="channel-add-btn">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg></span>
-          Add Selected to Cart
-        </button>
       </div>
-
-      <div id="sheet-content" class="tab-content hidden">
-        <div class="mb-2 mobile-only text-center text-muted-foreground">8X4 Sheet</div>
-        <div class="product-card">
-          <div class="product-table">
-            <div class="table-head">
-              <div class="table-row">
-                <div class="table-header">Item Name</div>
-                <div class="table-header">
-                  Thickness (mm)
-                </div>
-                <div class="table-header">Weight (kg/pc)</div>
-                <div class="table-header text-center">Quantity</div>
-              </div>
-            </div>
-            <div class="table-body" id="sheet-items"></div>
-          </div>
-        </div>
-        <button class="add-to-cart-btn btn p-lg w-100" id="sheet-add-btn">
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-              aria-hidden="true"
-            >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path></svg></span>
-          Add Selected to Cart
-        </button>
-      </div>
-    </div>
+    </main>
 
     <button class="cart-button btn p-lg" id="cart-btn">
       <svg
@@ -326,7 +344,6 @@
         <span class="text-muted-foreground">Weight (kg/pc)</span>
         <span class="text-muted-foreground text-center">Quantity</span>
         <span class="text-muted-foreground"></span>
-        
       </div>
       <div class="cart-content" id="cart-items"></div>
       <div class="cart-footer">
