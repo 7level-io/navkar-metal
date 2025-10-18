@@ -381,9 +381,9 @@ const Cart = {
         <div class="cart-category">
           <div class="cart-category-title inline-block w-100">
             <span class="cart-category-title-text">${category}</span>
-            <div class="cart-unit-toggle inline-block ml-2">
+            <div class="cart-unit-toggle inline-block ml-10">
               <div>
-                <span style="font-size: 14px; font-weight: 500">Size</span>
+                <span class="text-muted-foreground" style="font-size: 14px; font-weight: 500">Size:</span>
                 <div class="unit-toggle">
                   <button class="unit-btn active" data-unit="mm" id="cart-unit-mm">
                     mm
@@ -640,20 +640,16 @@ const Checkout = {
     let subWeight = 0;
 
     Utils.sortItems(items).forEach((item) => {
-      const displayValue = Utils.getDisplayValueForCheckout(item, STATE.currentUnit);
+      const displayValue = item.sizeMm || item.thickness || item.sizeIn;
       // const label = item.thickness && !item.sizeIn ? "Thickness" : "Size";
-      
-      let unitLabel = STATE.currentUnit === "in" ? "Inch" : "mm";
-      if (STATE.currentUnit === "in" && displayValue === item.sizeMm) {
-        unitLabel = "mm";
-      }
+      const unitLabel = "mm";
       
       const extra = item.extra ? ` ${item.extra}` : "";
       const quantity = parseInt(item.quantity) || 0;
       const weight = parseFloat(item.weight) || 0;
       const itemTotalWeight = weight * quantity;
 
-      result += `${counter}. ${displayValue} ${unitLabel}${extra} x${quantity} | Total Item Weight: ${itemTotalWeight}}\n`;
+      result += `${counter}. ${displayValue} ${unitLabel}${extra} x${quantity} | Total Item Weight: ${itemTotalWeight.toFixed(2)}\n`;
       counter++;
       
       subWeight += itemTotalWeight;

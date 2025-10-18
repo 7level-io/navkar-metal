@@ -39,6 +39,10 @@ input[type="number"] {
   margin-left: calc(var(--spacing) * 2);
 }
 
+.ml-10 {
+  margin-left: calc(var(--spacing) * 10);
+}
+
 .mr-2 {
   margin-right: calc(var(--spacing) * 2);
 }
@@ -473,7 +477,7 @@ button {
   margin-top: 0.75rem;
   background-color: #f0f0f0;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem 0;
 }
 
 .cart-category-title {
@@ -483,7 +487,7 @@ button {
   font-size: 18px;
   font-weight: 600;
   border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
 }
 
 .cart-subcategory {
