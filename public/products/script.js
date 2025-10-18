@@ -640,13 +640,9 @@ const Checkout = {
     let subWeight = 0;
 
     Utils.sortItems(items).forEach((item) => {
-      const displayValue = Utils.getDisplayValueForCheckout(item, STATE.currentUnit);
+      const displayValue = item.sizeMm || item.thickness || item.sizeIn;
       // const label = item.thickness && !item.sizeIn ? "Thickness" : "Size";
-      
-      let unitLabel = STATE.currentUnit === "in" ? "Inch" : "mm";
-      if (STATE.currentUnit === "in" && displayValue === item.sizeMm) {
-        unitLabel = "mm";
-      }
+      const unitLabel = "mm";
       
       const extra = item.extra ? ` ${item.extra}` : "";
       const quantity = parseInt(item.quantity) || 0;
