@@ -24,6 +24,12 @@
         <button class="tab btn p-md fw-500 font-size-md" data-tab="flat">
           Flat
         </button>
+        <button class="tab btn p-md fw-500 font-size-md" data-tab="channel">
+          Channel
+        </button>
+        <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet">
+          Sheet
+        </button>
       </div>
 
       <div id="pipe-content" class="tab-content">
@@ -49,8 +55,8 @@
                 <div class="table-header">
                   Size
                   <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="in">in</button>
-                    <button class="unit-btn" data-unit="mm">mm</button>
+                    <button class="unit-btn active" data-unit="mm">mm</button>
+                    <button class="unit-btn" data-unit="in">in</button>
                   </div>
                 </div>
                 <div class="table-header">Weight (kg/pc)</div>
@@ -69,8 +75,8 @@
                 <div class="table-header">
                   Size
                   <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="in">in</button>
-                    <button class="unit-btn" data-unit="mm">mm</button>
+                    <button class="unit-btn active" data-unit="mm">mm</button>
+                    <button class="unit-btn" data-unit="in">in</button>
                   </div>
                 </div>
                 <div class="table-header">Weight (kg/pc)</div>
@@ -89,8 +95,8 @@
                 <div class="table-header">
                   Size
                   <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="in">in</button>
-                    <button class="unit-btn" data-unit="mm">mm</button>
+                    <button class="unit-btn active" data-unit="mm">mm</button>
+                    <button class="unit-btn" data-unit="in">in</button>
                   </div>
                 </div>
                 <div class="table-header">Weight (kg/pc)</div>
@@ -132,11 +138,7 @@
               <div class="table-row">
                 <div class="table-header">Item Name</div>
                 <div class="table-header">
-                  Size
-                  <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="in">in</button>
-                    <button class="unit-btn" data-unit="mm">mm</button>
-                  </div>
+                  Size (mm)
                 </div>
                 <div class="table-header">Weight (kg/pc)</div>
                 <div class="table-header text-center">Quantity</div>
@@ -168,7 +170,6 @@
         </button>
       </div>
 
-      <!-- Flat Content -->
       <div id="flat-content" class="tab-content hidden">
         <div class="product-card">
           <div class="product-table">
@@ -176,11 +177,7 @@
               <div class="table-row">
                 <div class="table-header">Item Name</div>
                 <div class="table-header">
-                  Size
-                  <div class="unit-toggle">
-                    <button class="unit-btn active" data-unit="in">in</button>
-                    <button class="unit-btn" data-unit="mm">mm</button>
-                  </div>
+                  Size (mm)
                 </div>
                 <div class="table-header">Weight (kg/pc)</div>
                 <div class="table-header text-center">Quantity</div>
@@ -212,10 +209,89 @@
           Add Selected to Cart
         </button>
       </div>
+      <div id="channel-content" class="tab-content hidden">
+        <div class="product-card">
+          <div class="product-table">
+            <div class="table-head">
+              <div class="table-row">
+                <div class="table-header">Item Name</div>
+                <div class="table-header">
+                  Size (mm)
+                </div>
+                <div class="table-header">Weight (kg/pc)</div>
+                <div class="table-header text-center">Quantity</div>
+              </div>
+            </div>
+            <div class="table-body" id="channel-items"></div>
+          </div>
+        </div>
+        <button class="add-to-cart-btn btn p-lg w-100" id="channel-add-btn">
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path></svg></span>
+          Add Selected to Cart
+        </button>
+      </div>
+
+      <div id="sheet-content" class="tab-content hidden">
+        <div class="mb-2 mobile-only text-center text-muted-foreground">8X4 Sheet</div>
+        <div class="product-card">
+          <div class="product-table">
+            <div class="table-head">
+              <div class="table-row">
+                <div class="table-header">Item Name</div>
+                <div class="table-header">
+                  Thickness (mm)
+                </div>
+                <div class="table-header">Weight (kg/pc)</div>
+                <div class="table-header text-center">Quantity</div>
+              </div>
+            </div>
+            <div class="table-body" id="sheet-items"></div>
+          </div>
+        </div>
+        <button class="add-to-cart-btn btn p-lg w-100" id="sheet-add-btn">
+          <span
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path></svg></span>
+          Add Selected to Cart
+        </button>
+      </div>
     </div>
 
-    <!-- Cart Button -->
-    <button class="cart-button btn p-md" id="cart-btn">
+    <button class="cart-button btn p-lg" id="cart-btn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -238,7 +314,6 @@
       Cart <span class="cart-count" id="cart-count">0</span>
     </button>
 
-    <!-- Cart Drawer -->
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
       <div class="cart-header">
@@ -246,19 +321,7 @@
         <button class="close-btn" id="close-cart">×</button>
       </div>
       <div class="item-attributes">
-        <div class="cart-unit-toggle">
-          <div>
-            <span style="font-size: 14px; font-weight: 500">Size</span>
-            <div class="unit-toggle">
-              <button class="unit-btn active" data-unit="in" id="cart-unit-in">
-                in
-              </button>
-              <button class="unit-btn" data-unit="mm" id="cart-unit-mm">
-                mm
-              </button>
-            </div>
-          </div>
-        </div>
+        <span></span>
         <span class="text-muted-foreground">Weight (kg/pc)</span>
         <span class="text-muted-foreground text-center">Quantity</span>
         <span class="text-muted-foreground"></span>
@@ -270,9 +333,13 @@
           <span>Total Items:</span>
           <span id="total-items">0</span>
         </div>
-        <button class="checkout-btn btn p-lg w-100">Checkout</button>
+        <div class="cart-total">
+          <span>Total Weight:</span>
+          <span><span id="total-weight">0</span> kg</span>
+        </div>
+        <button class="checkout-btn btn p-lg w-100">Place Order</button>
       </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./script.js" type="module"></script>
   </body>
 </html>
