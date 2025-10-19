@@ -553,11 +553,19 @@ const Cart = {
   open() {
     document.querySelector(SELECTORS.cartOverlay)?.classList.add("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.add("active");
+
+    if (window.history.state?.cartOpen !== true) {
+      window.history.pushState({ cartOpen: true }, "", window.location.href);
+    }
   },
 
   close() {
     document.querySelector(SELECTORS.cartOverlay)?.classList.remove("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.remove("active");
+
+    if (window.history.state?.cartOpen === true) {
+      window.history.back();
+    }
   },
 };
 
@@ -788,13 +796,44 @@ const Events = {
       }
     });
 
-    document.querySelector(SELECTORS.cartBtn)?.addEventListener("click", () => Cart.open());
-    document.querySelector(SELECTORS.closeCart)?.addEventListener("click", () => Cart.close());
-    document.querySelector(SELECTORS.cartOverlay)?.addEventListener("click", () => Cart.close());
-    document.querySelector(SELECTORS.checkoutBtn)?.addEventListener("click", () => Checkout.handle());
+    document
+      .getElementById("floating-add-cart")
+      ?.addEventListener("click", () => {
+        Products.addAllToCart();
+      });
+
+    document
+      .querySelector(SELECTORS.cartBtn)
+      ?.addEventListener("click", () => Cart.open());
+    document
+      .querySelector(SELECTORS.closeCart)
+      ?.addEventListener("click", () => Cart.close());
+    document
+      .querySelector(SELECTORS.cartOverlay)
+      ?.addEventListener("click", () => Cart.close());
+    document
+      .querySelector(SELECTORS.checkoutBtn)
+      ?.addEventListener("click", () => Checkout.handle());
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") Cart.close();
+    });
+
+    window.addEventListener("popstate", (e) => {
+      const cartDrawer = document.querySelector(SELECTORS.cartDrawer);
+      const isCartOpen = cartDrawer?.classList.contains("active");
+
+      if (isCartOpen) {
+        Cart.close();
+
+        if (!e.state?.cartOpen) {
+          window.history.pushState(
+            { cartOpen: false },
+            "",
+            window.location.href
+          );
+        }
+      }
     });
   },
 };
