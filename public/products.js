@@ -409,12 +409,12 @@ export const products = {
   sheet: [
     {
       name: "8X4",
-      thickness: "0.5",
+      thickness: "0.5 mm",
       weight: 6.5,
     },
     {
       name: "8X4",
-      thickness: "0.7",
+      thickness: "0.7 mm",
       weight: 17,
     },
     {
