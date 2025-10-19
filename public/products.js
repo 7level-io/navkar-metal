@@ -275,12 +275,12 @@ export const products = {
       sizeMm: "25X25X5",
       weight: 10,
     },
-    {
-      name: "Angle 30X30X5",
-      sizeIn: "",
-      sizeMm: "30X30X5",
-      weight: "",
-    },
+    // {
+    //   name: "Angle 30X30X5",
+    //   sizeIn: "",
+    //   sizeMm: "30X30X5",
+    //   weight: "",
+    // },
     {
       name: "Angle 35X35X3",
       sizeIn: "",
@@ -361,18 +361,18 @@ export const products = {
       sizeMm: "30X5",
       weight: 7.2,
     },
-    {
-      name: "Flat 35X3",
-      sizeIn: "",
-      sizeMm: "35X3",
-      weight: "",
-    },
-    {
-      name: "Flat 35X5",
-      sizeIn: "",
-      sizeMm: "35X5",
-      weight: "",
-    },
+    // {
+    //   name: "Flat 35X3",
+    //   sizeIn: "",
+    //   sizeMm: "35X3",
+    //   weight: "",
+    // },
+    // {
+    //   name: "Flat 35X5",
+    //   sizeIn: "",
+    //   sizeMm: "35X5",
+    //   weight: "",
+    // },
     {
       name: "Flat 40X3",
       sizeIn: "",
