@@ -269,7 +269,92 @@ button {
   border-radius: 1.5rem;
 }
 
-/* tab */
+/* tab badge */
+.tab-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #306beb;
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(48, 107, 235, 0.3);
+  animation: badgeAppear 0.3s ease;
+}
+
+@keyframes badgeAppear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tab-badge.updated {
+  animation: badgePulse 0.4s ease;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .tab-badge {
+    top: -6px;
+    right: -6px;
+    padding: 2px 5px;
+    font-size: 10px;
+    min-width: 16px;
+  }
+}
+
+/* Tooltip showing item breakdown */
+.tab-badge-tooltip {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+.tab-badge-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #333;
+}
+
+.tab:hover .tab-badge-tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .tab-badge-tooltip {
+    display: none;
+  }
+}
 
 .sub-tabs-container {
   display: flex;
