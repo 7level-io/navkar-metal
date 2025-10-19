@@ -339,6 +339,50 @@ const Products = {
       }
     });
   },
+  checkAnyItems() {
+    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
+
+    return categories.some((category) => {
+      if (category === "pipe") {
+        return ["square", "rectangle", "round"].some((sub) => {
+          return products.pipe[sub].some((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            return input && Utils.parseIntSafe(input.value) > 0;
+          });
+        });
+      } else {
+        return products[category].some((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          return input && Utils.parseIntSafe(input.value) > 0;
+        });
+      }
+    });
+  },
+
+  addAllToCart() {
+    ["pipe", "angle", "flat", "channel", "sheet"].forEach((category) => {
+      if (category === "pipe") {
+        this.addPipeToCart();
+      } else {
+        this.addSimpleCategoryToCart(category);
+      }
+    });
+
+    Storage.save();
+    Cart.updateCount();
+    Cart.render();
+    this.updateFloatingButton();
+  },
+
+  updateFloatingButton() {
+    const floatingBtn = document.getElementById("floating-add-cart");
+    if (!floatingBtn) return;
+
+    const hasAnyItems = this.checkAnyItems();
+    floatingBtn.classList.toggle("hidden", !hasAnyItems);
+  },
 };
 
 const Cart = {
