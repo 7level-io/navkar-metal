@@ -789,6 +789,47 @@ button {
   background: #333;
 }
 
+/* Add toast notification styles */
+.toast-notification {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #333;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 2001;
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.toast-notification.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-success {
+  background: #10b981;
+}
+
+.toast-error {
+  background: #ef4444;
+}
+
+.toast-info {
+  background: #3b82f6;
+}
+
+@media (max-width: 768px) {
+  .toast-notification {
+    bottom: 80px;
+    max-width: 90%;
+  }
+}
+
 @media (max-width: 768px) {
   .btn.p-md {
     padding: 0.5rem 0.25rem;
