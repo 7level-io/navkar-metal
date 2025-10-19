@@ -217,8 +217,10 @@ button {
 }
 
 .navbar-links {
+  position: relative;
   display: flex;
   gap: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .navbar-links a {
@@ -259,12 +261,15 @@ button {
   cursor: pointer;
   border-radius: 1.5rem;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .tab.active {
   background: #fff;
   border-radius: 1.5rem;
 }
+
+/* tab */
 
 .sub-tabs-container {
   display: flex;
@@ -400,6 +405,39 @@ button {
   border-color: #306beb;
 }
 
+.floating-add-cart-btn {
+    display: flex
+;
+    align-items: flex-end;
+    gap: 0.5rem;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #306beb;
+    color: #fff;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(48, 107, 235, 0.3);
+    z-index: 998;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.floating-add-cart-btn:hover {
+  background: #1a4db8;
+  transform: scale(1.05);
+}
+
+.floating-add-cart-btn.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .floating-add-cart-btn {
+    bottom: 24px;
+    right: 16px;
+  }
+}
+
 .add-to-cart-btn {
   font-family: "Lexand", sans-serif;
   background: #818089;
@@ -425,14 +463,8 @@ button {
 }
 
 .cart-button.btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  padding: 1rem 1.5rem;
-  background: #000;
-  color: #fff;
+  padding: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   border-radius: 5rem;
   display: flex;
   align-items: center;
@@ -441,14 +473,15 @@ button {
   transition: all 0.3s;
 }
 
-.cart-button:hover {
-  background-color: #2c2c2c;
-}
-
 .cart-count {
-  background: #306beb;
-  padding: 0.25rem 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #306bebdd;
+  color: #fff;
+  padding: 0.125rem 0.25rem;
   border-radius: 12px;
+  font-size: 12px;
 }
 
 .cart-overlay {
@@ -521,8 +554,8 @@ button {
   padding: 0 1rem;
   font-size: 14px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr auto;
-  gap: 3rem;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+  gap: 4rem;
 }
 
 .cart-content {
@@ -560,7 +593,7 @@ button {
 
 .cart-item {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
   align-items: center;
   gap: 1rem;
   padding: 0.25rem 0;
