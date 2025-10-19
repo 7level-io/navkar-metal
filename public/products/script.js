@@ -395,13 +395,126 @@ const Cart = {
     if (countEl) countEl.textContent = count;
   },
 
+  /**
+   * Clears all items from cart with confirmation
+   * ${Object.keys(STATE.cart).length}
+   **/
+  clearCart() {
+    this.showConfirmModal(
+      "Clear Cart",
+      `Are you sure you want to remove all 
+      items from your cart? This action cannot be undone.`,
+      () => {
+        console.log(Object.keys(STATE.cart));
+        STATE.cart = {};
+        Storage.save();
+        this.updateCount();
+        this.render();
+        Products.updateTabBadges();
+
+        // Show success feedback
+        this.showToast("Cart cleared successfully", "success");
+      }
+    );
+  },
+
+  /**
+   * Shows confirmation modal
+   */
+  showConfirmModal(title, message, onConfirm) {
+    // Create modal elements if they don't exist
+    let overlay = document.getElementById("confirm-modal-overlay");
+    let modal = document.getElementById("confirm-modal");
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "confirm-modal-overlay";
+      overlay.className = "confirm-modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "confirm-modal";
+      modal.className = "confirm-modal";
+      document.body.appendChild(modal);
+    }
+
+    // Set modal content
+    modal.innerHTML = `
+      <h3>${title}</h3>
+      <p>${message}</p>
+      <div class="confirm-modal-buttons">
+        <button class="confirm-btn-cancel" id="confirm-cancel">Cancel</button>
+        <button class="confirm-btn-confirm" id="confirm-ok">Confirm</button>
+      </div>
+    `;
+
+    // Show modal
+    overlay.classList.add("active");
+    modal.classList.add("active");
+
+    // Handle cancel
+    const cancelBtn = modal.querySelector("#confirm-cancel");
+    const closeModal = () => {
+      overlay.classList.remove("active");
+      modal.classList.remove("active");
+    };
+
+    cancelBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", closeModal);
+
+    // Handle confirm
+    const confirmBtn = modal.querySelector("#confirm-ok");
+    confirmBtn.addEventListener("click", () => {
+      closeModal();
+      onConfirm();
+    });
+
+    // ESC to cancel
+    const escHandler = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+        document.removeEventListener("keydown", escHandler);
+      }
+    };
+    document.addEventListener("keydown", escHandler);
+  },
+
+  /**
+   * Shows toast notification
+   */
+  showToast(message, type = "info") {
+    let toast = document.getElementById("toast-notification");
+
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast-notification";
+      toast.className = "toast-notification";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.className = `toast-notification toast-${type} active`;
+
+    setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3000);
+  },
+
   render() {
     const container = document.querySelector(SELECTORS.cartItems);
     if (!container) return;
 
-    if (Object.keys(STATE.cart).length === 0) {
+    const isEmpty = Object.keys(STATE.cart).length === 0;
+
+    if (isEmpty) {
       container.innerHTML = this.renderEmptyCart();
       this.updateTotal(0);
+
+      const clearBtn = document.getElementById("clear-cart-btn");
+      if (clearBtn) clearBtn.disabled = true;
+
       return;
     }
 
@@ -413,6 +526,9 @@ const Cart = {
       0
     );
     this.updateTotal(total);
+
+    const clearBtn = document.getElementById("clear-cart-btn");
+    if (clearBtn) clearBtn.disabled = false;
   },
 
   renderEmptyCart() {
@@ -797,6 +913,11 @@ const Events = {
         const cartItem = target.closest(".cart-item");
         if (cartItem) Cart.removeItem(cartItem.dataset.itemId);
       }
+      document
+        .getElementById("clear-cart-btn")
+        ?.addEventListener("click", () => {
+          Cart.clearCart();
+        });
     });
 
     document.addEventListener("change", (e) => {
