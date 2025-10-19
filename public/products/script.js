@@ -218,6 +218,160 @@ const Products = {
     `;
   },
 
+  /**
+   * Updates badges on all category tabs showing item counts
+   * Also shows breakdown tooltip on hover
+   */
+  updateTabBadges() {
+    const categories = {
+      pipe: ["square", "rectangle", "round"],
+      angle: null,
+      flat: null,
+      channel: null,
+      sheet: null,
+    };
+
+    Object.entries(categories).forEach(([category, subs]) => {
+      let totalCount = 0;
+      let breakdown = [];
+
+      if (subs) {
+        // Pipe with subcategories
+        subs.forEach((sub) => {
+          let subCount = 0;
+          products.pipe[sub].forEach((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            const qty = Utils.parseIntSafe(input?.value);
+            subCount += qty;
+          });
+          if (subCount > 0) {
+            breakdown.push(`${Utils.capitalize(sub)}: ${subCount}`);
+            totalCount += subCount;
+          }
+        });
+      } else {
+        // Simple categories
+        products[category]?.forEach((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          const qty = Utils.parseIntSafe(input?.value);
+          totalCount += qty;
+        });
+      }
+
+      // Update tab badge
+      const tab = document.querySelector(`[data-tab="${category}"]`);
+      if (!tab) return;
+
+      let badge = tab.querySelector(".tab-badge");
+      let tooltip = tab.querySelector(".tab-badge-tooltip");
+
+      if (totalCount > 0) {
+        // Create or update badge
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "tab-badge";
+          tab.appendChild(badge);
+        } else {
+          badge.classList.add("updated");
+          setTimeout(() => badge.classList.remove("updated"), 400);
+        }
+        badge.textContent = totalCount;
+
+        // Create or update tooltip (for pipe only)
+        if (breakdown.length > 0) {
+          if (!tooltip) {
+            tooltip = document.createElement("div");
+            tooltip.className = "tab-badge-tooltip";
+            tab.appendChild(tooltip);
+          }
+          tooltip.textContent = breakdown.join(" • ");
+        }
+      } else {
+        // Remove badge and tooltip if count is 0
+        badge?.remove();
+        tooltip?.remove();
+      }
+    });
+
+    // Also update floating button state
+    this.updateFloatingButton();
+  },
+
+  /**
+   * Updates floating "Add to Cart" button visibility
+   */
+  updateFloatingButton() {
+    const floatingBtn = document.getElementById("floating-add-cart");
+    if (!floatingBtn) return;
+
+    const hasAnyItems = this.checkAnyItems();
+    floatingBtn.classList.toggle("hidden", !hasAnyItems);
+
+    // Update count on button
+    if (hasAnyItems) {
+      const totalCount = this.getTotalSelectedCount();
+      const countSpan = floatingBtn.querySelector(".floating-cart-count");
+      if (countSpan) {
+        countSpan.textContent = totalCount;
+      }
+    }
+  },
+
+  /**
+   * Checks if any items are selected across all categories
+   */
+  checkAnyItems() {
+    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
+
+    return categories.some((category) => {
+      if (category === "pipe") {
+        return ["square", "rectangle", "round"].some((sub) => {
+          return products.pipe[sub].some((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            return input && Utils.parseIntSafe(input.value) > 0;
+          });
+        });
+      } else {
+        return products[category]?.some((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          return input && Utils.parseIntSafe(input.value) > 0;
+        });
+      }
+    });
+  },
+
+  /**
+   * Gets total count of selected items across all categories
+   */
+  getTotalSelectedCount() {
+    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
+    let total = 0;
+
+    categories.forEach((category) => {
+      if (category === "pipe") {
+        ["square", "rectangle", "round"].forEach((sub) => {
+          products.pipe[sub].forEach((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            total += Utils.parseIntSafe(input?.value);
+          });
+        });
+      } else {
+        products[category]?.forEach((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          total += Utils.parseIntSafe(input?.value);
+        });
+      }
+    });
+
+    return total;
+  },
+
   updateQuantity(category, subcategory, index, change) {
     const input = document.getElementById(
       `qty-${category}-${subcategory}-${index}`
@@ -230,6 +384,7 @@ const Products = {
     input.value = newValue;
     this.updateInputStyle(input);
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   setQuantity(category, subcategory, index, value) {
@@ -241,6 +396,7 @@ const Products = {
     input.value = Math.max(0, Utils.parseIntSafe(value));
     this.updateInputStyle(input);
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   updateInputStyle(input) {
@@ -286,6 +442,7 @@ const Products = {
     Cart.updateCount();
     Cart.render();
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   addPipeToCart() {
@@ -339,27 +496,6 @@ const Products = {
       }
     });
   },
-  checkAnyItems() {
-    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
-
-    return categories.some((category) => {
-      if (category === "pipe") {
-        return ["square", "rectangle", "round"].some((sub) => {
-          return products.pipe[sub].some((_, index) => {
-            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
-            return input && Utils.parseIntSafe(input.value) > 0;
-          });
-        });
-      } else {
-        return products[category].some((_, index) => {
-          const input = document.getElementById(
-            `qty-${category}-null-${index}`
-          );
-          return input && Utils.parseIntSafe(input.value) > 0;
-        });
-      }
-    });
-  },
 
   addAllToCart() {
     ["pipe", "angle", "flat", "channel", "sheet"].forEach((category) => {
@@ -374,14 +510,7 @@ const Products = {
     Cart.updateCount();
     Cart.render();
     this.updateFloatingButton();
-  },
-
-  updateFloatingButton() {
-    const floatingBtn = document.getElementById("floating-add-cart");
-    if (!floatingBtn) return;
-
-    const hasAnyItems = this.checkAnyItems();
-    floatingBtn.classList.toggle("hidden", !hasAnyItems);
+    this.updateTabBadges();
   },
 };
 
