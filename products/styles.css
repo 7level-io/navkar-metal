@@ -269,7 +269,92 @@ button {
   border-radius: 1.5rem;
 }
 
-/* tab */
+/* tab badge */
+.tab-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #306beb;
+  color: #fff;
+  padding: 3px 7px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(48, 107, 235, 0.3);
+  animation: badgeAppear 0.3s ease;
+}
+
+@keyframes badgeAppear {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tab-badge.updated {
+  animation: badgePulse 0.4s ease;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .tab-badge {
+    top: -6px;
+    right: -6px;
+    padding: 2px 5px;
+    font-size: 10px;
+    min-width: 16px;
+  }
+}
+
+/* Tooltip showing item breakdown */
+.tab-badge-tooltip {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1000;
+}
+
+.tab-badge-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #333;
+}
+
+.tab:hover .tab-badge-tooltip {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .tab-badge-tooltip {
+    display: none;
+  }
+}
 
 .sub-tabs-container {
   display: flex;
@@ -644,13 +729,135 @@ button {
 }
 
 .cart-footer {
-  padding-top: 1.5rem;
+  padding-top: 0.75rem;
   border-top: 1px solid #e0e0e0;
+}
+
+/* Add to styles.css */
+
+.clear-cart-btn {
+  font-weight: 500;
+  background: transparent;
+  color: #d4183d;
+  border: 1px solid #d4183d;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.clear-cart-btn:hover {
+  background: #d4183d;
+  color: #fff;
+}
+
+.clear-cart-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #999;
+}
+
+.clear-cart-btn:disabled:hover {
+  background: transparent;
+  color: #999;
+}
+
+/* Confirmation modal */
+.confirm-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+  max-width: 400px;
+  width: 90%;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.confirm-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+}
+
+.confirm-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.confirm-modal h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.confirm-modal p {
+  margin-bottom: 1.5rem;
+  color: #666;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.confirm-modal-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.confirm-modal-buttons button {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirm-btn-cancel {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.confirm-btn-cancel:hover {
+  background: #e0e0e0;
+}
+
+.confirm-btn-confirm {
+  background: #d4183d;
+  color: #fff;
+  border: none;
+}
+
+.confirm-btn-confirm:hover {
+  background: #a0122d;
 }
 
 .cart-total {
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
 }
 
@@ -665,6 +872,47 @@ button {
 
 .checkout-btn:hover {
   background: #333;
+}
+
+/* Add toast notification styles */
+.toast-notification {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #333;
+  color: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 2001;
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.toast-notification.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast-success {
+  background: #10b981;
+}
+
+.toast-error {
+  background: #ef4444;
+}
+
+.toast-info {
+  background: #3b82f6;
+}
+
+@media (max-width: 768px) {
+  .toast-notification {
+    bottom: 80px;
+    max-width: 90%;
+  }
 }
 
 @media (max-width: 768px) {

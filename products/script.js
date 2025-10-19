@@ -181,7 +181,7 @@ const Products = {
           </span>
           ${extraText}
         </div>
-        <div class="table-data">${weightIcons} ${item.weight || "N/A"}kg</div>
+        <div class="table-data" style="display: flex;flex-direction:column; width: fit-content;"><span style=" align-self:center">${weightIcons}</span> <span>${item.weight || "N/A"}kg</span></div>
         <div class="table-data">
           <div class="qty-control">
             <button
@@ -218,6 +218,160 @@ const Products = {
     `;
   },
 
+  /**
+   * Updates badges on all category tabs showing item counts
+   * Also shows breakdown tooltip on hover
+   */
+  updateTabBadges() {
+    const categories = {
+      pipe: ["square", "rectangle", "round"],
+      angle: null,
+      flat: null,
+      channel: null,
+      sheet: null,
+    };
+
+    Object.entries(categories).forEach(([category, subs]) => {
+      let totalCount = 0;
+      let breakdown = [];
+
+      if (subs) {
+        // Pipe with subcategories
+        subs.forEach((sub) => {
+          let subCount = 0;
+          products.pipe[sub].forEach((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            const qty = Utils.parseIntSafe(input?.value);
+            subCount += qty;
+          });
+          if (subCount > 0) {
+            breakdown.push(`${Utils.capitalize(sub)}: ${subCount}`);
+            totalCount += subCount;
+          }
+        });
+      } else {
+        // Simple categories
+        products[category]?.forEach((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          const qty = Utils.parseIntSafe(input?.value);
+          totalCount += qty;
+        });
+      }
+
+      // Update tab badge
+      const tab = document.querySelector(`[data-tab="${category}"]`);
+      if (!tab) return;
+
+      let badge = tab.querySelector(".tab-badge");
+      let tooltip = tab.querySelector(".tab-badge-tooltip");
+
+      if (totalCount > 0) {
+        // Create or update badge
+        if (!badge) {
+          badge = document.createElement("span");
+          badge.className = "tab-badge";
+          tab.appendChild(badge);
+        } else {
+          badge.classList.add("updated");
+          setTimeout(() => badge.classList.remove("updated"), 400);
+        }
+        badge.textContent = totalCount;
+
+        // Create or update tooltip (for pipe only)
+        if (breakdown.length > 0) {
+          if (!tooltip) {
+            tooltip = document.createElement("div");
+            tooltip.className = "tab-badge-tooltip";
+            tab.appendChild(tooltip);
+          }
+          tooltip.textContent = breakdown.join(" • ");
+        }
+      } else {
+        // Remove badge and tooltip if count is 0
+        badge?.remove();
+        tooltip?.remove();
+      }
+    });
+
+    // Also update floating button state
+    this.updateFloatingButton();
+  },
+
+  /**
+   * Updates floating "Add to Cart" button visibility
+   */
+  updateFloatingButton() {
+    const floatingBtn = document.getElementById("floating-add-cart");
+    if (!floatingBtn) return;
+
+    const hasAnyItems = this.checkAnyItems();
+    floatingBtn.classList.toggle("hidden", !hasAnyItems);
+
+    // Update count on button
+    if (hasAnyItems) {
+      const totalCount = this.getTotalSelectedCount();
+      const countSpan = floatingBtn.querySelector(".floating-cart-count");
+      if (countSpan) {
+        countSpan.textContent = totalCount;
+      }
+    }
+  },
+
+  /**
+   * Checks if any items are selected across all categories
+   */
+  checkAnyItems() {
+    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
+
+    return categories.some((category) => {
+      if (category === "pipe") {
+        return ["square", "rectangle", "round"].some((sub) => {
+          return products.pipe[sub].some((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            return input && Utils.parseIntSafe(input.value) > 0;
+          });
+        });
+      } else {
+        return products[category]?.some((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          return input && Utils.parseIntSafe(input.value) > 0;
+        });
+      }
+    });
+  },
+
+  /**
+   * Gets total count of selected items across all categories
+   */
+  getTotalSelectedCount() {
+    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
+    let total = 0;
+
+    categories.forEach((category) => {
+      if (category === "pipe") {
+        ["square", "rectangle", "round"].forEach((sub) => {
+          products.pipe[sub].forEach((_, index) => {
+            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
+            total += Utils.parseIntSafe(input?.value);
+          });
+        });
+      } else {
+        products[category]?.forEach((_, index) => {
+          const input = document.getElementById(
+            `qty-${category}-null-${index}`
+          );
+          total += Utils.parseIntSafe(input?.value);
+        });
+      }
+    });
+
+    return total;
+  },
+
   updateQuantity(category, subcategory, index, change) {
     const input = document.getElementById(
       `qty-${category}-${subcategory}-${index}`
@@ -230,6 +384,7 @@ const Products = {
     input.value = newValue;
     this.updateInputStyle(input);
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   setQuantity(category, subcategory, index, value) {
@@ -241,6 +396,7 @@ const Products = {
     input.value = Math.max(0, Utils.parseIntSafe(value));
     this.updateInputStyle(input);
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   updateInputStyle(input) {
@@ -286,6 +442,7 @@ const Products = {
     Cart.updateCount();
     Cart.render();
     this.updateAddButtonState(category);
+    this.updateTabBadges();
   },
 
   addPipeToCart() {
@@ -339,27 +496,6 @@ const Products = {
       }
     });
   },
-  checkAnyItems() {
-    const categories = ["pipe", "angle", "flat", "channel", "sheet"];
-
-    return categories.some((category) => {
-      if (category === "pipe") {
-        return ["square", "rectangle", "round"].some((sub) => {
-          return products.pipe[sub].some((_, index) => {
-            const input = document.getElementById(`qty-pipe-${sub}-${index}`);
-            return input && Utils.parseIntSafe(input.value) > 0;
-          });
-        });
-      } else {
-        return products[category].some((_, index) => {
-          const input = document.getElementById(
-            `qty-${category}-null-${index}`
-          );
-          return input && Utils.parseIntSafe(input.value) > 0;
-        });
-      }
-    });
-  },
 
   addAllToCart() {
     ["pipe", "angle", "flat", "channel", "sheet"].forEach((category) => {
@@ -374,14 +510,7 @@ const Products = {
     Cart.updateCount();
     Cart.render();
     this.updateFloatingButton();
-  },
-
-  updateFloatingButton() {
-    const floatingBtn = document.getElementById("floating-add-cart");
-    if (!floatingBtn) return;
-
-    const hasAnyItems = this.checkAnyItems();
-    floatingBtn.classList.toggle("hidden", !hasAnyItems);
+    this.updateTabBadges();
   },
 };
 
@@ -395,13 +524,126 @@ const Cart = {
     if (countEl) countEl.textContent = count;
   },
 
+  /**
+   * Clears all items from cart with confirmation
+   * ${Object.keys(STATE.cart).length}
+   **/
+  clearCart() {
+    this.showConfirmModal(
+      "Clear Cart",
+      `Are you sure you want to remove all 
+      items from your cart? This action cannot be undone.`,
+      () => {
+        console.log(Object.keys(STATE.cart));
+        STATE.cart = {};
+        Storage.save();
+        this.updateCount();
+        this.render();
+        Products.updateTabBadges();
+
+        // Show success feedback
+        this.showToast("Cart cleared successfully", "success");
+      }
+    );
+  },
+
+  /**
+   * Shows confirmation modal
+   */
+  showConfirmModal(title, message, onConfirm) {
+    // Create modal elements if they don't exist
+    let overlay = document.getElementById("confirm-modal-overlay");
+    let modal = document.getElementById("confirm-modal");
+
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "confirm-modal-overlay";
+      overlay.className = "confirm-modal-overlay";
+      document.body.appendChild(overlay);
+    }
+
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "confirm-modal";
+      modal.className = "confirm-modal";
+      document.body.appendChild(modal);
+    }
+
+    // Set modal content
+    modal.innerHTML = `
+      <h3>${title}</h3>
+      <p>${message}</p>
+      <div class="confirm-modal-buttons">
+        <button class="confirm-btn-cancel" id="confirm-cancel">Cancel</button>
+        <button class="confirm-btn-confirm" id="confirm-ok">Confirm</button>
+      </div>
+    `;
+
+    // Show modal
+    overlay.classList.add("active");
+    modal.classList.add("active");
+
+    // Handle cancel
+    const cancelBtn = modal.querySelector("#confirm-cancel");
+    const closeModal = () => {
+      overlay.classList.remove("active");
+      modal.classList.remove("active");
+    };
+
+    cancelBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", closeModal);
+
+    // Handle confirm
+    const confirmBtn = modal.querySelector("#confirm-ok");
+    confirmBtn.addEventListener("click", () => {
+      closeModal();
+      onConfirm();
+    });
+
+    // ESC to cancel
+    const escHandler = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+        document.removeEventListener("keydown", escHandler);
+      }
+    };
+    document.addEventListener("keydown", escHandler);
+  },
+
+  /**
+   * Shows toast notification
+   */
+  showToast(message, type = "info") {
+    let toast = document.getElementById("toast-notification");
+
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "toast-notification";
+      toast.className = "toast-notification";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.className = `toast-notification toast-${type} active`;
+
+    setTimeout(() => {
+      toast.classList.remove("active");
+    }, 3000);
+  },
+
   render() {
     const container = document.querySelector(SELECTORS.cartItems);
     if (!container) return;
 
-    if (Object.keys(STATE.cart).length === 0) {
+    const isEmpty = Object.keys(STATE.cart).length === 0;
+
+    if (isEmpty) {
       container.innerHTML = this.renderEmptyCart();
       this.updateTotal(0);
+
+      const clearBtn = document.getElementById("clear-cart-btn");
+      if (clearBtn) clearBtn.disabled = true;
+
       return;
     }
 
@@ -413,6 +655,9 @@ const Cart = {
       0
     );
     this.updateTotal(total);
+
+    const clearBtn = document.getElementById("clear-cart-btn");
+    if (clearBtn) clearBtn.disabled = false;
   },
 
   renderEmptyCart() {
@@ -515,7 +760,7 @@ const Cart = {
              data-extra="${item.extra || ""}">
           ${displayValue}<span class="text-muted-foreground" style="font-size: 10px">${extraText}</span>
         </div>
-        <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center" flex-wrap: wrap"><div>${weightIcons}</div><span style="font-size: 12px">${
+        <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center;"><div>${weightIcons}</div><span style="font-size: 12px">${
       item.weight ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
@@ -797,6 +1042,11 @@ const Events = {
         const cartItem = target.closest(".cart-item");
         if (cartItem) Cart.removeItem(cartItem.dataset.itemId);
       }
+      document
+        .getElementById("clear-cart-btn")
+        ?.addEventListener("click", () => {
+          Cart.clearCart();
+        });
     });
 
     document.addEventListener("change", (e) => {

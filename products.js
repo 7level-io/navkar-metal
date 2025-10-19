@@ -22,7 +22,7 @@ export const products = {
         sizeIn: "3/4&quot;X3/4&quot;",
         sizeMm: "20X20",
         weight: "7",
-        weightCategory: "large",
+        weightCategory: "heavy",
         extra: "(Sut 6)",
       },
       {
