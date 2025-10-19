@@ -14,9 +14,17 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./marquee.css">
   </head>
   <body>
+      <div class="marquee-container">
+    <div class="marquee-inner">
+      <div class="marquee-track">
+        <div class="marquee-content" id="marqueeContent"></div>
+      </div>
+    </div>
+  </div>
     <header class="navbar">
       <div class="navbar-container">
         <div class="navbar-logo">
@@ -361,6 +369,7 @@
         <button class="checkout-btn btn p-lg w-100">Place Order</button>
       </div>
     </div>
+    <script src="./marquee.js"></script>
     <script src="./script.js" type="module"></script>
   </body>
 </html>
