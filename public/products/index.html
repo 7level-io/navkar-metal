@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="./marquee.css">
   </head>
   <body>
-      <div class="marquee-container">
-    <div class="marquee-inner">
-      <div class="marquee-track">
-        <div class="marquee-content" id="marqueeContent"></div>
+    <div class="marquee-container">
+      <div class="marquee-inner">
+        <div class="marquee-track">
+          <div class="marquee-content" id="marqueeContent"></div>
+        </div>
       </div>
     </div>
-  </div>
     <header class="navbar">
       <div class="navbar-container">
         <div class="navbar-logo">
@@ -378,6 +378,16 @@
       </div>
       <div class="cart-content" id="cart-items"></div>
       <div class="cart-footer">
+        <button class="clear-cart-btn btn p-md w-100" id="clear-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 6h18"></path>
+            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+            <line x1="10" y1="11" x2="10" y2="17"></line>
+            <line x1="14" y1="11" x2="14" y2="17"></line>
+          </svg>
+          Clear Cart
+        </button>
         <div class="cart-total">
           <span>Total Items:</span>
           <span id="total-items">0</span>
@@ -386,6 +396,7 @@
           <span>Total Weight:</span>
           <span><span id="total-weight">0</span> kg</span>
         </div>
+
         <button class="checkout-btn btn p-lg w-100">Place Order</button>
       </div>
     </div>
