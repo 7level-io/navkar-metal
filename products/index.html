@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="icon" type="image/x-icon" href="../7level.ico" />
     <title>Premium Construction Metals</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -11,16 +14,44 @@
       href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./marquee.css">
   </head>
   <body>
+      <div class="marquee-container">
+    <div class="marquee-inner">
+      <div class="marquee-track">
+        <div class="marquee-content" id="marqueeContent"></div>
+      </div>
+    </div>
+  </div>
     <header class="navbar">
       <div class="navbar-container">
         <div class="navbar-logo">
           <a href="https://navkarmetal.7level.in/">Navkar Metals</a>
         </div>
         <nav class="navbar-links">
-          <a class="active" href="../products/">Products</a>
+          <button class="cart-button btn p-lg" id="cart-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-shopping-cart h-5 w-5"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="21" r="1"></circle>
+              <circle cx="19" cy="21" r="1"></circle>
+              <path
+                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
+              ></path>
+            </svg><span class="cart-count" id="cart-count">0</span>
+          </button>
         </nav>
       </div>
     </header>
@@ -77,7 +108,7 @@
                       <button class="unit-btn" data-unit="in">in</button>
                     </div>
                   </div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center text-center">
                     Quantity
                   </div>
@@ -102,7 +133,7 @@
                       <button class="unit-btn" data-unit="in">in</button>
                     </div>
                   </div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -122,7 +153,7 @@
                       <button class="unit-btn" data-unit="in">in</button>
                     </div>
                   </div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -161,7 +192,7 @@
                 <div class="table-row">
                   <div class="table-header">Item Name</div>
                   <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -199,7 +230,7 @@
                 <div class="table-row">
                   <div class="table-header">Item Name</div>
                   <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -236,7 +267,7 @@
                 <div class="table-row">
                   <div class="table-header">Item Name</div>
                   <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -277,7 +308,7 @@
                 <div class="table-row">
                   <div class="table-header">Item Name</div>
                   <div class="table-header">Thickness (mm)</div>
-                  <div class="table-header">Weight (kg/pc)</div>
+                  <div class="table-header">Weight</div>
                   <div class="table-header text-center">Quantity</div>
                 </div>
               </div>
@@ -310,18 +341,18 @@
       </div>
     </main>
 
-    <button class="cart-button btn p-lg" id="cart-btn">
+    <button class="floating-add-cart-btn btn p-lg hidden" id="floating-add-cart">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
+        width="32"
+        height="32"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="lucide lucide-shopping-cart mr-2 h-5 w-5"
+        class="lucide lucide-shopping-cart h-5 w-5"
         aria-hidden="true"
       >
         <circle cx="8" cy="21" r="1"></circle>
@@ -330,7 +361,7 @@
           d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
         ></path>
       </svg>
-      Cart <span class="cart-count" id="cart-count">0</span>
+      Add to Cart
     </button>
 
     <div class="cart-overlay" id="cart-overlay"></div>
@@ -341,7 +372,7 @@
       </div>
       <div class="item-attributes">
         <span></span>
-        <span class="text-muted-foreground">Weight (kg/pc)</span>
+        <span class="text-muted-foreground">Weight</span>
         <span class="text-muted-foreground text-center">Quantity</span>
         <span class="text-muted-foreground"></span>
       </div>
@@ -358,6 +389,7 @@
         <button class="checkout-btn btn p-lg w-100">Place Order</button>
       </div>
     </div>
+    <script src="./marquee.js"></script>
     <script src="./script.js" type="module"></script>
   </body>
 </html>
