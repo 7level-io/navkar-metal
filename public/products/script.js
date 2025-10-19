@@ -181,7 +181,7 @@ const Products = {
           </span>
           ${extraText}
         </div>
-        <div class="table-data">${weightIcons} ${item.weight || "N/A"}kg</div>
+        <div class="table-data" style="display: flex;flex-direction:column; width: fit-content;"><span style=" align-self:center">${weightIcons}</span> <span>${item.weight || "N/A"}kg</span></div>
         <div class="table-data">
           <div class="qty-control">
             <button
@@ -631,7 +631,7 @@ const Cart = {
              data-extra="${item.extra || ""}">
           ${displayValue}<span class="text-muted-foreground" style="font-size: 10px">${extraText}</span>
         </div>
-        <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center" flex-wrap: wrap"><div>${weightIcons}</div><span style="font-size: 12px">${
+        <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center;"><div>${weightIcons}</div><span style="font-size: 12px">${
       item.weight ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
