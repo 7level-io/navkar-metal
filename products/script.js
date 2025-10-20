@@ -181,7 +181,9 @@ const Products = {
           </span>
           ${extraText}
         </div>
-        <div class="table-data" style="display: flex;flex-direction:column; width: fit-content;"><span style=" align-self:center">${weightIcons}</span> <span>${item.weight || "N/A"}kg</span></div>
+        <div class="table-data" style="display: flex;flex-direction:column; width: 3rem; text-align: center;"><span style=" align-self:center">${weightIcons}</span> <span>${
+      item.weight || "N/A"
+    }kg</span></div>
         <div class="table-data">
           <div class="qty-control">
             <button
@@ -644,7 +646,11 @@ const Cart = {
       const clearBtn = document.getElementById("clear-cart-btn");
       if (clearBtn) clearBtn.disabled = true;
 
+      container.classList.add("empty-cart");
+
       return;
+    } else {
+      container.classList.remove("empty-cart");
     }
 
     const grouped = this.groupItems();
