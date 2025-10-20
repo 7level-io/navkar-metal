@@ -647,6 +647,8 @@ const Cart = {
       container.classList.add("empty-cart")
 
       return;
+    } else {
+      container.classList.remove("empty-cart")
     }
 
     const grouped = this.groupItems();
