@@ -273,7 +273,7 @@ button {
 .tab-badge {
   position: absolute;
   top: -8px;
-  right: -8px;
+  right: 0;
   background: #306beb;
   color: #fff;
   padding: 3px 7px;
@@ -297,14 +297,19 @@ button {
   }
 }
 
-.tab-badge.updated {
+/* .updated {
   animation: badgePulse 0.4s ease;
 }
 
 @keyframes badgePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-}
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+} */
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
