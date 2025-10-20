@@ -225,8 +225,6 @@ const Products = {
    * Also shows breakdown tooltip on hover
    */
   updateTabBadges() {
-    const cartCount = document.querySelector(SELECTORS.cartCount);
-
     const categories = {
       pipe: ["square", "rectangle", "round"],
       angle: null,
@@ -240,7 +238,6 @@ const Products = {
       let breakdown = [];
 
       if (subs) {
-        // Pipe with subcategories
         subs.forEach((sub) => {
           let subCount = 0;
           products.pipe[sub].forEach((_, index) => {
@@ -254,7 +251,6 @@ const Products = {
           }
         });
       } else {
-        // Simple categories
         products[category]?.forEach((_, index) => {
           const input = document.getElementById(
             `qty-${category}-null-${index}`
@@ -277,11 +273,6 @@ const Products = {
           badge = document.createElement("span");
           badge.className = "tab-badge";
           tab.appendChild(badge);
-        } else {
-          // badge.classList.add("updated");
-          cartCount.classList.add("updated");
-          // setTimeout(() => badge.classList.remove("updated"), 400);
-          setTimeout(() => cartCount.classList.remove("updated"), 400);
         }
         badge.textContent = totalCount;
 
@@ -521,13 +512,40 @@ const Products = {
 };
 
 const Cart = {
-  updateCount() {
-    const count = Object.values(STATE.cart).reduce(
+   updateCount() {
+    const newCount = Object.values(STATE.cart).reduce(
       (sum, item) => sum + item.quantity,
       0
     );
     const countEl = document.querySelector(SELECTORS.cartCount);
-    if (countEl) countEl.textContent = count;
+    if (!countEl) return;
+
+    const oldCount = parseInt(countEl.textContent) || 0;
+    countEl.textContent = newCount;
+
+    // Trigger pulse animation if count increased
+    if (newCount > oldCount) {
+      this.pulseCartBadge();
+    }
+  },
+
+  /**
+   * Triggers pulse animation on cart count badge
+   */
+  pulseCartBadge() {
+    const countEl = document.querySelector(SELECTORS.cartCount);
+    if (!countEl) return;
+
+    countEl.classList.remove('pulse');
+    
+    // Trigger reflow to restart animation
+    void countEl.offsetWidth;
+    
+    countEl.classList.add('pulse');
+    
+    setTimeout(() => {
+      countEl.classList.remove('pulse');
+    }, 600); // Match animation duration
   },
 
   /**
