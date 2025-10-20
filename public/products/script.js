@@ -169,7 +169,6 @@ const Products = {
 
     return `
       <div class="table-row" data-product-row="${category}-${subcategory}-${index}">
-        <div class="table-data">${item.name}</div>
         <div class="table-data">
           <span
             class="size-display"

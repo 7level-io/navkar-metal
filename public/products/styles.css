@@ -387,7 +387,7 @@ button {
 
 .table-row {
   display: grid;
-  grid-template-columns: 2fr 2fr 1.5fr 2fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   justify-content: center;
   align-items: center;
@@ -411,7 +411,7 @@ button {
 }
 
 .table-head:first-child {
-  grid-template-columns: 2fr 2fr 1.5fr auto;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .product-table .table-head {
@@ -648,7 +648,7 @@ button {
   padding: 0 1rem;
   font-size: 14px;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
   gap: 4rem;
 }
 
@@ -946,14 +946,9 @@ button {
     margin: 1rem 0 1rem;
   }
 
-  .product-table .table-header:first-child,
-  .product-table .table-data:first-child {
-    display: none;
-  }
-
   .table-row {
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-columns: 2fr 1fr auto;
   }
 
   .unit-toggle {
