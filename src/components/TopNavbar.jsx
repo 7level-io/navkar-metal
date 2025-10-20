@@ -73,11 +73,11 @@ export default function TopNavbar() {
           <a href="../roofing">Roofing</a> */}
         </nav>
 
-        <button
+        {/* <button
           className="navbar-toggle"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
-        ></button>
+        ></button> */}
       </div>
     </header>
   );
