@@ -225,6 +225,8 @@ const Products = {
    * Also shows breakdown tooltip on hover
    */
   updateTabBadges() {
+    const cartCount = document.querySelector(SELECTORS.cartCount);
+
     const categories = {
       pipe: ["square", "rectangle", "round"],
       angle: null,
@@ -276,8 +278,10 @@ const Products = {
           badge.className = "tab-badge";
           tab.appendChild(badge);
         } else {
-          badge.classList.add("updated");
-          setTimeout(() => badge.classList.remove("updated"), 400);
+          // badge.classList.add("updated");
+          cartCount.classList.add("updated");
+          // setTimeout(() => badge.classList.remove("updated"), 400);
+          setTimeout(() => cartCount.classList.remove("updated"), 400);
         }
         badge.textContent = totalCount;
 
