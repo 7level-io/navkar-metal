@@ -220,7 +220,7 @@ button {
   position: relative;
   display: flex;
   gap: 1.5rem;
-  padding-right: 1.5rem;
+  padding-right: 1rem;
 }
 
 .navbar-links a {
@@ -296,20 +296,6 @@ button {
     opacity: 1;
   }
 }
-
-/* .updated {
-  animation: badgePulse 0.4s ease;
-}
-
-@keyframes badgePulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-} */
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
@@ -571,6 +557,26 @@ button {
   padding: 0.125rem 0.25rem;
   border-radius: 12px;
   font-size: 12px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.cart-count.pulse {
+  animation: cartPulse 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  background: #225cdb;
+}
+
+.cart-count.pulse {
+  animation: cartPulse 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes cartPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .cart-overlay {
