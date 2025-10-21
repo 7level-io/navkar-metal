@@ -983,7 +983,7 @@ const Checkout = {
             message += formattedItems;
             message += `  Subtotal Weight (${sub}): ${subWeight.toFixed(
               2
-            )} kg\n\n`;
+            )}! kg\n\n`;
             categoryTotalWeight += subWeight;
           }
         });
@@ -996,7 +996,7 @@ const Checkout = {
       message += `Total Weight (${category}): ${categoryTotalWeight.toFixed(
         2
       )}~ kg\n`;
-      message += `${"=".repeat(40)}\n\n`;
+      message += `${"=".repeat(35)}\n\n`;
       grandTotalWeight += categoryTotalWeight;
     });
 
@@ -1019,16 +1019,16 @@ const Checkout = {
     Utils.sortItems(items).forEach((item) => {
       const displayValue = item.sizeMm || item.thickness || item.sizeIn;
       // const label = item.thickness && !item.sizeIn ? "Thickness" : "Size";
-      const unitLabel = "mm";
+      // const unitLabel = "mm";
 
-      const extra = item.extra ? ` ${item.extra}` : "";
+      // const extra = item.extra ? ` ${item.extra}` : "";
       const quantity = parseInt(item.quantity) || 0;
       const weight = parseFloat(item.weight) || 0;
       const itemTotalWeight = weight * quantity;
 
-      result += `${counter}. ${displayValue} ${unitLabel}${extra} x${quantity} | Total Item Weight: ${itemTotalWeight.toFixed(
+      result += `${counter}. ${displayValue} Item Weight: ${weight} x${quantity} | Total Item Weight: ${itemTotalWeight.toFixed(
         2
-      )}\n`;
+      )}~ kg\n`;
       counter++;
 
       subWeight += itemTotalWeight;
