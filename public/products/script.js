@@ -1006,7 +1006,7 @@ const Checkout = {
     );
     message += `SUMMARY:\n`;
     message += `Total Items: ${totalItems}\n`;
-    message += `Total Weight: ${grandTotalWeight.toFixed(2)} kg\n`;
+    message += `Total Weight: ${grandTotalWeight.toFixed(2)}~ kg\n`;
 
     return message;
   },
