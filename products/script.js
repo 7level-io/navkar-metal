@@ -557,7 +557,6 @@ const Cart = {
       `Are you sure you want to remove all 
       items from your cart? This action cannot be undone.`,
       () => {
-        console.log(Object.keys(STATE.cart));
         STATE.cart = {};
         Storage.save();
         this.updateCount();
@@ -788,7 +787,7 @@ const Cart = {
           ${displayValue}<span class="text-muted-foreground" style="font-size: 10px">${extraText}</span>
         </div>
         <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center;"><div>${weightIcons}</div><span style="font-size: 12px">${
-      item.weight.toFixed(2) ?? "N/A"
+      Number(item.weight).toFixed(2) ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
           <button class="qty-btn cart-decrement" type="button">−</button>
