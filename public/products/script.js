@@ -788,7 +788,7 @@ const Cart = {
           ${displayValue}<span class="text-muted-foreground" style="font-size: 10px">${extraText}</span>
         </div>
         <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center;"><div>${weightIcons}</div><span style="font-size: 12px">${
-      item.weight ?? "N/A"
+      item.weight.toFixed(2) ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
           <button class="qty-btn cart-decrement" type="button">−</button>
@@ -803,7 +803,7 @@ const Cart = {
           <button class="qty-btn cart-increment" type="button">+</button>
         </div>
         <span class="text-center" style="color:#000">${
-          item.weight * item.quantity
+          (item.weight * item.quantity).toFixed(2)
         }kg</span>
         <button type="button" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 size-9 rounded-md text-destructive h-6 w-6 shrink-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
