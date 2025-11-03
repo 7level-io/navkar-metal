@@ -980,7 +980,7 @@ const Checkout = {
             message += `${sub}:\n`;
             const { formattedItems, subWeight } = this.formatItems(data[sub]);
             message += formattedItems;
-            message += `  Sub ttl wt (${sub}): ${subWeight.toFixed(
+            message += `  Sub Net wt (${sub}): ${subWeight.toFixed(
               2
             )}! kg\n\n`;
             categoryTotalWeight += subWeight;
@@ -992,7 +992,7 @@ const Checkout = {
         categoryTotalWeight += subWeight;
       }
 
-      message += `Ttl Wt (${category}): ${categoryTotalWeight.toFixed(
+      message += `Net Wt (${category}): ${categoryTotalWeight.toFixed(
         2
       )}~ kg\n`;
       message += `${"=".repeat(35)}\n\n`;
@@ -1004,8 +1004,8 @@ const Checkout = {
       0
     );
     message += `SUMMARY:\n`;
-    message += `Ttl Items: ${totalItems}\n`;
-    message += `Ttl Wt: ${grandTotalWeight.toFixed(2)}~ kg\n`;
+    message += `Net Items: ${totalItems}\n`;
+    message += `Net Wt: ${grandTotalWeight.toFixed(2)}~ kg\n`;
 
     return message;
   },
@@ -1025,7 +1025,7 @@ const Checkout = {
       const weight = parseFloat(item.weight) || 0;
       const itemTotalWeight = weight * quantity;
 
-      result += `${counter}. ${displayValue} | Wt: ${weight} x${quantity} | Ttl Item Wt: ${itemTotalWeight.toFixed(
+      result += `${counter}. ${displayValue} | Wt: ${weight} x${quantity} | Net Item Wt: ${itemTotalWeight.toFixed(
         2
       )}~ kg\n`;
       counter++;
