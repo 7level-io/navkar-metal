@@ -12,13 +12,13 @@ const icons = {
 };
 
 const banners = [
-  { icon: icons.verified, text: "Affordable pricing with no hidden fees" },
-  { icon: icons.shieldCheck, text: "FDA-regulated pharmacies" },
-  { icon: icons.mobile, text: "100% online process" },
-  { icon: icons.chat, text: "Unlimited provider messaging" },
-  { icon: icons.verified, text: "US-Sourced ingredients" },
-  { icon: icons.heart, text: "Free Shipping Over $50" },
-  { icon: icons.box, text: "New Arrivals Just Dropped!" },
+  { icon: icons.verified, text: "Trusted brands" },
+  { icon: icons.shieldCheck, text: "ISI approved" },
+  { icon: icons.mobile, text: "Online process" },
+  { icon: icons.chat, text: "Unlimited free enquiry" },
+  { icon: icons.verified, text: "Aftersales support" },
+  { icon: icons.heart, text: "Affordable rates" },
+  { icon: icons.box, text: "Low minimum order!" },
 ];
 
 const scrollingContent = [...banners, ...banners];

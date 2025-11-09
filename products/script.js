@@ -79,13 +79,14 @@ const Utils = {
 
     if (iconCount === 0) return "";
 
-    const color = {
-      light: "#666",
-      medium: "#444",
-      heavy: "#000",
-    }[weightCategory];
+    // const color = {
+    //   light: "#666",
+    //   medium: "#444",
+    //   heavy: "#000",
+    // }[weightCategory];
+    // add color: ${color}; to style
 
-    return `<span style="color: ${color}; display: inline-flex; gap: 2px; align-items: center;">
+    return `<span style="display: inline-flex; gap: 2px; align-items: center;">
     ${iconSVG.repeat(iconCount)}
   </span>`;
   },
@@ -180,9 +181,10 @@ const Products = {
           </span>
           ${extraText}
         </div>
-        <div class="table-data" style="display: flex;flex-direction:column; width: 3rem; text-align: center;"><span style=" align-self:center">${weightIcons}</span> <span>${
-      item.weight || "N/A"
-    }kg</span></div>
+        <div class="table-data" style="display: flex;flex-direction:column; width: 3rem; text-align: center;">
+          <span>${item.weight || "N/A"}kg</span>
+          <span style=" align-self:center">${weightIcons}</span> 
+        </div>
         <div class="table-data">
           <div class="qty-control">
             <button
@@ -511,7 +513,7 @@ const Products = {
 };
 
 const Cart = {
-   updateCount() {
+  updateCount() {
     const newCount = Object.values(STATE.cart).reduce(
       (sum, item) => sum + item.quantity,
       0
@@ -535,15 +537,15 @@ const Cart = {
     const countEl = document.querySelector(SELECTORS.cartCount);
     if (!countEl) return;
 
-    countEl.classList.remove('pulse');
-    
+    countEl.classList.remove("pulse");
+
     // Trigger reflow to restart animation
     void countEl.offsetWidth;
-    
-    countEl.classList.add('pulse');
-    
+
+    countEl.classList.add("pulse");
+
     setTimeout(() => {
-      countEl.classList.remove('pulse');
+      countEl.classList.remove("pulse");
     }, 600); // Match animation duration
   },
 
@@ -801,9 +803,9 @@ const Cart = {
           />
           <button class="qty-btn cart-increment" type="button">+</button>
         </div>
-        <span class="text-center" style="color:#000">${
-          (item.weight * item.quantity).toFixed(2)
-        }kg</span>
+        <span class="text-center" style="color:#000">${(
+          item.weight * item.quantity
+        ).toFixed(2)}kg</span>
         <button type="button" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 size-9 rounded-md text-destructive h-6 w-6 shrink-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
             <path d="M10 11v6"></path>
@@ -980,9 +982,7 @@ const Checkout = {
             message += `${sub}:\n`;
             const { formattedItems, subWeight } = this.formatItems(data[sub]);
             message += formattedItems;
-            message += `  Sub ttl wt (${sub}): ${subWeight.toFixed(
-              2
-            )}! kg\n\n`;
+            message += `  Sub Net wt (${sub}): ${subWeight.toFixed(2)}! kg\n\n`;
             categoryTotalWeight += subWeight;
           }
         });
@@ -992,7 +992,7 @@ const Checkout = {
         categoryTotalWeight += subWeight;
       }
 
-      message += `Ttl Wt (${category}): ${categoryTotalWeight.toFixed(
+      message += `Net Wt (${category}): ${categoryTotalWeight.toFixed(
         2
       )}~ kg\n`;
       message += `${"=".repeat(35)}\n\n`;
@@ -1004,8 +1004,8 @@ const Checkout = {
       0
     );
     message += `SUMMARY:\n`;
-    message += `Ttl Items: ${totalItems}\n`;
-    message += `Ttl Wt: ${grandTotalWeight.toFixed(2)}~ kg\n`;
+    message += `Net Items: ${totalItems}\n`;
+    message += `Net Wt: ${grandTotalWeight.toFixed(2)}~ kg\n`;
 
     return message;
   },
@@ -1025,7 +1025,7 @@ const Checkout = {
       const weight = parseFloat(item.weight) || 0;
       const itemTotalWeight = weight * quantity;
 
-      result += `${counter}. ${displayValue} | Wt: ${weight} x${quantity} | Ttl Item Wt: ${itemTotalWeight.toFixed(
+      result += `${counter}. ${displayValue} | Wt: ${weight} x${quantity} | Net Item Wt: ${itemTotalWeight.toFixed(
         2
       )}~ kg\n`;
       counter++;
