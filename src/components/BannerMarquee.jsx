@@ -9,13 +9,13 @@ import {
 } from "./BannerIcons";
 
 const banners = [
-  { icon: <VerifiedIcon />, text: "Affordable pricing with no hidden fees" },
-  { icon: <ShieldCheckIcon />, text: "FDA-regulated pharmacies" },
-  { icon: <MobileIcon />, text: "100% online process" },
-  { icon: <ChatIcon />, text: "Unlimited provider messaging" },
-  { icon: <VerifiedIcon />, text: "US-Sourced ingredients" },
-  { icon: <HeartIcon />, text: "Free Shipping Over $50" },
-  { icon: <BoxIcon />, text: "New Arrivals Just Dropped!" },
+  { icon: <VerifiedIcon />, text: "Trusted brands" },
+  { icon: <ShieldCheckIcon />, text: "ISI approved" },
+  { icon: <MobileIcon />, text: "Online process" },
+  { icon: <ChatIcon />, text: "Unlimited free enquiry" },
+  { icon: <VerifiedIcon />, text: "Aftersales support" },
+  { icon: <HeartIcon />,text: "Affordable rates" },
+  { icon: <BoxIcon />, text: "Low minimum order" },
 ];
 
 export default function BannerMarquee() {
