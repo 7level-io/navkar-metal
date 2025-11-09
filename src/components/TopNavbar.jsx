@@ -4,7 +4,7 @@ import "./TopNavbar.css";
 import { Link, useLocation } from "react-router-dom";
 
 export default function TopNavbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [navbarColor, setNavbarColor] = useState("default");
   const observer = useRef(null);
