@@ -1003,28 +1003,6 @@ button {
   gap: 1.25rem;
 }
 
-.tabs {
-  align-self: center;
-  width: min(100%, 900px);
-  margin: 0 0 1.25rem;
-  gap: 0.25rem;
-  padding: 0.25rem;
-}
-
-.tab {
-  min-height: 2.75rem;
-  color: #666;
-  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
-}
-
-.tab:hover {
-  color: #333;
-}
-
-.tab.active {
-  color: #306beb;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
 .sub-tabs {
   gap: 0.25rem;
@@ -1133,17 +1111,6 @@ input:focus-visible {
     gap: 0.75rem;
   }
 
-  .tabs {
-    width: 100%;
-    margin-bottom: 1rem;
-    overflow-x: auto;
-    justify-content: flex-start;
-  }
-
-  .tab {
-    flex: 1 0 auto;
-    min-width: 4.5rem;
-  }
 
   .table-row {
     padding: 0.875rem 0.75rem;
@@ -1162,5 +1129,63 @@ input:focus-visible {
   .clear-cart-btn,
   .checkout-btn {
     transition: none;
+  }
+}
+
+/* Configurator composition refinement */
+body {
+  background: #f8f8f8;
+  color: #121212;
+}
+
+main {
+  min-height: calc(100vh - 7rem);
+}
+
+.product-list.container {
+  max-width: 1200px;
+  padding-top: 2.5rem;
+}
+
+.tab-content:not(.hidden) {
+  background: #fff;
+  border: 2px solid #121212;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.tab-content:not(.hidden) .product-card {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.sub-tabs-container {
+  justify-content: center;
+}
+
+.table-row {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(8rem, 1fr);
+}
+
+.add-to-cart-btn {
+  border-radius: 0.75rem;
+}
+
+.cart-drawer {
+  border-left: 2px solid #121212;
+}
+
+@media (max-width: 768px) {
+  .product-list.container {
+    padding-top: 1.5rem;
+  }
+
+  .tab-content:not(.hidden) {
+    padding: 0.75rem;
+  }
+
+  .table-row {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
