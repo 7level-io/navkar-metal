@@ -23,6 +23,7 @@
 
 .navbar {
   width: 100%;
+  font-family: "Lexend", sans-serif;
   background-color: #ffffff;
   top: 0;
   z-index: 1000;
@@ -45,7 +46,7 @@
 }
 
 .navbar-logo a {
-  font-family: "Sofia Sans", sans-serif;
+  font-family: inherit;
   text-decoration: none;
   color: #333;
   font-size: 1.75rem;
@@ -57,6 +58,7 @@
 }
 
 .navbar-links a {
+  font-family: inherit;
   text-decoration: none;
   color: #333;
   font-weight: 500;
@@ -87,7 +89,6 @@
   .navbar-links {
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1rem;
   }
 
   .navbar-links.active {
