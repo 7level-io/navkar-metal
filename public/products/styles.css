@@ -1189,3 +1189,27 @@ main {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
+/* Refined navigation header */
+.navbar {
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: none;
+}
+
+.navbar-container {
+  width: min(calc(100% - 3rem), 1200px);
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.navbar-logo a {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    width: calc(100% - 2rem);
+    padding: 0.75rem 0;
+  }
+}

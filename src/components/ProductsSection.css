@@ -26,3 +26,38 @@
     padding-left: 0.75rem;
   }
 }
+
+/* Product range label */
+.ProductsSection::before {
+  content: "PRODUCT RANGE";
+  grid-column: 1 / -1;
+  color: #666;
+  font-family: "Lexend", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding-bottom: 0.25rem;
+}
+
+@media screen and (max-width: 767px) {
+  .ProductsSection::before {
+    padding-bottom: 0;
+  }
+}
+/* Keep the product-range label out of the grid flow */
+.ProductsSection::before {
+  position: absolute;
+  top: -1.35rem;
+  left: 0;
+  grid-column: auto;
+  padding-bottom: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .ProductsSection::before {
+    right: 0.75rem;
+    left: auto;
+    text-align: right;
+  }
+}
