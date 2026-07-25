@@ -1,81 +1,71 @@
 .product {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   border: 2px solid #000;
 }
 
-.product-image img {
-  max-width: 15vw;
-  display: block;
-}
-
 .product-image {
-  border-right: 2px solid #000;
-}
-
-.product-content {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.product-content.image-left {
-  background-color: #306beb;
-}
-
-.product-content.image-left,
-.product-content.image-left a {
-  color: #fff;
-}
-
-.product-content h2 {
-  font-size: 2.25rem;
-}
-
-.product-content a {
-  font-size: 1.5rem;
+  display: block;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+  color: inherit;
   text-decoration: none;
-  border-bottom: 3px solid;
 }
 
-.product-content.product-content.image-left svg {
-  fill: #fff;
+.product-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
-.product-content.product-content.image-right svg {
-  fill: #0000ee;
+.product-image-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.52);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 180ms ease-in-out;
 }
 
-.product-content.product-content svg {
-  margin-bottom: -4px;
+.product-image-overlay h2 {
+  margin: 0;
+  font-family: "JUST Sans Outline", "JUST Sans", sans-serif;
+  font-size: clamp(3.25rem, 5vw, 6rem);
+  font-weight: 700;
+  -webkit-text-stroke: 0.7px currentColor;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.product-image:hover .product-image-overlay,
+.product-image:focus-visible .product-image-overlay {
+  opacity: 1;
 }
 
 @media screen and (max-width: 767px) {
-  .product-content h2 {
-    font-size: 2.5rem;
+  .product-image-overlay {
+    opacity: 1;
   }
 
-  .product-image img {
-    max-width: 50vw;
-  }
-
-  .product-image.image-right {
-    border-left: 2px solid #000;
-
-    order: 1;
-  }
-
-  .product-image.image-left {
-    border-right: 2px solid #000;
-
-    order: -1;
+  .product-image-overlay h2 {
+    font-size: clamp(2.75rem, 13vw, 4.75rem);
   }
 }
 
 @media screen and (max-width: 526px) {
-  .product-content h2 {
-    font-size: 1.75rem;
+  .product-image-overlay h2 {
+    font-size: 2.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-image-overlay {
+    transition: none;
   }
 }
