@@ -183,6 +183,7 @@ button {
 /* Product page */
 .navbar {
   width: 100%;
+  font-family: "Lexend", sans-serif;
   background-color: #ffffff;
   color: #333;
   transition: background-color 0.3s ease, border-radius 0.3s ease;
@@ -190,7 +191,7 @@ button {
 }
 
 .navbar a {
-  font-family: "Sofia Sans", sans-serif;
+  font-family: inherit;
   color: inherit;
   text-decoration: none;
 }
@@ -210,7 +211,7 @@ button {
 
 .navbar-logo a {
   text-decoration: none;
-  font-family: "Sofia Sans", sans-serif;
+  font-family: inherit;
 
   color: #333;
   font-size: 1.75rem;
@@ -224,7 +225,7 @@ button {
 }
 
 .navbar-links a {
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   text-decoration: none;
   color: #333;
   font-weight: 500;
@@ -514,7 +515,7 @@ button {
 }
 
 .add-to-cart-btn {
-  font-family: "Lexand", sans-serif;
+  font-family: "Lexend", sans-serif;
   background: #818089;
   border-radius: 0.75rem;
   padding: 1rem;
@@ -994,4 +995,197 @@ button {
 
 .hidden {
   display: none;
+}
+
+/* Premium UI refinements */
+.product-list.container {
+  padding: 2rem 2rem 5rem;
+  gap: 1.25rem;
+}
+
+
+.sub-tabs {
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.sub-tab {
+  min-height: 2.5rem;
+  transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.sub-tab.active {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card {
+  margin-bottom: 1.25rem;
+}
+
+.product-table .table-head {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table-row {
+  padding: 1rem 1.25rem;
+}
+
+.product-table .table-header {
+  color: #333;
+  letter-spacing: 0.01em;
+}
+
+.product-table .table-body .table-row {
+  transition: background-color 160ms ease;
+}
+
+.table-row .qty-input,
+.cart-qty-input {
+  min-height: 2.5rem;
+  border: 1px solid transparent;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.qty-btn {
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.qty-btn:hover {
+  border-color: #306beb;
+  color: #1a4db8;
+}
+
+.add-to-cart-btn {
+  font-family: "Lexend", sans-serif;
+  min-height: 3.25rem;
+  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.add-to-cart-btn.enabled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-to-cart-btn.enabled:hover,
+.checkout-btn:hover {
+  transform: translateY(-1px);
+}
+
+.cart-button.btn {
+  position: relative;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.cart-button.btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+.cart-drawer {
+  width: min(700px, 100%);
+  height: 100dvh;
+}
+
+.cart-header h2 {
+  font-family: "Lexend", sans-serif;
+  font-size: 1.5rem;
+}
+
+.close-btn,
+.clear-cart-btn,
+.checkout-btn {
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #306beb;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .product-list.container {
+    padding: 1.25rem 1rem 5rem;
+    gap: 0.75rem;
+  }
+
+
+  .table-row {
+    padding: 0.875rem 0.75rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab,
+  .sub-tab,
+  .product-table .table-body .table-row,
+  .qty-btn,
+  .add-to-cart-btn,
+  .cart-button.btn,
+  .close-btn,
+  .clear-cart-btn,
+  .checkout-btn {
+    transition: none;
+  }
+}
+
+/* Configurator composition refinement */
+body {
+  background: #f8f8f8;
+  color: #121212;
+}
+
+main {
+  min-height: calc(100vh - 7rem);
+}
+
+.product-list.container {
+  max-width: 1200px;
+  padding-top: 2.5rem;
+}
+
+.tab-content:not(.hidden) {
+  background: #fff;
+  border: 2px solid #121212;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.tab-content:not(.hidden) .product-card {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.sub-tabs-container {
+  justify-content: center;
+}
+
+.table-row {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(8rem, 1fr);
+}
+
+.add-to-cart-btn {
+  border-radius: 0.75rem;
+}
+
+.cart-drawer {
+  border-left: 2px solid #121212;
+}
+
+@media (max-width: 768px) {
+  .product-list.container {
+    padding-top: 1.5rem;
+  }
+
+  .tab-content:not(.hidden) {
+    padding: 0.75rem;
+  }
+
+  .table-row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }

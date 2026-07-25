@@ -61,3 +61,11 @@
     padding: 0.5rem 1rem;
   }
 }
+
+.marquee-container {
+  font-family: "Inter", sans-serif;
+}
+
+.marquee-track {
+  padding: 0.75rem 0;
+}
