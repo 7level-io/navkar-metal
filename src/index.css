@@ -8,3 +8,9 @@
 h1 {
   font-family: "Lexend", sans-serif;
 }
+
+/* Page-level visual system */
+body {
+  background: #f8f8f8;
+  color: #121212;
+}

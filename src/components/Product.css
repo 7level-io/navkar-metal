@@ -84,3 +84,39 @@
     transition: none;
   }
 }
+
+/* Gallery composition refinement */
+.ProductsSection {
+  width: min(100%, 1200px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 1.25rem;
+}
+
+.product {
+  position: relative;
+}
+
+.product-image-overlay {
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.product-image-overlay h2 {
+  font-family: "Lexend", sans-serif;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  letter-spacing: -0.04em;
+
+}
+
+@media screen and (max-width: 767px) {
+  .ProductsSection {
+    width: 100%;
+    padding-top: 0.75rem;
+  }
+
+  .product-image-overlay {
+    padding: 1rem;
+  }
+}
