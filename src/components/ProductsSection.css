@@ -6,13 +6,17 @@
   gap: 1rem;
   position: relative;
   z-index: 12;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 767px) {
   .ProductsSection {
     margin-top: -1.5rem;
-    display: block;
-    padding: 0 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0 0.5rem 1rem;
+    gap: 0.5rem;
   }
 }
 
