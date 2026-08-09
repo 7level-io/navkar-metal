@@ -917,6 +917,7 @@ const Cart = {
 
   open() {
     this.previousFocus = document.activeElement;
+    document.body.classList.add("drawer-open");
     document.querySelector(SELECTORS.cartOverlay)?.classList.add("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.add("active");
     document.querySelector(SELECTORS.cartDrawer)?.setAttribute("aria-hidden", "false");
@@ -928,6 +929,7 @@ const Cart = {
   },
 
   close() {
+    document.body.classList.remove("drawer-open");
     document.querySelector(SELECTORS.cartOverlay)?.classList.remove("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.remove("active");
     document.querySelector(SELECTORS.cartDrawer)?.setAttribute("aria-hidden", "true");
@@ -1036,13 +1038,17 @@ const Checkout = {
       return;
     }
 
+    Details.open();
+  },
+
+  send(details = {}) {
     const form = document.getElementById("enquiry-form");
-    const details = form ? Object.fromEntries(new FormData(form).entries()) : {};
-    const message = this.generateMessage(details);
+    const message = this.generateMessage(details || (form ? Object.fromEntries(new FormData(form).entries()) : {}));
     const encoded = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
 
     window.open(whatsappURL, "_blank");
+    Details.close();
     const feedback = document.getElementById("enquiry-feedback");
     if (feedback) feedback.textContent = "WhatsApp opened with your enquiry. Your selection has been retained.";
   },
@@ -1200,14 +1206,13 @@ const Events = {
 
     document.getElementById("catalog-search")?.addEventListener("input", (event) => Products.filterRows(event.target.value));
     document.getElementById("summary-open")?.addEventListener("click", () => Cart.open());
-    document.getElementById("open-enquiry-details")?.addEventListener("click", () => Details.open());
     document.getElementById("close-enquiry-details")?.addEventListener("click", () => Details.close());
     document.getElementById("details-overlay")?.addEventListener("click", () => Details.close());
+    document.getElementById("skip-enquiry-details")?.addEventListener("click", () => Checkout.send({}));
     document.getElementById("enquiry-form")?.addEventListener("submit", (event) => {
       event.preventDefault();
       if (event.currentTarget.reportValidity()) {
-        Details.close();
-        document.getElementById("enquiry-feedback").textContent = "Details saved. You can now send your enquiry on WhatsApp.";
+        Checkout.send(Object.fromEntries(new FormData(event.currentTarget).entries()));
       }
     });
     document.querySelectorAll(".sub-tab").forEach((tab) => {

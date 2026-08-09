@@ -411,8 +411,10 @@
           <span><span id="total-weight">0</span> kg</span>
         </div>
 
-        <button class="quotation-btn btn p-lg w-100" id="open-enquiry-details" type="button">Request a quotation</button>
-        <button class="checkout-btn btn p-lg w-100" type="button">Send enquiry on WhatsApp</button>
+        <button class="checkout-btn btn p-lg w-100" type="button">
+          <img class="whatsapp-icon" src="../assets/WhatsApp_icon.png" alt="" aria-hidden="true" />
+          Whatsapp Enquiry
+        </button>
         <p class="enquiry-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
       </div>
     </div>
@@ -425,7 +427,7 @@
         </div>
         <button class="close-btn" id="close-enquiry-details" type="button" aria-label="Close enquiry details">&times;</button>
       </div>
-      <p class="details-help">Share your company or project details for a more specific quote. This information is optional, added only to your WhatsApp enquiry, and not stored on this website.</p>
+      <p class="details-help">Share your company or project details for a more specific quote, or skip this step to send the product list immediately. This information is not stored on this website.</p>
       <form class="enquiry-form" id="enquiry-form">
         <div class="form-grid">
           <label>Name<input name="name" autocomplete="name" /></label>
@@ -433,7 +435,10 @@
           <label>Location<input name="location" autocomplete="address-level2" /></label>
           <label>Project details<textarea name="project" rows="3" placeholder="Optional"></textarea></label>
         </div>
-        <button class="details-save btn p-lg" id="save-enquiry-details" type="submit">Save details</button>
+        <div class="details-actions">
+          <button class="details-skip btn p-lg" id="skip-enquiry-details" type="button">Skip and send</button>
+          <button class="details-save btn p-lg" id="save-enquiry-details" type="submit">Send with details</button>
+        </div>
       </form>
     </section>
     <script src="./marquee.js" type="module"></script>
