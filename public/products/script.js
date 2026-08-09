@@ -3,6 +3,30 @@ import { products } from "../products.js";
 const STATE = {
   cart: {},
   currentUnit: "mm",
+  currentCategory: "pipe",
+};
+
+const CATEGORY_CONTENT = {
+  pipe: {
+    title: "Pipe",
+    description: "Browse square, rectangle and round pipe options by size, weight and quantity.",
+  },
+  angle: {
+    title: "Angle",
+    description: "Review the available angle sizes and select the quantities for your enquiry.",
+  },
+  flat: {
+    title: "Flat",
+    description: "Compare the listed flat sections by size and weight before adding your selection.",
+  },
+  channel: {
+    title: "Channel",
+    description: "Explore the available channel sizes and build a focused product selection.",
+  },
+  sheet: {
+    title: "Sheet",
+    description: "Choose from the listed sheet thicknesses and add the required quantities to your enquiry.",
+  },
 };
 
 const SELECTORS = {
@@ -169,7 +193,7 @@ const Products = {
     const weightIcons = Utils.getWeightIcons(item.weightCategory);
 
     return `
-      <div class="table-row" data-product-row="${category}-${subcategory}-${index}">
+      <div class="table-row" data-product-row="${category}-${subcategory}-${index}" data-search-text="${`${displaySize} ${item.weight || ""} ${item.weightCategory || ""} ${item.extra || ""}`.toLowerCase()}">
         <div class="table-data">
           <span
             class="size-display"
@@ -190,11 +214,12 @@ const Products = {
             <button
               class="qty-btn product-decrement"
               type="button"
+              aria-label="Decrease quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
               data-category="${category}"
               data-subcategory="${subcategory}"
               data-index="${index}"
             >
-              −
+              &minus;
             </button>
             <input
               type="number"
@@ -205,10 +230,12 @@ const Products = {
               data-category="${category}"
               data-subcategory="${subcategory}"
               data-index="${index}"
+              aria-label="Quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
             />
             <button
               class="qty-btn product-increment"
               type="button"
+              aria-label="Increase quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
               data-category="${category}"
               data-subcategory="${subcategory}"
               data-index="${index}"
@@ -284,7 +311,7 @@ const Products = {
             tooltip.className = "tab-badge-tooltip";
             tab.appendChild(tooltip);
           }
-          tooltip.textContent = breakdown.join(" • ");
+          tooltip.textContent = breakdown.join(" · ");
         }
       } else {
         // Remove badge and tooltip if count is 0
@@ -315,6 +342,27 @@ const Products = {
         countSpan.textContent = totalCount;
       }
     }
+    this.updateSelectionSummary();
+  },
+
+  updateSelectionSummary() {
+    const count = this.getTotalSelectedCount();
+    const countEl = document.getElementById("summary-count");
+    const detailEl = document.getElementById("summary-detail");
+    if (countEl) countEl.textContent = `${count} item${count === 1 ? "" : "s"}`;
+    if (detailEl) detailEl.textContent = count ? "Ready to add to your enquiry." : "Add quantities below to build an enquiry.";
+  },
+
+  filterRows(query) {
+    const needle = query.trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll("[data-product-row]").forEach((row) => {
+      const matches = !needle || row.dataset.searchText.includes(needle);
+      row.classList.toggle("search-hidden", !matches);
+      if (matches && !row.closest(".tab-content.hidden")) visible += 1;
+    });
+    const status = document.getElementById("catalog-search-status");
+    if (status) status.textContent = needle ? `${visible} matching size${visible === 1 ? "" : "s"}` : "";
   },
 
   /**
@@ -792,7 +840,7 @@ const Cart = {
       item.weight ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
-          <button class="qty-btn cart-decrement" type="button">−</button>
+          <button class="qty-btn cart-decrement" type="button" aria-label="Decrease quantity for ${displayValue}">&minus;</button>
           <input 
             type="number" 
             class="cart-qty-input w-12 text-center ${
@@ -801,12 +849,12 @@ const Cart = {
             value="${item.quantity}" 
             min="1"
           />
-          <button class="qty-btn cart-increment" type="button">+</button>
+          <button class="qty-btn cart-increment" type="button" aria-label="Increase quantity for ${displayValue}">+</button>
         </div>
         <span class="text-center" style="color:#000">${(
           item.weight * item.quantity
         ).toFixed(2)}kg</span>
-        <button type="button" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 size-9 rounded-md text-destructive h-6 w-6 shrink-0">
+        <button type="button" aria-label="Remove ${displayValue} from enquiry" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 size-9 rounded-md text-destructive h-6 w-6 shrink-0">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
             <path d="M10 11v6"></path>
             <path d="M14 11v6"></path>
@@ -821,7 +869,7 @@ const Cart = {
 
   updateTotal(count) {
     const totalEl = document.querySelector(SELECTORS.totalItems);
-    if (totalEl) totalEl.textContent = count;
+    if (totalEl) totalEl.textContent = `(${count})`;
 
     const totalWeight = Object.values(STATE.cart).reduce((sum, item) => {
       const weight = parseFloat(item.weight) || 0;
@@ -868,8 +916,12 @@ const Cart = {
   },
 
   open() {
+    this.previousFocus = document.activeElement;
+    document.body.classList.add("drawer-open");
     document.querySelector(SELECTORS.cartOverlay)?.classList.add("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.add("active");
+    document.querySelector(SELECTORS.cartDrawer)?.setAttribute("aria-hidden", "false");
+    document.querySelector("#close-cart")?.focus();
 
     if (window.history.state?.cartOpen !== true) {
       window.history.pushState({ cartOpen: true }, "", window.location.href);
@@ -877,8 +929,11 @@ const Cart = {
   },
 
   close() {
+    document.body.classList.remove("drawer-open");
     document.querySelector(SELECTORS.cartOverlay)?.classList.remove("active");
     document.querySelector(SELECTORS.cartDrawer)?.classList.remove("active");
+    document.querySelector(SELECTORS.cartDrawer)?.setAttribute("aria-hidden", "true");
+    this.previousFocus?.focus?.();
 
     if (window.history.state?.cartOpen === true) {
       window.history.back();
@@ -887,6 +942,17 @@ const Cart = {
 };
 
 const UI = {
+  updateCategoryIntro(category) {
+    const content = CATEGORY_CONTENT[category] || CATEGORY_CONTENT.pipe;
+    const title = document.getElementById("product-page-title");
+    const description = document.getElementById("product-description");
+    const heroCategory = document.getElementById("hero-category");
+
+    if (title) title.textContent = `Choose the right ${content.title.toLowerCase()} section for your project.`;
+    if (description) description.textContent = content.description;
+    if (heroCategory) heroCategory.textContent = content.title;
+  },
+
   toggleUnit(unit) {
     STATE.currentUnit = unit;
 
@@ -926,25 +992,37 @@ const UI = {
     });
   },
 
-  switchTab(tab) {
+  switchTab(tab, { updateUrl = true } = {}) {
+    if (!CATEGORY_CONTENT[tab]) return;
+    STATE.currentCategory = tab;
     document
       .querySelectorAll(".tab")
-      .forEach((t) => t.classList.remove("active"));
-    document.querySelector(`[data-tab="${tab}"]`)?.classList.add("active");
+      .forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
+    const activeTab = document.querySelector(`[data-tab="${tab}"]`);
+    activeTab?.classList.add("active");
+    activeTab?.setAttribute("aria-selected", "true");
 
     document
       .querySelectorAll(".tab-content")
       .forEach((c) => c.classList.add("hidden"));
     document.getElementById(`${tab}-content`)?.classList.remove("hidden");
+    this.updateCategoryIntro(tab);
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("category", tab);
+      window.history.pushState({ category: tab }, "", url);
+    }
+    Products.filterRows(document.getElementById("catalog-search")?.value || "");
   },
 
   switchSubTab(subtab) {
     document
       .querySelectorAll(".sub-tab")
-      .forEach((t) => t.classList.remove("active"));
+      .forEach((t) => { t.classList.remove("active"); t.setAttribute("aria-selected", "false"); });
     document
       .querySelector(`[data-subtab="${subtab}"]`)
       ?.classList.add("active");
+    document.querySelector(`[data-subtab="${subtab}"]`)?.setAttribute("aria-selected", "true");
 
     document
       .querySelectorAll(".subtab-content")
@@ -960,15 +1038,23 @@ const Checkout = {
       return;
     }
 
-    const message = this.generateMessage();
+    Details.open();
+  },
+
+  send(details = {}) {
+    const form = document.getElementById("enquiry-form");
+    const message = this.generateMessage(details || (form ? Object.fromEntries(new FormData(form).entries()) : {}));
     const encoded = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`;
 
     window.open(whatsappURL, "_blank");
+    Details.close();
+    const feedback = document.getElementById("enquiry-feedback");
+    if (feedback) feedback.textContent = "WhatsApp opened with your enquiry. Your selection has been retained.";
   },
 
-  generateMessage() {
-    let message = "Purchase Order:\n\n";
+  generateMessage(details = {}) {
+    let message = `Navkar Metals enquiry\nName: ${details.name || "-"}\nPhone: ${details.phone || "-"}\nLocation: ${details.location || "-"}\nProject: ${details.project || "-"}\n\nSelection:\n\n`;
     const grouped = Cart.groupItems();
     let grandTotalWeight = 0;
 
@@ -1037,6 +1123,25 @@ const Checkout = {
   },
 };
 
+const Details = {
+  previousFocus: null,
+  open() {
+    this.previousFocus = document.activeElement;
+    document.getElementById("details-overlay")?.classList.add("active");
+    const modal = document.getElementById("details-modal");
+    modal?.classList.add("active");
+    modal?.setAttribute("aria-hidden", "false");
+    modal?.querySelector("input")?.focus();
+  },
+  close() {
+    document.getElementById("details-overlay")?.classList.remove("active");
+    const modal = document.getElementById("details-modal");
+    modal?.classList.remove("active");
+    modal?.setAttribute("aria-hidden", "true");
+    this.previousFocus?.focus?.();
+  },
+};
+
 const Events = {
   init() {
     document.addEventListener("click", (e) => {
@@ -1099,6 +1204,17 @@ const Events = {
       tab.addEventListener("click", () => UI.switchTab(tab.dataset.tab));
     });
 
+    document.getElementById("catalog-search")?.addEventListener("input", (event) => Products.filterRows(event.target.value));
+    document.getElementById("summary-open")?.addEventListener("click", () => Cart.open());
+    document.getElementById("close-enquiry-details")?.addEventListener("click", () => Details.close());
+    document.getElementById("details-overlay")?.addEventListener("click", () => Details.close());
+    document.getElementById("skip-enquiry-details")?.addEventListener("click", () => Checkout.send({}));
+    document.getElementById("enquiry-form")?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (event.currentTarget.reportValidity()) {
+        Checkout.send(Object.fromEntries(new FormData(event.currentTarget).entries()));
+      }
+    });
     document.querySelectorAll(".sub-tab").forEach((tab) => {
       tab.addEventListener("click", () => UI.switchSubTab(tab.dataset.subtab));
     });
@@ -1136,7 +1252,12 @@ const Events = {
       ?.addEventListener("click", () => Checkout.handle());
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") Cart.close();
+      if (e.key !== "Escape") return;
+      if (document.getElementById("details-modal")?.classList.contains("active")) {
+        Details.close();
+        return;
+      }
+      Cart.close();
     });
 
     window.addEventListener("popstate", (e) => {
@@ -1153,6 +1274,9 @@ const Events = {
             window.location.href
           );
         }
+      } else {
+        const category = new URL(window.location.href).searchParams.get("category");
+        if (CATEGORY_CONTENT[category]) UI.switchTab(category, { updateUrl: false });
       }
     });
   },
@@ -1172,9 +1296,14 @@ function init() {
   Products.render("channel");
   Products.render("sheet");
 
+  const initialCategory = new URL(window.location.href).searchParams.get("category");
+  UI.switchTab(CATEGORY_CONTENT[initialCategory] ? initialCategory : "pipe", { updateUrl: false });
+
   Storage.load();
 
   Events.init();
+  Products.filterRows(document.getElementById("catalog-search")?.value || "");
+  Products.updateSelectionSummary();
 }
 
 init();

@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 // import { Menu, X } from "lucide-react";
 import "./TopNavbar.css";
-import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/imgs/logo.svg";
 
 export default function TopNavbar() {
   // const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [navbarColor, setNavbarColor] = useState("default");
   const observer = useRef(null);
-
-  const location = useLocation();
 
   // Detect scroll depth for shadow
   useEffect(() => {
@@ -40,17 +38,6 @@ export default function TopNavbar() {
     return () => observer.current?.disconnect();
   }, []);
 
-  const getPageLabel = (pathname) => {
-    if (pathname === "/") return "";
-    const label = pathname
-      .split("/")
-      .filter(Boolean)
-      .pop()
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, (l) => l.toUpperCase());
-    return ` - ${label}`;
-  };
-
   return (
     <header
       className={`navbar navbar-${navbarColor} ${
@@ -59,13 +46,11 @@ export default function TopNavbar() {
     >
       <div className="navbar-container">
         <div className="navbar-logo">
-          <Link to="https://7level.in">
-            7Level{getPageLabel(location.pathname)}
-          </Link>
+          <img src={logo} alt="Navkar Metals" />
         </div>
 
-        <nav class="navbar-links">
-          <a href="../products">Products</a>
+        <nav className="navbar-links">
+          <a href="/products">Products</a>
           {/* <a href="../pipe">Pipe</a>
           <a href="../angle">Angle</a>
           <a href="../flat">Flat</a>
