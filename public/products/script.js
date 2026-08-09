@@ -5,6 +5,29 @@ const STATE = {
   currentUnit: "mm",
 };
 
+const CATEGORY_CONTENT = {
+  pipe: {
+    title: "Pipe",
+    description: "Browse square, rectangle and round pipe options by size, weight and quantity.",
+  },
+  angle: {
+    title: "Angle",
+    description: "Review the available angle sizes and select the quantities for your enquiry.",
+  },
+  flat: {
+    title: "Flat",
+    description: "Compare the listed flat sections by size and weight before adding your selection.",
+  },
+  channel: {
+    title: "Channel",
+    description: "Explore the available channel sizes and build a focused product selection.",
+  },
+  sheet: {
+    title: "Sheet",
+    description: "Choose from the listed sheet thicknesses and add the required quantities to your enquiry.",
+  },
+};
+
 const SELECTORS = {
   cartDrawer: ".cart-drawer",
   cartOverlay: "#cart-overlay",
@@ -194,7 +217,7 @@ const Products = {
               data-subcategory="${subcategory}"
               data-index="${index}"
             >
-              −
+              &minus;
             </button>
             <input
               type="number"
@@ -284,7 +307,7 @@ const Products = {
             tooltip.className = "tab-badge-tooltip";
             tab.appendChild(tooltip);
           }
-          tooltip.textContent = breakdown.join(" • ");
+          tooltip.textContent = breakdown.join(" · ");
         }
       } else {
         // Remove badge and tooltip if count is 0
@@ -792,7 +815,7 @@ const Cart = {
       item.weight ?? "N/A"
     }kg/pc</span></div>
         <div class="cart-item-controls">
-          <button class="qty-btn cart-decrement" type="button">−</button>
+          <button class="qty-btn cart-decrement" type="button">&minus;</button>
           <input 
             type="number" 
             class="cart-qty-input w-12 text-center ${
@@ -887,6 +910,17 @@ const Cart = {
 };
 
 const UI = {
+  updateCategoryIntro(category) {
+    const content = CATEGORY_CONTENT[category] || CATEGORY_CONTENT.pipe;
+    const title = document.getElementById("product-page-title");
+    const description = document.getElementById("product-description");
+    const heroCategory = document.getElementById("hero-category");
+
+    if (title) title.textContent = `Choose the right ${content.title.toLowerCase()} section for your project.`;
+    if (description) description.textContent = content.description;
+    if (heroCategory) heroCategory.textContent = content.title;
+  },
+
   toggleUnit(unit) {
     STATE.currentUnit = unit;
 
@@ -936,6 +970,7 @@ const UI = {
       .querySelectorAll(".tab-content")
       .forEach((c) => c.classList.add("hidden"));
     document.getElementById(`${tab}-content`)?.classList.remove("hidden");
+    this.updateCategoryIntro(tab);
   },
 
   switchSubTab(subtab) {
@@ -1171,6 +1206,8 @@ function init() {
   Products.render("flat");
   Products.render("channel");
   Products.render("sheet");
+
+  UI.updateCategoryIntro("pipe");
 
   Storage.load();
 

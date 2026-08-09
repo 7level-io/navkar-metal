@@ -1213,3 +1213,142 @@ main {
     padding: 0.75rem 0;
   }
 }
+
+/* Premium catalog direction: restrained industrial palette and clearer hierarchy. */
+:root {
+  --catalog-ink: #172027;
+  --catalog-muted: #53616a;
+  --catalog-paper: #f4f3ef;
+  --catalog-line: #d9ddd9;
+  --catalog-accent: #306beb;
+}
+
+body {
+  background: var(--catalog-paper);
+  color: var(--catalog-ink);
+}
+
+.product-list.container { padding-top: 1.5rem; }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--catalog-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.breadcrumb a { color: var(--catalog-ink); }
+.breadcrumb a:hover { color: var(--catalog-accent); }
+
+.product-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(16rem, 0.8fr);
+  gap: 2rem;
+  align-items: end;
+  padding: 3.5rem 0 3rem;
+  border-bottom: 1px solid var(--catalog-line);
+}
+
+.eyebrow {
+  margin-bottom: 0.75rem;
+  color: var(--catalog-accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.product-hero h1 {
+  max-width: 740px;
+  margin-bottom: 1rem;
+  color: var(--catalog-ink);
+  font-family: "Lexend", sans-serif;
+  font-size: clamp(2.1rem, 5vw, 4.7rem);
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 0.98;
+}
+
+.product-hero-copy > p:not(.eyebrow) {
+  max-width: 560px;
+  color: var(--catalog-muted);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.hero-link {
+  display: inline-flex;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+  color: var(--catalog-ink);
+  font-weight: 600;
+  border-bottom: 1px solid var(--catalog-ink);
+  padding-bottom: 0.3rem;
+}
+
+.hero-link:hover { color: var(--catalog-accent); border-color: var(--catalog-accent); }
+
+.product-hero-note {
+  display: grid;
+  gap: 0.55rem;
+  padding: 1.3rem;
+  border-left: 2px solid var(--catalog-accent);
+  background: #fff;
+  color: var(--catalog-muted);
+  line-height: 1.45;
+}
+
+.product-hero-note strong {
+  color: var(--catalog-ink);
+  font-family: "Lexend", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.hero-note-label { color: var(--catalog-accent); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: end;
+  padding-top: 2.5rem;
+}
+
+.section-heading h2 { font-family: "Lexend", sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 500; letter-spacing: -0.05em; }
+.section-help { max-width: 420px; color: var(--catalog-muted); line-height: 1.5; text-align: right; }
+
+.tabs { background: var(--catalog-ink); border-radius: 0; margin: 1.5rem 0 1rem; padding: 0.35rem; }
+.tabs .tab { color: #fff; }
+.tab.active { background: var(--catalog-accent); color: #fff; }
+.tab-index { margin-right: 0.35rem; opacity: 0.55; font-size: 0.72rem; }
+.tabs .tab-badge {
+  background: #fff;
+  color: var(--catalog-accent);
+  border: 2px solid var(--catalog-accent);
+  box-shadow: 0 2px 6px rgba(23, 32, 39, 0.22);
+}
+
+.tab-content:not(.hidden) { border: 1px solid var(--catalog-line); border-radius: 0; padding: 1.25rem; box-shadow: 0 14px 40px rgba(23, 32, 39, 0.06); }
+.tab-content:not(.hidden) .product-card { border-color: var(--catalog-line); }
+.add-to-cart-btn { border-radius: 0; }
+
+.navbar { border-bottom-color: var(--catalog-line); background: rgba(244, 243, 239, 0.94); backdrop-filter: blur(12px); }
+.navbar-logo a, .navbar-links .cart-button { color: var(--catalog-ink); }
+.navbar-logo a { display: inline-flex; align-items: center; gap: 0.65rem; }
+.navbar-logo img { width: 2rem; height: 1.65rem; object-fit: contain; }
+.floating-add-cart-btn { background: var(--catalog-ink); border-radius: 0; box-shadow: 0 12px 28px rgba(23, 32, 39, 0.2); }
+.floating-add-cart-btn:hover, .checkout-btn:hover { background: var(--catalog-accent); }
+.checkout-btn { background: var(--catalog-ink); border-radius: 0; }
+
+@media (max-width: 768px) {
+  .product-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.5rem 0 2rem; }
+  .section-heading { display: block; padding-top: 2rem; }
+  .section-help { margin-top: 0.75rem; text-align: left; }
+  .tabs { overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { min-width: 8.5rem; white-space: nowrap; }
+  .navbar-logo img { width: 1.7rem; height: 1.4rem; }
+}
