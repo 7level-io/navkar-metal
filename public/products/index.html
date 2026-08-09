@@ -59,51 +59,43 @@
     </header>
     <main>
       <div class="product-list container">
-        <div class="breadcrumb" aria-label="Breadcrumb">
-          <a href="https://navkarmetals.7level.in/">Home</a>
-          <span aria-hidden="true">/</span>
-          <span>Products</span>
-        </div>
-
-        <section class="product-hero" aria-labelledby="product-page-title">
-          <div class="product-hero-copy">
-            <p class="eyebrow">NAVKAR METALS / PRODUCT CATALOG</p>
-            <h1 id="product-page-title">Choose the right metal section for your project.</h1>
-            <p id="product-description">Browse available sizes, compare weights and build a clear product enquiry.</p>
-            <a class="hero-link" href="#configurator">Browse specifications <span aria-hidden="true">&rarr;</span></a>
-          </div>
-          <div class="product-hero-note">
-            <span class="hero-note-label">Currently viewing</span>
-            <strong id="hero-category">Pipe</strong>
-            <span>Sizes and quantities can be selected below.</span>
-          </div>
-        </section>
-
         <div class="section-heading" id="configurator">
-          <div>
-            <p class="eyebrow">PRODUCT CATALOG</p>
-            <h2>Configure your selection</h2>
-          </div>
-          <p class="section-help">Select a category, review the available specifications and add the items you need to your enquiry.</p>
+          <p class="eyebrow">PRODUCT CATALOG</p>
         </div>
 
-        <div class="tabs">
+        <div class="catalog-toolbar">
+          <label class="catalog-search-label visually-hidden" for="catalog-search">Find a size or weight</label>
+          <input id="catalog-search" class="catalog-search" type="search" placeholder="Search specifications…" autocomplete="off" />
+          <span id="catalog-search-status" class="catalog-search-status" role="status"></span>
+        </div>
+
+        <div class="selection-summary" id="selection-summary" aria-live="polite">
+          <div>
+            <span class="summary-label">Your selection</span>
+            <strong id="summary-count">0 items</strong>
+          </div>
+          <span id="summary-detail">Add quantities below to build an enquiry.</span>
+          <button class="summary-link" type="button" id="summary-open">Open enquiry</button>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Product categories">
           <button
             class="tab btn p-md fw-500 font-size-md active"
             data-tab="pipe"
+            role="tab" aria-selected="true" aria-controls="pipe-content"
           >
             <span class="tab-index">01</span> Pipe
           </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="angle">
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="angle" role="tab" aria-selected="false" aria-controls="angle-content">
             <span class="tab-index">02</span> Angle
           </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="flat">
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="flat" role="tab" aria-selected="false" aria-controls="flat-content">
             <span class="tab-index">03</span> Flat
           </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="channel">
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="channel" role="tab" aria-selected="false" aria-controls="channel-content">
             <span class="tab-index">04</span> Channel
           </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet">
+          <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet" role="tab" aria-selected="false" aria-controls="sheet-content">
             <span class="tab-index">05</span> Sheet
           </button>
         </div>
@@ -114,13 +106,14 @@
               <button
                 class="sub-tab btn p-md fw-500 active"
                 data-subtab="square"
+                role="tab" aria-selected="true" aria-controls="square-content"
               >
                 Square
               </button>
-              <button class="sub-tab btn p-md fw-500" data-subtab="rectangle">
+              <button class="sub-tab btn p-md fw-500" data-subtab="rectangle" role="tab" aria-selected="false" aria-controls="rectangle-content">
                 Rectangle
               </button>
-              <button class="sub-tab btn p-md fw-500" data-subtab="round">
+              <button class="sub-tab btn p-md fw-500" data-subtab="round" role="tab" aria-selected="false" aria-controls="round-content">
                 Round
               </button>
             </div>
@@ -388,13 +381,12 @@
     </button>
 
     <div class="cart-overlay" id="cart-overlay"></div>
-    <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="enquiry-title" aria-hidden="true">
       <div class="cart-header">
           <div>
-            <p class="eyebrow">YOUR SELECTION</p>
-            <h2>Your enquiry</h2>
+            <h2 id="enquiry-title">Your enquiry <span class="enquiry-count" id="total-items">(0)</span></h2>
           </div>
-        <button class="close-btn" id="close-cart">&times;</button>
+        <button class="close-btn" id="close-cart" type="button" aria-label="Close enquiry">&times;</button>
       </div>
       <!-- <div class="item-attributes">
         <span class="text-muted-foreground">Item</span>
@@ -415,17 +407,35 @@
           Clear Cart
         </button>
         <div class="cart-total">
-          <span>Total Items:</span>
-          <span id="total-items">0</span>
-        </div>
-        <div class="cart-total">
           <span>Total Weight:</span>
           <span><span id="total-weight">0</span> kg</span>
         </div>
 
-        <button class="checkout-btn btn p-lg w-100">Send enquiry on WhatsApp</button>
+        <button class="quotation-btn btn p-lg w-100" id="open-enquiry-details" type="button">Request a quotation</button>
+        <button class="checkout-btn btn p-lg w-100" type="button">Send enquiry on WhatsApp</button>
+        <p class="enquiry-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
       </div>
     </div>
+    <div class="details-overlay" id="details-overlay"></div>
+    <section class="details-modal" id="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-title" aria-hidden="true">
+      <div class="details-modal-header">
+        <div>
+          <p class="eyebrow">ENQUIRY DETAILS</p>
+          <h2 id="details-title">Request a quotation.</h2>
+        </div>
+        <button class="close-btn" id="close-enquiry-details" type="button" aria-label="Close enquiry details">&times;</button>
+      </div>
+      <p class="details-help">Share your company or project details for a more specific quote. This information is optional, added only to your WhatsApp enquiry, and not stored on this website.</p>
+      <form class="enquiry-form" id="enquiry-form">
+        <div class="form-grid">
+          <label>Name<input name="name" autocomplete="name" /></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" /></label>
+          <label>Location<input name="location" autocomplete="address-level2" /></label>
+          <label>Project details<textarea name="project" rows="3" placeholder="Optional"></textarea></label>
+        </div>
+        <button class="details-save btn p-lg" id="save-enquiry-details" type="submit">Save details</button>
+      </form>
+    </section>
     <script src="./marquee.js" type="module"></script>
     <script src="./script.js" type="module"></script>
   </body>
