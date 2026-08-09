@@ -4,7 +4,7 @@ export default function Product({ image, heading }) {
   return (
     <div className="product">
       <a
-        href="https://navkarmetal.7level.in/products"
+        href="https://navkarmetals.7level.in/products"
         target="_blank"
         rel="noopener noreferrer"
         className="product-image"
