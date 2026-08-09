@@ -33,6 +33,11 @@
           </a>
         </div>
         <nav class="navbar-links">
+          <div class="navbar-search">
+            <label class="catalog-search-label visually-hidden" for="catalog-search">Find a size or weight</label>
+            <input id="catalog-search" class="catalog-search" type="search" placeholder="Search specifications…" autocomplete="off" />
+            <span id="catalog-search-status" class="catalog-search-status visually-hidden" role="status"></span>
+          </div>
           <button class="cart-button btn p-lg" id="cart-btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,12 +66,6 @@
       <div class="product-list container">
         <div class="section-heading" id="configurator">
           <p class="eyebrow">PRODUCT CATALOG</p>
-        </div>
-
-        <div class="catalog-toolbar">
-          <label class="catalog-search-label visually-hidden" for="catalog-search">Find a size or weight</label>
-          <input id="catalog-search" class="catalog-search" type="search" placeholder="Search specifications…" autocomplete="off" />
-          <span id="catalog-search-status" class="catalog-search-status" role="status"></span>
         </div>
 
         <div class="selection-summary" id="selection-summary" aria-live="polite">

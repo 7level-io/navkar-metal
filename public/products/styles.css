@@ -1589,7 +1589,7 @@ body.drawer-open { overflow: hidden; }
 .cart-category { margin:.85rem 0; padding:0; overflow:hidden; border:1px solid var(--catalog-line); border-radius:.95rem; background:#fff; box-shadow:0 8px 22px rgba(23,32,39,.05); }
 .cart-category:first-child { margin-top:.35rem; }
 .cart-category-title { position:static; min-height:3.35rem; align-items:center; justify-content:flex-start; padding:.8rem 1rem; border-bottom:1px solid var(--catalog-line); background:#f1f5fc; color:var(--catalog-ink); font-family:"Lexend",sans-serif; font-size:.92rem; }
-.cart-category-title::before { content:""; width:.45rem; height:.45rem; margin-right:.6rem; border-radius:50%; background:var(--catalog-warm); box-shadow:0 0 0 4px rgba(244,185,66,.16); }
+.cart-category-title::before { display:none; content:none; }
 .cart-category-title-text { flex:1; }
 .cart-unit-toggle { margin-left:.5rem; }
 .cart-category .text-muted-foreground { color:var(--catalog-muted); }
@@ -1612,6 +1612,20 @@ body.drawer-open { overflow: hidden; }
 .clear-cart-btn { border-color:#e8b3bb; color:#b4233e; }
 .checkout-btn { min-height:3.35rem; border:1px solid #18b85a; border-radius:0; background:#20cf68; color:#fff; box-shadow:0 6px 16px rgba(32,207,104,.2); font-family:"Lexend",sans-serif; font-weight:600; }
 .checkout-btn:hover { background:#18b85a; box-shadow:0 8px 20px rgba(32,207,104,.28); }
+
+.navbar-links { align-items:center; gap:1rem; padding-right:0; }
+.navbar-search { position:relative; display:flex; align-items:center; }
+.navbar-search .catalog-search { width:clamp(13rem, 24vw, 20rem); min-height:2.65rem; padding:.55rem .8rem; border:1px solid var(--catalog-line); border-radius:0; background:#fff; color:var(--catalog-ink); font-family:Inter,sans-serif; font-size:.86rem; box-shadow:0 2px 8px rgba(23,32,39,.04); }
+.navbar-search .catalog-search::placeholder { color:#8b959c; }
+.navbar-search .catalog-search:focus { border-color:var(--catalog-accent); box-shadow:0 0 0 3px rgba(48,107,235,.12); }
+
+@media (max-width:768px) {
+  .navbar-container { gap:.75rem; }
+  .navbar-links { gap:.45rem; }
+  .navbar-search { flex:1 1 auto; }
+  .navbar-search .catalog-search { width:100%; min-width:0; min-height:2.45rem; font-size:.78rem; }
+  .cart-button.btn { padding:.45rem; }
+}
 
 @media (max-width:768px) {
   .tabs { overflow-x:auto; border-radius:.75rem; }
