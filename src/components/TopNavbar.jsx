@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 // import { Menu, X } from "lucide-react";
 import "./TopNavbar.css";
 import { Link, useLocation } from "react-router-dom";
+import logo from "../assets/imgs/logo.svg";
 
 export default function TopNavbar() {
   // const [isOpen, setIsOpen] = useState(false);
@@ -60,6 +61,7 @@ export default function TopNavbar() {
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link to="https://7level.in">
+            <img src={logo} alt="" aria-hidden="true" />
             7Level{getPageLabel(location.pathname)}
           </Link>
         </div>

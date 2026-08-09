@@ -4,7 +4,7 @@
 }
 
 .navbar-brown {
-  background-color: rgb(176, 115, 43);
+  background-color: #306beb;
   color: white;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .navbar.navbar-scrolled {
-  background-color: #b0732b;
+  background-color: #306beb;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -45,6 +45,9 @@
 }
 
 .navbar-logo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   font-family: inherit;
   text-decoration: none;
   color: #333;
@@ -111,6 +114,12 @@
   box-shadow: none;
 }
 
+.navbar-logo img {
+  width: 2rem;
+  height: 1.65rem;
+  object-fit: contain;
+}
+
 .navbar-container {
   width: min(calc(100% - 3rem), 1280px);
   margin: 0 auto;
@@ -132,5 +141,10 @@
   .navbar-container {
     width: calc(100% - 2rem);
     padding: 0.75rem 0;
+  }
+
+  .navbar-logo img {
+    width: 1.7rem;
+    height: 1.4rem;
   }
 }
