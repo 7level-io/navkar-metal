@@ -82,26 +82,34 @@
 
 @media screen and (max-width: 767px) {
   .product-showcase {
-    padding: 1.75rem 1rem 3rem;
+    padding: 0 1rem 3rem;
   }
 
   .product-showcase-frame {
-    inset: 0 1rem 2.25rem;
+    display: none;
   }
 
   .product-showcase-intro {
-    display: block;
-    padding: 0 0.25rem 1rem;
-  }
-
-  .product-showcase-intro > p {
-    margin-top: 0.8rem;
+    display: none;
   }
 
   .ProductsSection {
     grid-template-columns: 1fr;
     gap: 1rem;
-    padding: 1rem;
+    padding: 0;
+  }
+
+  .ProductsSection::before {
+    content: "PRODUCT RANGE";
+    position: absolute;
+    top: -1.35rem;
+    right: 0;
+    color: #666;
+    font-family: "Lexend", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    pointer-events: none;
   }
 }
 
