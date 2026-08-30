@@ -1,26 +1,38 @@
 .product-showcase {
   width: min(100%, 1280px);
   margin: 0 auto;
-  padding: 2.25rem 1.5rem 5rem;
+  padding: 4rem 2rem 6rem;
   position: relative;
 }
 
 .product-showcase-frame {
   position: absolute;
-  inset: 0 1.5rem 3.5rem;
-  border: 1.75px solid #1f1f1f;
+  inset: 0 2rem 4rem;
   overflow: hidden;
   pointer-events: none;
 }
 
 .product-showcase-border {
   position: absolute;
+  background: #1f1f1f;
+}
+
+.product-showcase-border.top,
+.product-showcase-border.bottom {
   left: 0;
   width: 100%;
   height: 1.5px;
-  background: #1f1f1f;
   transform-origin: left top;
   transform: scaleX(0);
+}
+
+.product-showcase-border.left,
+.product-showcase-border.right {
+  top: 0;
+  width: 1.5px;
+  height: 100%;
+  transform-origin: top left;
+  transform: scaleY(0);
 }
 
 .product-showcase-border.top {
@@ -31,78 +43,98 @@
   bottom: 0;
 }
 
-.product-showcase-intro,
+.product-showcase-border.left {
+  left: 0;
+}
+
+.product-showcase-border.right {
+  right: 0;
+}
+
+.product-showcase-intro-container,
 .ProductsSection {
   position: relative;
   z-index: 1;
 }
 
+.product-showcase-intro-container {
+  padding: 0 1rem 4rem;
+}
+
 .product-showcase-intro {
   display: flex;
-  align-items: end;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 0 0.5rem 1.25rem;
+  gap: 3rem;
+  padding: 0;
 }
 
 .section-eyebrow {
-  margin-bottom: 0.45rem;
+  margin-bottom: 1.5rem;
   color: #666;
   font-family: "Lexend", sans-serif;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
 .product-showcase-intro h2 {
   margin: 0;
   font-family: "Lexend", sans-serif;
-  font-size: clamp(1.75rem, 3vw, 2.8rem);
-  letter-spacing: -0.06em;
-  line-height: 1;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  color: #121212;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
 }
 
 .product-showcase-intro > p {
-  max-width: 27rem;
-  margin: 0;
+  max-width: 28rem;
+  margin: 0.35rem 0 0 0;
   color: #555;
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .ProductsSection {
   width: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  padding: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  padding: 0 1rem;
   max-width: 1200px;
 }
 
 @media screen and (max-width: 767px) {
   .product-showcase {
-    padding: 0 1rem 3rem;
+    padding: 3rem 1.25rem 4rem;
   }
 
   .product-showcase-frame {
     display: none;
   }
 
+  .product-showcase-intro-container {
+    padding: 0 0 2rem;
+  }
+
   .product-showcase-intro {
-    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
   }
 
   .ProductsSection {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 0;
   }
 
   .ProductsSection::before {
     content: "PRODUCT RANGE";
     position: absolute;
-    top: -1.35rem;
+    top: -2rem;
     right: 0;
     color: #666;
     font-family: "Lexend", sans-serif;
@@ -122,7 +154,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .product-showcase-border {
+  .product-showcase-border.top,
+  .product-showcase-border.bottom {
     transform: scaleX(1);
+  }
+  .product-showcase-border.left,
+  .product-showcase-border.right {
+    transform: scaleY(1);
   }
 }

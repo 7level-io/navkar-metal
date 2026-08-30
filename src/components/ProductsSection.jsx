@@ -20,6 +20,16 @@ export default function ProductsSection() {
         },
         0
       );
+
+      tl.to(
+        ".product-showcase-border.left, .product-showcase-border.right",
+        {
+          scaleY: 1,
+          duration: 3,
+          ease: "expoScale",
+        },
+        0
+      );
     }, showcaseRef);
 
     return () => ctx.revert();
@@ -30,16 +40,18 @@ export default function ProductsSection() {
       <div className="product-showcase-frame" aria-hidden="true">
         <span className="product-showcase-border top"></span>
         <span className="product-showcase-border bottom"></span>
+        <span className="product-showcase-border left"></span>
+        <span className="product-showcase-border right"></span>
       </div>
-      <div className="product-showcase-intro">
-        <div>
-          <p className="section-eyebrow">PRODUCT CATALOGUE</p>
+      <div className="product-showcase-intro-container">
+        <p className="section-eyebrow">PRODUCT CATALOGUE</p>
+        <div className="product-showcase-intro">
           <h2>Start with the section you need.</h2>
+          <p>
+            From everyday structural sections to roofing sheets, choose a
+            category to see available sizes and build your enquiry.
+          </p>
         </div>
-        <p>
-          From everyday structural sections to roofing sheets, choose a
-          category to see available sizes and build your enquiry.
-        </p>
       </div>
       <div className="ProductsSection">
         {sectionsData.map((section, index) => (
