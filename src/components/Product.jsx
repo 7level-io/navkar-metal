@@ -2,9 +2,11 @@ import "../components/Product.css";
 import RightArrow from "./RightArrow";
 
 export default function Product({ image, heading }) {
+  const categoryParam = heading.toLowerCase();
+  
   return (
     <a
-      href="https://navkarmetals.7level.in/products"
+      href={`/products?category=${categoryParam}`}
       target="_blank"
       rel="noopener noreferrer"
       className="product-card"
