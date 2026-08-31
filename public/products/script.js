@@ -352,18 +352,64 @@ const Products = {
     if (countEl) countEl.textContent = `${count} item${count === 1 ? "" : "s"}`;
     if (detailEl) detailEl.textContent = count ? "Ready to add to your enquiry." : "Add quantities below to build an enquiry.";
   },
-
   filterRows(query) {
     const needle = query.trim().toLowerCase();
+    const tabsContainer = document.querySelector(".tabs");
+    const subTabsContainer = document.querySelector(".sub-tabs-container");
+    const allTabContents = document.querySelectorAll(".tab-content");
+    const allSubTabContents = document.querySelectorAll(".subtab-content");
+    
     let visible = 0;
-    document.querySelectorAll("[data-product-row]").forEach((row) => {
-      const matches = !needle || row.dataset.searchText.includes(needle);
-      row.classList.toggle("search-hidden", !matches);
-      if (matches && !row.closest(".tab-content.hidden")) visible += 1;
-    });
+
+    if (needle) {
+      // Enter Global Search Mode
+      document.body.classList.add("global-search-active");
+      if (tabsContainer) tabsContainer.style.display = "none";
+      if (subTabsContainer) subTabsContainer.style.display = "none";
+      
+      // Force unhide all tab contents so all rows can be seen
+      allTabContents.forEach(tc => tc.classList.remove("hidden"));
+      allSubTabContents.forEach(stc => stc.classList.remove("hidden"));
+      
+      document.querySelectorAll("[data-product-row]").forEach((row) => {
+        const matches = row.dataset.searchText.includes(needle);
+        row.classList.toggle("search-hidden", !matches);
+        if (matches) visible += 1;
+        
+        // Hide empty categories visually during search
+        const tableBody = row.closest('.table-body');
+        if (tableBody) {
+            const hasVisible = Array.from(tableBody.querySelectorAll('[data-product-row]')).some(r => !r.classList.contains('search-hidden'));
+            const productTable = tableBody.closest('.product-table');
+            if (productTable) productTable.style.display = hasVisible ? 'block' : 'none';
+            // Also hide the title if the table is hidden
+            const title = productTable.previousElementSibling;
+            if (title && title.classList.contains('search-category-title')) {
+                title.style.display = hasVisible ? 'block' : 'none';
+            }
+        }
+      });
+    } else {
+      // Exit Global Search Mode
+      document.body.classList.remove("global-search-active");
+      if (tabsContainer) tabsContainer.style.display = "";
+      if (subTabsContainer) subTabsContainer.style.display = "";
+      
+      // Reset all visibility
+      document.querySelectorAll("[data-product-row]").forEach(r => r.classList.remove("search-hidden"));
+      document.querySelectorAll('.product-table').forEach(pt => pt.style.display = "");
+      document.querySelectorAll('.search-category-title').forEach(t => t.style.display = "");
+      
+      // Restore tab states based on STATE without calling switchTab
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.add("hidden"));
+      const currentContent = document.getElementById(`${STATE.currentCategory}-content`);
+      if (currentContent) currentContent.classList.remove("hidden");
+    }
+
     const status = document.getElementById("catalog-search-status");
     if (status) status.textContent = needle ? `${visible} matching size${visible === 1 ? "" : "s"}` : "";
   },
+
 
   /**
    * Checks if any items are selected across all categories
