@@ -1648,3 +1648,20 @@ body.drawer-open { overflow: hidden; }
   .cart-item > .text-center { grid-column:2 / 4; grid-row:1; justify-self:end; }
   .cart-item-remove { grid-column:4; grid-row:1; }
 }
+
+.search-category-title {
+  display: none;
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 1rem 1rem 0.5rem 1rem;
+  font-size: 1.25rem;
+  color: #333;
+  border-bottom: 2px solid #306beb;
+  background: #fff;
+}
+
+body.global-search-active .search-category-title {
+  display: block;
+}
