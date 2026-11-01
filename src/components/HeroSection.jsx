@@ -11,20 +11,37 @@ export default function HeroSection() {
   ));
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        gsap.set(".heading-content", { opacity: 1 });
+        gsap.set(
+          ".lines-bg .lines:nth-child(4n+1), .lines-bg .lines:nth-child(4n+2), .lines-bg .lines:nth-child(3), .lines-bg .lines:nth-child(7)",
+          { scaleY: 1 }
+        );
+        gsap.set(".hero-heading .border.top, .hero-heading .border.bottom", {
+          scaleX: 1,
+        });
+        return;
+      }
+
       const tl = gsap.timeline();
 
       tl.from(".heading-content", {
-        duration: 3,
+        duration: 0.6,
         opacity: 0,
+        ease: "power2.out",
       });
       tl.to(
         ".lines-bg .lines:nth-child(4n+1), .lines-bg .lines:nth-child(4n+2), .lines-bg .lines:nth-child(3), .lines-bg .lines:nth-child(7)",
         {
           scaleY: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "expoScale",
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
         },
         0
       );
@@ -33,8 +50,8 @@ export default function HeroSection() {
         ".hero-heading .border.top, .hero-heading .border.bottom",
         {
           scaleX: 1,
-          duration: 3,
-          ease: "expoScale",
+          duration: 1,
+          ease: "power2.out",
         },
         0
       );

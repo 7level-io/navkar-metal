@@ -13,7 +13,14 @@ export default function Product({ image, heading }) {
       aria-label={`View ${heading} products`}
     >
       <div className="product-image-container">
-        <img src={image} alt={heading} />
+        <img
+          src={image}
+          alt={heading}
+          loading="lazy"
+          decoding="async"
+          width="400"
+          height="300"
+        />
         <div className="product-overlay"></div>
       </div>
       <div className="product-content">

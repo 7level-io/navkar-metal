@@ -8,15 +8,35 @@ export default function ProductsSection() {
   const showcaseRef = useRef(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        gsap.set(
+          ".product-showcase-border.top, .product-showcase-border.bottom",
+          { scaleX: 1 }
+        );
+        gsap.set(
+          ".product-showcase-border.left, .product-showcase-border.right",
+          { scaleY: 1 }
+        );
+        return;
+      }
+
+      // Check if showcase frame is visible (it's display: none on mobile <= 767px)
+      const isMobile = window.innerWidth <= 767;
+      if (isMobile) return;
+
       const tl = gsap.timeline();
 
       tl.to(
         ".product-showcase-border.top, .product-showcase-border.bottom",
         {
           scaleX: 1,
-          duration: 3,
-          ease: "expoScale",
+          duration: 1.2,
+          ease: "power2.out",
         },
         0
       );
@@ -25,8 +45,8 @@ export default function ProductsSection() {
         ".product-showcase-border.left, .product-showcase-border.right",
         {
           scaleY: 1,
-          duration: 3,
-          ease: "expoScale",
+          duration: 1.2,
+          ease: "power2.out",
         },
         0
       );
