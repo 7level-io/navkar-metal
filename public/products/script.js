@@ -90,29 +90,19 @@ const Utils = {
   },
 
   getWeightIcons(weightCategory) {
-    const iconSVG = `<svg style="width: 12px; height: 12px; display: inline-block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
+    if (!weightCategory) return "";
+    const iconSVG = `<svg class="weight-tier-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="currentColor">
         <path d="M288 160C288 142.3 302.3 128 320 128C337.7 128 352 142.3 352 160C352 177.7 337.7 192 320 192C302.3 192 288 177.7 288 160zM410.5 192C414 182 416 171.2 416 160C416 107 373 64 320 64C267 64 224 107 224 160C224 171.2 225.9 182 229.5 192L207.7 192C179.4 192 154.5 210.5 146.4 237.6L66.4 504.2C64.8 509.4 64 514.8 64 520.2C64 551 89 576 119.8 576L520.2 576C551 576 576 551 576 520.2C576 514.8 575.2 509.4 573.6 504.2L493.6 237.7C485.5 210.6 460.6 192.1 432.3 192.1L410.5 192.1z"/>
       </svg>`;
 
-    const iconCount =
-      {
-        light: 1,
-        medium: 2,
-        heavy: 3,
-      }[weightCategory] || 0;
-
+    const iconCount = { light: 1, medium: 2, heavy: 3 }[weightCategory] || 0;
     if (iconCount === 0) return "";
+    const label = { light: "Light", medium: "Medium", heavy: "Heavy" }[weightCategory] || "";
 
-    // const color = {
-    //   light: "#666",
-    //   medium: "#444",
-    //   heavy: "#000",
-    // }[weightCategory];
-    // add color: ${color}; to style
-
-    return `<span style="display: inline-flex; gap: 2px; align-items: center;">
-    ${iconSVG.repeat(iconCount)}
-  </span>`;
+    return `<span class="weight-tier-badge tier-${weightCategory}" title="${label} Class: ${iconCount} weight icon${iconCount > 1 ? 's' : ''}">
+      <span class="tier-icons">${iconSVG.repeat(iconCount)}</span>
+      <span class="tier-label">${label}</span>
+    </span>`;
   },
 
   sortItems(items) {
@@ -185,16 +175,99 @@ const Products = {
   },
 
   renderRow(item, index, category, subcategory) {
-    const displaySize = Utils.getDisplaySize(item, STATE.currentUnit);
+    const isPipe = category === "pipe";
+    const displaySize = Utils.getDisplaySize(item, isPipe ? STATE.currentUnit : "mm");
     const extraText = item.extra
-      ? `<span style="color: #666; font-size: 13px">${item.extra}</span>`
+      ? `<span class="size-extra">${item.extra}</span>`
       : "";
 
-    const weightIcons = Utils.getWeightIcons(item.weightCategory);
+    if (isPipe) {
+      const weightIcons = Utils.getWeightIcons(item.weightCategory);
 
+      return `
+        <div class="table-row" data-product-row="${category}-${subcategory}-${index}" data-search-text="${`${displaySize} ${item.weight || ""} ${item.weightCategory || ""} ${item.extra || ""}`.toLowerCase()}">
+          <div class="table-data cell-size">
+            <span
+              class="size-display"
+              data-size-in="${item.sizeIn || ""}"
+              data-size-mm="${item.sizeMm || ""}"
+              data-thickness="${item.thickness || ""}"
+            >
+              ${displaySize}
+            </span>
+            ${extraText}
+          </div>
+          <div class="table-data cell-weight">
+            <span class="weight-number">${item.weight ? `${item.weight} <small>kg</small>` : "N/A"}</span>
+            ${weightIcons}
+          </div>
+          <div class="table-data cell-qty">
+            <div class="qty-control">
+              <button
+                class="qty-btn product-decrement product-step-btn"
+                type="button"
+                aria-label="Decrease quantity"
+                data-category="${category}"
+                data-subcategory="${subcategory}"
+                data-index="${index}"
+                data-step="-1"
+              >
+                &minus;
+              </button>
+              <input
+                type="number"
+                class="qty-input"
+                id="qty-${category}-${subcategory}-${index}"
+                value="0"
+                min="0"
+                data-category="${category}"
+                data-subcategory="${subcategory}"
+                data-index="${index}"
+                aria-label="Quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
+              />
+              <button
+                class="qty-btn product-increment product-step-btn"
+                type="button"
+                aria-label="Increase by 1"
+                data-category="${category}"
+                data-subcategory="${subcategory}"
+                data-index="${index}"
+                data-step="1"
+              >
+                +
+              </button>
+              <button
+                class="qty-btn qty-btn-step product-step-btn"
+                type="button"
+                aria-label="Add 5"
+                data-category="${category}"
+                data-subcategory="${subcategory}"
+                data-index="${index}"
+                data-step="5"
+              >
+                +5
+              </button>
+              <button
+                class="qty-btn qty-btn-step product-step-btn"
+                type="button"
+                aria-label="Add 10"
+                data-category="${category}"
+                data-subcategory="${subcategory}"
+                data-index="${index}"
+                data-step="10"
+              >
+                +10
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Non-pipe categories have weight data, but no weight class metadata.
     return `
-      <div class="table-row" data-product-row="${category}-${subcategory}-${index}" data-search-text="${`${displaySize} ${item.weight || ""} ${item.weightCategory || ""} ${item.extra || ""}`.toLowerCase()}">
-        <div class="table-data">
+      <div class="table-row" data-product-row="${category}-${subcategory}-${index}" data-search-text="${`${displaySize} ${item.weight || ""} ${item.extra || ""}`.toLowerCase()}">
+        <div class="table-data cell-size">
           <span
             class="size-display"
             data-size-in="${item.sizeIn || ""}"
@@ -205,25 +278,25 @@ const Products = {
           </span>
           ${extraText}
         </div>
-        <div class="table-data" style="display: flex;flex-direction:column; width: 3rem; text-align: center;">
-          <span>${item.weight || "N/A"}kg</span>
-          <span style=" align-self:center">${weightIcons}</span> 
+        <div class="table-data cell-weight">
+          <span class="weight-number">${item.weight ? `${item.weight} <small>kg</small>` : "N/A"}</span>
         </div>
-        <div class="table-data">
+        <div class="table-data cell-qty">
           <div class="qty-control">
             <button
-              class="qty-btn product-decrement"
+              class="qty-btn product-decrement product-step-btn"
               type="button"
-              aria-label="Decrease quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
+              aria-label="Decrease quantity"
               data-category="${category}"
               data-subcategory="${subcategory}"
               data-index="${index}"
+              data-step="-1"
             >
               &minus;
             </button>
             <input
               type="number"
-              class="qty-input w-12"
+              class="qty-input"
               id="qty-${category}-${subcategory}-${index}"
               value="0"
               min="0"
@@ -233,14 +306,37 @@ const Products = {
               aria-label="Quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
             />
             <button
-              class="qty-btn product-increment"
+              class="qty-btn product-increment product-step-btn"
               type="button"
-              aria-label="Increase quantity for ${displaySize}${item.extra ? ` ${item.extra}` : ""}"
+              aria-label="Increase by 1"
               data-category="${category}"
               data-subcategory="${subcategory}"
               data-index="${index}"
+              data-step="1"
             >
               +
+            </button>
+            <button
+              class="qty-btn qty-btn-step product-step-btn"
+              type="button"
+              aria-label="Add 5"
+              data-category="${category}"
+              data-subcategory="${subcategory}"
+              data-index="${index}"
+              data-step="5"
+            >
+              +5
+            </button>
+            <button
+              class="qty-btn qty-btn-step product-step-btn"
+              type="button"
+              aria-label="Add 10"
+              data-category="${category}"
+              data-subcategory="${subcategory}"
+              data-index="${index}"
+              data-step="10"
+            >
+              +10
             </button>
           </div>
         </div>
@@ -248,10 +344,6 @@ const Products = {
     `;
   },
 
-  /**
-   * Updates badges on all category tabs showing item counts
-   * Also shows breakdown tooltip on hover
-   */
   updateTabBadges() {
     const categories = {
       pipe: ["square", "rectangle", "round"],
@@ -261,9 +353,15 @@ const Products = {
       sheet: null,
     };
 
+    const subIcons = {
+      square: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="tab-sub-svg" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`,
+      rectangle: `<svg width="13" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="tab-sub-svg" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>`,
+      round: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="tab-sub-svg" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>`
+    };
+
     Object.entries(categories).forEach(([category, subs]) => {
       let totalCount = 0;
-      let breakdown = [];
+      const subCounts = {};
 
       if (subs) {
         subs.forEach((sub) => {
@@ -273,9 +371,23 @@ const Products = {
             const qty = Utils.parseIntSafe(input?.value);
             subCount += qty;
           });
-          if (subCount > 0) {
-            breakdown.push(`${Utils.capitalize(sub)}: ${subCount}`);
-            totalCount += subCount;
+          subCounts[sub] = subCount;
+          totalCount += subCount;
+
+          // Update pill counter on the sub-tab itself
+          const subTabBtn = document.querySelector(`.sub-tab[data-subtab="${sub}"]`);
+          if (subTabBtn) {
+            let pill = subTabBtn.querySelector(".subtab-pill");
+            if (subCount > 0) {
+              if (!pill) {
+                pill = document.createElement("span");
+                pill.className = "subtab-pill";
+                subTabBtn.appendChild(pill);
+              }
+              pill.textContent = subCount;
+            } else if (pill) {
+              pill.remove();
+            }
           }
         });
       } else {
@@ -288,45 +400,40 @@ const Products = {
         });
       }
 
-      // Update tab badge
+      // Update main category tab badge: clean pill
       const tab = document.querySelector(`[data-tab="${category}"]`);
       if (!tab) return;
 
       let badge = tab.querySelector(".tab-badge");
-      let tooltip = tab.querySelector(".tab-badge-tooltip");
+      tab.querySelector(".tab-badge-tooltip")?.remove(); // remove old tooltip completely
 
       if (totalCount > 0) {
-        // Create or update badge
         if (!badge) {
           badge = document.createElement("span");
-          badge.className = "tab-badge";
+          badge.className = "tab-badge pill-badge";
           tab.appendChild(badge);
         }
-        badge.textContent = totalCount;
 
-        // Create or update tooltip (for pipe only)
-        if (breakdown.length > 0) {
-          if (!tooltip) {
-            tooltip = document.createElement("div");
-            tooltip.className = "tab-badge-tooltip";
-            tab.appendChild(tooltip);
-          }
-          tooltip.textContent = breakdown.join(" · ");
+        if (subs) {
+          // Render visual geometric icons with counts (e.g., [ □ 20 ▭ 20 ○ 20 ])
+          let indicatorsHtml = "";
+          Object.entries(subCounts).forEach(([sub, cnt]) => {
+            if (cnt > 0) {
+              indicatorsHtml += `<span class="sub-indicator" title="${Utils.capitalize(sub)}: ${cnt}">${subIcons[sub]}<span class="sub-indicator-num">${cnt}</span></span>`;
+            }
+          });
+          badge.innerHTML = indicatorsHtml || `${totalCount}`;
+        } else {
+          badge.textContent = totalCount;
         }
       } else {
-        // Remove badge and tooltip if count is 0
         badge?.remove();
-        tooltip?.remove();
       }
     });
 
-    // Also update floating button state
     this.updateFloatingButton();
   },
 
-  /**
-   * Updates floating "Add to Cart" button visibility
-   */
   updateFloatingButton() {
     const floatingBtn = document.getElementById("floating-add-cart");
     if (!floatingBtn) return;
@@ -342,15 +449,6 @@ const Products = {
         countSpan.textContent = totalCount;
       }
     }
-    this.updateSelectionSummary();
-  },
-
-  updateSelectionSummary() {
-    const count = this.getTotalSelectedCount();
-    const countEl = document.getElementById("summary-count");
-    const detailEl = document.getElementById("summary-detail");
-    if (countEl) countEl.textContent = `${count} item${count === 1 ? "" : "s"}`;
-    if (detailEl) detailEl.textContent = count ? "Ready to add to your enquiry." : "Add quantities below to build an enquiry.";
   },
   filterRows(query) {
     const needle = query.trim().toLowerCase();
@@ -494,6 +592,10 @@ const Products = {
   updateInputStyle(input) {
     const value = Utils.parseIntSafe(input.value);
     input.classList.toggle("has-value", value > 0);
+    const row = input.closest(".table-row");
+    if (row) {
+      row.classList.toggle("row-selected", value > 0);
+    }
   },
 
   updateAddButtonState(category) {
@@ -649,9 +751,8 @@ const Cart = {
    **/
   clearCart() {
     this.showConfirmModal(
-      "Clear Cart",
-      `Are you sure you want to remove all 
-      items from your cart? This action cannot be undone.`,
+      "Clear Enquiry",
+      "Are you sure you want to remove all items from your quotation enquiry? This action cannot be undone.",
       () => {
         STATE.cart = {};
         Storage.save();
@@ -660,7 +761,7 @@ const Cart = {
         Products.updateTabBadges();
 
         // Show success feedback
-        this.showToast("Cart cleared successfully", "success");
+        this.showToast("Enquiry cleared successfully", "success");
       }
     );
   },
@@ -784,6 +885,24 @@ const Cart = {
 
   renderEmptyCart() {
     return `
+      <div class="empty-enquiry-container text-center py-12">
+        <div class="empty-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="empty-enquiry-icon">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/>
+            <path d="M12 11h4"/>
+            <path d="M12 16h4"/>
+            <path d="M8 11h.01"/>
+            <path d="M8 16h.01"/>
+          </svg>
+        </div>
+        <h3 class="empty-enquiry-title">Your enquiry is empty</h3>
+        <p class="empty-enquiry-desc">Add pipe, angle, flat, channel, or sheet sections from the catalogue to assemble your quotation enquiry.</p>
+      </div>
+    `;
+  },
+  _old_renderEmptyCart() {
+    return `
       <div class="text-center py-12">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart mx-auto h-12 w-12 text-muted-foreground mb-4">
           <circle cx="8" cy="21" r="1"></circle>
@@ -799,7 +918,9 @@ const Cart = {
     const grouped = {};
 
     Object.entries(STATE.cart).forEach(([id, item]) => {
+      if (!item || !item.quantity || item.quantity <= 0) return;
       const cat = item.category;
+      if (!cat) return;
       if (!grouped[cat]) grouped[cat] = {};
 
       if (item.subcategory) {
@@ -820,95 +941,116 @@ const Cart = {
 
     Object.entries(grouped).forEach(([category, data]) => {
       if (category === "Pipe") {
+        const activeSubs = ["Square", "Rectangle", "Round"].filter(
+          (sub) => data[sub] && data[sub].length > 0
+        );
+        if (activeSubs.length === 0) return; // Do not render empty Pipe category
+
         html += `
         <div class="cart-category">
-          <div class="cart-category-title inline-block w-100">
-            <span class="cart-category-title-text">${category}</span>
-            <div class="cart-unit-toggle inline-block ml-10">
-              <div>
-                <span class="text-muted-foreground" style="font-size: 14px; font-weight: 500">Size:</span>
-                <div class="unit-toggle">
-                  <button class="unit-btn active" data-unit="mm" id="cart-unit-mm">
-                    mm
-                  </button>
-                  <button class="unit-btn" data-unit="in" id="cart-unit-in">
-                    in
-                  </button>
-                </div>
+          <div class="cart-category-header">
+            <div class="cart-category-title-text">${category}</div>
+            <div class="cart-unit-toggle">
+              <span class="cart-unit-label">Unit:</span>
+              <div class="unit-toggle">
+                <button class="unit-btn ${STATE.currentUnit === "mm" ? "active" : ""}" data-unit="mm" type="button">mm</button>
+                <button class="unit-btn ${STATE.currentUnit === "in" ? "active" : ""}" data-unit="in" type="button">in</button>
               </div>
             </div>
           </div>`;
-      } else {
-        html += `<div class="cart-category">
-        <div class="cart-category-title">${category}</div>`;
-      }
-      if (category === "Pipe") {
-        ["Square", "Rectangle", "Round"].forEach((sub) => {
-          if (data[sub]) {
-            html += `<div class="cart-subcategory w-100 text-center">${sub}</div>`;
-            Utils.sortItems(data[sub]).forEach((item) => {
-              html += this.renderCartItem(item);
-            });
-          }
-        });
-      } else if (data.items) {
-        Utils.sortItems(data.items).forEach((item) => {
-          html += this.renderCartItem(item);
-        });
-      }
 
-      html += `</div>`;
+        activeSubs.forEach((sub) => {
+          const subIcon = {
+            Square: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>`,
+            Rectangle: `<svg width="13" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>`,
+            Round: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/></svg>`
+          }[sub] || "";
+
+          html += `
+          <div class="cart-subcategory-group">
+            <div class="cart-subcategory-header">${subIcon}<span>${sub}</span></div>
+            <div class="cart-items-list">
+              ${Utils.sortItems(data[sub]).map((item) => this.renderCartItem(item)).join("")}
+            </div>
+          </div>`;
+        });
+
+        html += `</div>`;
+      } else {
+        if (!data.items || data.items.length === 0) return; // Do not render empty category
+
+        html += `
+        <div class="cart-category">
+          <div class="cart-category-header">
+            <div class="cart-category-title-text">${category}</div>
+          </div>
+          <div class="cart-items-list">
+            ${Utils.sortItems(data.items).map((item) => this.renderCartItem(item)).join("")}
+          </div>
+        </div>`;
+      }
     });
 
     return html;
   },
 
   renderCartItem(item) {
+    const isPipe = item.category === "Pipe";
     const displayValue =
-      STATE.currentUnit === "in"
+      STATE.currentUnit === "in" && isPipe
         ? item.sizeIn && !item.sizeIn.includes("&")
           ? item.sizeIn
           : item.sizeMm || item.thickness
         : item.sizeMm || item.thickness;
-    const weightIcons = Utils.getWeightIcons(item.weightCategory);
-
+    const weightIcons = isPipe ? Utils.getWeightIcons(item.weightCategory) : "";
     const extraText = item.extra ? ` ${item.extra}` : "";
+    const totalItemWeight = (item.weight && item.quantity)
+      ? (parseFloat(item.weight) * item.quantity).toFixed(2)
+      : null;
+
     return `
       <div class="cart-item" data-item-id="${item.id}">
-        <div class="cart-item-size" 
-             data-size-in="${item.sizeIn || ""}" 
-             data-size-mm="${item.sizeMm || ""}" 
-             data-thickness="${item.thickness || ""}"
-             data-extra="${item.extra || ""}">
-          ${displayValue}<span class="text-muted-foreground" style="font-size: 10px">${extraText}</span>
+        <div class="cart-item-col-info">
+          <div class="cart-item-title-row">
+            <strong
+              class="cart-item-name cart-item-size"
+              data-size-in="${item.sizeIn || ""}"
+              data-size-mm="${item.sizeMm || ""}"
+              data-thickness="${item.thickness || ""}"
+              data-extra="${item.extra || ""}"
+            >${displayValue}</strong>
+            ${extraText ? `<span class="cart-item-extra">${extraText}</span>` : ""}
+          </div>
+          <div class="cart-item-meta-row">
+            ${weightIcons ? `<span class="cart-weight-badge">${weightIcons}</span>` : ""}
+            <span class="cart-weight-spec">${item.weight ? `${item.weight} kg/pc` : ""}</span>
+          </div>
         </div>
-        <div class="cart-item-weight" style="display:flex; flex-direction: column; justify-content: space-evenly; align-items:center;"><div>${weightIcons}</div><span style="font-size: 12px">${
-      item.weight ?? "N/A"
-    }kg/pc</span></div>
-        <div class="cart-item-controls">
-          <button class="qty-btn cart-decrement" type="button" aria-label="Decrease quantity for ${displayValue}">&minus;</button>
-          <input 
-            type="number" 
-            class="cart-qty-input w-12 text-center ${
-              item.quantity > 0 ? "has-value" : ""
-            }" 
-            value="${item.quantity}" 
-            min="1"
-          />
-          <button class="qty-btn cart-increment" type="button" aria-label="Increase quantity for ${displayValue}">+</button>
+        <div class="cart-item-col-qty">
+          <div class="qty-control cart-qty-ctrl">
+            <button class="qty-btn cart-decrement cart-step-btn" type="button" data-step="-1" title="Decrease">&minus;</button>
+            <input 
+              type="number" 
+              class="qty-input cart-qty-input has-value" 
+              value="${item.quantity}" 
+              min="1"
+              data-item-id="${item.id}"
+              aria-label="Quantity"
+            />
+            <button class="qty-btn cart-increment cart-step-btn" type="button" data-step="1" title="Increase">+</button>
+          </div>
         </div>
-        <span class="text-center" style="color:#000">${(
-          item.weight * item.quantity
-        ).toFixed(2)}kg</span>
-        <button type="button" aria-label="Remove ${displayValue} from enquiry" class="btn cart-item-remove inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 size-9 rounded-md text-destructive h-6 w-6 shrink-0">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3">
-            <path d="M10 11v6"></path>
-            <path d="M14 11v6"></path>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
-            <path d="M3 6h18"></path>
-            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-          </svg>
-        </button>
+        <div class="cart-item-col-total">
+          ${totalItemWeight ? `<span class="cart-item-total-weight">${totalItemWeight} <small>kg</small></span>` : ""}
+        </div>
+        <div class="cart-item-col-del">
+          <button type="button" aria-label="Remove ${displayValue} from enquiry" class="cart-item-remove-btn" title="Remove item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
       </div>
     `;
   },
@@ -925,7 +1067,7 @@ const Cart = {
 
     const totalWeightEl = document.querySelector("#total-weight");
     if (totalWeightEl) {
-      totalWeightEl.textContent = `${totalWeight.toFixed(2)}~`;
+      totalWeightEl.textContent = totalWeight > 0 ? `${totalWeight.toFixed(2)}~` : "0";
     }
   },
 
@@ -1080,7 +1222,7 @@ const UI = {
 const Checkout = {
   handle() {
     if (Object.keys(STATE.cart).length === 0) {
-      alert("Your cart is empty!");
+      alert("Your enquiry is empty! Please select metal sections first.");
       return;
     }
 
@@ -1193,37 +1335,36 @@ const Events = {
     document.addEventListener("click", (e) => {
       const target = e.target;
 
-      if (target.classList.contains("product-increment")) {
-        const { category, subcategory, index } = target.dataset;
-        Products.updateQuantity(category, subcategory, parseInt(index), 1);
+      const unitButton = target.closest(".unit-btn");
+      if (unitButton) {
+        UI.toggleUnit(unitButton.dataset.unit);
+        return;
+      }
+
+      const productStepBtn = target.closest(".product-step-btn");
+      if (productStepBtn) {
+        const { category, subcategory, index, step } = productStepBtn.dataset;
+        const delta = parseInt(step) || 1;
+        Products.updateQuantity(category, subcategory, parseInt(index), delta);
         Products.updateFloatingButton();
       }
 
-      if (target.classList.contains("product-decrement")) {
-        const { category, subcategory, index } = target.dataset;
-        Products.updateQuantity(category, subcategory, parseInt(index), -1);
-        Products.updateFloatingButton();
+      const cartStepBtn = target.closest(".cart-step-btn");
+      if (cartStepBtn) {
+        const cartItem = cartStepBtn.closest(".cart-item");
+        if (cartItem) {
+          const step = parseInt(cartStepBtn.dataset.step) || 1;
+          Cart.updateQuantity(cartItem.dataset.itemId, step);
+        }
       }
 
-      if (target.closest(".cart-increment")) {
-        const cartItem = target.closest(".cart-item");
-        if (cartItem) Cart.updateQuantity(cartItem.dataset.itemId, 1);
-      }
-
-      if (target.closest(".cart-decrement")) {
-        const cartItem = target.closest(".cart-item");
-        if (cartItem) Cart.updateQuantity(cartItem.dataset.itemId, -1);
-      }
-
-      if (target.closest(".cart-item-remove")) {
+      if (target.closest(".cart-item-remove") || target.closest(".cart-item-remove-btn")) {
         const cartItem = target.closest(".cart-item");
         if (cartItem) Cart.removeItem(cartItem.dataset.itemId);
       }
-      document
-        .getElementById("clear-cart-btn")
-        ?.addEventListener("click", () => {
-          Cart.clearCart();
-        });
+      if (target.closest("#clear-cart-btn")) {
+        Cart.clearCart();
+      }
     });
 
     document.addEventListener("change", (e) => {
@@ -1251,7 +1392,6 @@ const Events = {
     });
 
     document.getElementById("catalog-search")?.addEventListener("input", (event) => Products.filterRows(event.target.value));
-    document.getElementById("summary-open")?.addEventListener("click", () => Cart.open());
     document.getElementById("close-enquiry-details")?.addEventListener("click", () => Details.close());
     document.getElementById("details-overlay")?.addEventListener("click", () => Details.close());
     document.getElementById("skip-enquiry-details")?.addEventListener("click", () => Checkout.send({}));
@@ -1263,12 +1403,6 @@ const Events = {
     });
     document.querySelectorAll(".sub-tab").forEach((tab) => {
       tab.addEventListener("click", () => UI.switchSubTab(tab.dataset.subtab));
-    });
-
-    document.querySelectorAll(".unit-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        UI.toggleUnit(btn.dataset.unit);
-      });
     });
 
     ["pipe", "angle", "flat", "channel", "sheet"].forEach((category) => {
@@ -1329,11 +1463,6 @@ const Events = {
 };
 
 function init() {
-  const cartDrawer = document.querySelector(SELECTORS.cartDrawer);
-  if (cartDrawer) {
-    cartDrawer.style.height = `${window.innerHeight}px`;
-  }
-
   Products.render("pipe", "square");
   Products.render("pipe", "rectangle");
   Products.render("pipe", "round");
@@ -1349,7 +1478,6 @@ function init() {
 
   Events.init();
   Products.filterRows(document.getElementById("catalog-search")?.value || "");
-  Products.updateSelectionSummary();
 }
 
 init();

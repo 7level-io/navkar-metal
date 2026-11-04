@@ -3,6 +3,7 @@ import BannerMarquee from "./components/BannerMarquee";
 import TopNavbar from "./components/TopNavbar";
 import HeroSection from "./components/HeroSection";
 import ProductsSection from "./components/ProductsSection";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <HeroSection />
         <ProductsSection />
       </main>
+      <Footer />
     </>
   );
 }

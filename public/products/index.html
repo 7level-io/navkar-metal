@@ -56,349 +56,358 @@
             <input id="catalog-search" class="catalog-search" type="search" placeholder="Search specifications…" autocomplete="off" />
             <span id="catalog-search-status" class="catalog-search-status visually-hidden" role="status"></span>
           </div>
-          <button class="cart-button btn p-lg" id="cart-btn">
+          <button class="cart-button btn enquiry-btn" id="cart-btn" aria-label="View Enquiry List">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              width="18"
+              height="18"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-shopping-cart h-5 w-5"
+              class="lucide lucide-clipboard-list"
               aria-hidden="true"
             >
-              <circle cx="8" cy="21" r="1"></circle>
-              <circle cx="19" cy="21" r="1"></circle>
-              <path
-                d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-              ></path>
-            </svg><span class="cart-count" id="cart-count">0</span>
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <path d="M12 11h4"/>
+              <path d="M12 16h4"/>
+              <path d="M8 11h.01"/>
+              <path d="M8 16h.01"/>
+            </svg>
+            <span class="enquiry-btn-text">Enquiry</span>
+            <span class="cart-count" id="cart-count">0</span>
           </button>
         </nav>
       </div>
     </header>
-    <main>
-      <div class="product-list container">
-        <div class="section-heading" id="configurator">
-          <p class="eyebrow">PRODUCT CATALOG</p>
-        </div>
-
-        <div class="selection-summary" id="selection-summary" aria-live="polite">
-          <div>
-            <span class="summary-label">Your selection</span>
-            <strong id="summary-count">0 items</strong>
+            <main>
+      <div class="catalog-showcase container">
+        <div class="catalog-intro-container">
+          <div class="catalog-intro-header">
+            <div>
+              <p class="section-eyebrow">PRODUCT SPECIFICATIONS</p>
+              <h1 class="catalog-title">Standard Sections &amp; Calibrated Sizing</h1>
+            </div>
           </div>
-          <span id="summary-detail">Add quantities below to build an enquiry.</span>
-          <button class="summary-link" type="button" id="summary-open">Open enquiry</button>
+          <p class="catalog-subtitle">
+            Browse verified dimensional weights, inspect gauge classifications, and specify piece quantities to generate an immediate WhatsApp enquiry.
+          </p>
         </div>
 
-        <div class="tabs" role="tablist" aria-label="Product categories">
-          <button
-            class="tab btn p-md fw-500 font-size-md active"
-            data-tab="pipe"
-            role="tab" aria-selected="true" aria-controls="pipe-content"
-          >
-            <span class="tab-index">01</span> Pipe
-          </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="angle" role="tab" aria-selected="false" aria-controls="angle-content">
-            <span class="tab-index">02</span> Angle
-          </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="flat" role="tab" aria-selected="false" aria-controls="flat-content">
-            <span class="tab-index">03</span> Flat
-          </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="channel" role="tab" aria-selected="false" aria-controls="channel-content">
-            <span class="tab-index">04</span> Channel
-          </button>
-          <button class="tab btn p-md fw-500 font-size-md" data-tab="sheet" role="tab" aria-selected="false" aria-controls="sheet-content">
-            <span class="tab-index">05</span> Sheet
-          </button>
+        <div class="tabs-nav-wrapper">
+          <div class="tabs" role="tablist" aria-label="Product categories">
+            <button
+              class="tab active"
+              data-tab="pipe"
+              role="tab"
+              aria-selected="true"
+              aria-controls="pipe-content"
+            >
+              <span class="tab-name">Pipe</span>
+            </button>
+            <button
+              class="tab"
+              data-tab="angle"
+              role="tab"
+              aria-selected="false"
+              aria-controls="angle-content"
+            >
+              <span class="tab-name">Angle</span>
+            </button>
+            <button
+              class="tab"
+              data-tab="flat"
+              role="tab"
+              aria-selected="false"
+              aria-controls="flat-content"
+            >
+              <span class="tab-name">Flat</span>
+            </button>
+            <button
+              class="tab"
+              data-tab="channel"
+              role="tab"
+              aria-selected="false"
+              aria-controls="channel-content"
+            >
+              <span class="tab-name">Channel</span>
+            </button>
+            <button
+              class="tab"
+              data-tab="sheet"
+              role="tab"
+              aria-selected="false"
+              aria-controls="sheet-content"
+            >
+              <span class="tab-name">Sheet</span>
+            </button>
+          </div>
         </div>
 
+        <!-- PIPE CONTENT -->
         <div id="pipe-content" class="tab-content">
-          <div class="sub-tabs-container">
-            <div class="sub-tabs">
-              <button
-                class="sub-tab btn p-md fw-500 active"
-                data-subtab="square"
-                role="tab" aria-selected="true" aria-controls="square-content"
-              >
-                Square
-              </button>
-              <button class="sub-tab btn p-md fw-500" data-subtab="rectangle" role="tab" aria-selected="false" aria-controls="rectangle-content">
-                Rectangle
-              </button>
-              <button class="sub-tab btn p-md fw-500" data-subtab="round" role="tab" aria-selected="false" aria-controls="round-content">
-                Round
-              </button>
-            </div>
-          </div>
-
-          <div id="square-content" class="subtab-content product-card">
-            <h2 class="search-category-title">Square Pipe</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">
-                    Size
-                    <div class="unit-toggle">
-                      <button class="unit-btn active" data-unit="mm">mm</button>
-                      <button class="unit-btn" data-unit="in">in</button>
-                    </div>
-                  </div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center text-center">
-                    Quantity
-                  </div>
+          <div class="spec-sheet-card">
+            <div class="spec-toolbar">
+              <div class="sub-tabs-container">
+                <div class="sub-tabs" role="tablist" aria-label="Pipe geometry">
+                  <button
+                    class="sub-tab active"
+                    data-subtab="square"
+                    role="tab"
+                    aria-selected="true"
+                    aria-controls="square-content"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="subtab-icon" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                    <span>Square</span>
+                  </button>
+                  <button
+                    class="sub-tab"
+                    data-subtab="rectangle"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="rectangle-content"
+                  >
+                    <svg width="15" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="subtab-icon" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/></svg>
+                    <span>Rectangle</span>
+                  </button>
+                  <button
+                    class="sub-tab"
+                    data-subtab="round"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="round-content"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="subtab-icon" aria-hidden="true"><circle cx="12" cy="12" r="9"/></svg>
+                    <span>Round</span>
+                  </button>
                 </div>
               </div>
-              <div class="table-body" id="square-items"></div>
+              
+    <div class="spec-toolbar-right">
+      <div class="unit-toggle" aria-label="Unit of Measurement">
+        <button class="unit-btn active" data-unit="mm" type="button">mm</button>
+        <button class="unit-btn" data-unit="in" type="button">in</button>
+      </div>
+    </div>
             </div>
-          </div>
 
-          <div
-            id="rectangle-content"
-            class="subtab-content product-card hidden"
-          >
-            <h2 class="search-category-title">Rectangle Pipe</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">
-                    Size
-                    <div class="unit-toggle">
-                      <button class="unit-btn active" data-unit="mm">mm</button>
-                      <button class="unit-btn" data-unit="in">in</button>
-                    </div>
+            <div id="square-content" class="subtab-content product-card">
+              <h2 class="search-category-title">Square Pipe</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size / Dimension</div>
+                    <div class="table-header cell-weight">Weight (kg/pc) &amp; Class</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
                   </div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
                 </div>
+                <div class="table-body" id="square-items"></div>
               </div>
-              <div class="table-body" id="rectangle-items"></div>
             </div>
-          </div>
 
-          <div id="round-content" class="subtab-content product-card hidden">
-            <h2 class="search-category-title">Round Pipe</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">
-                    Size
-                    <div class="unit-toggle">
-                      <button class="unit-btn active" data-unit="mm">mm</button>
-                      <button class="unit-btn" data-unit="in">in</button>
-                    </div>
+            <div id="rectangle-content" class="subtab-content product-card hidden">
+              <h2 class="search-category-title">Rectangle Pipe</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size / Dimension</div>
+                    <div class="table-header cell-weight">Weight (kg/pc) &amp; Class</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
                   </div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
                 </div>
+                <div class="table-body" id="rectangle-items"></div>
               </div>
-              <div class="table-body" id="round-items"></div>
+            </div>
+
+            <div id="round-content" class="subtab-content product-card hidden">
+              <h2 class="search-category-title">Round Pipe</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size / Dimension</div>
+                    <div class="table-header cell-weight">Weight (kg/pc) &amp; Class</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
+                  </div>
+                </div>
+                <div class="table-body" id="round-items"></div>
+              </div>
             </div>
           </div>
 
           <button class="add-to-cart-btn btn p-lg w-100" id="pipe-add-btn">
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path></svg></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check mr-2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
             Add selected to enquiry
           </button>
         </div>
 
+        <!-- ANGLE CONTENT -->
         <div id="angle-content" class="tab-content hidden">
-          <div class="product-card">
-            <h2 class="search-category-title">Angle</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
-                </div>
+          <div class="spec-sheet-card">
+            <div class="spec-toolbar">
+              <div class="spec-section-badge">
+                <span class="badge-label">Equal Angle Profile</span>
               </div>
-              <div class="table-body" id="angle-items"></div>
+            </div>
+            <div class="product-card">
+              <h2 class="search-category-title">Angle</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size (mm)</div>
+                    <div class="table-header cell-weight">Weight (kg/pc)</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
+                  </div>
+                </div>
+                <div class="table-body" id="angle-items"></div>
+              </div>
             </div>
           </div>
           <button class="add-to-cart-btn btn p-lg w-100" id="angle-add-btn">
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path></svg></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check mr-2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
             Add selected to enquiry
           </button>
         </div>
 
+        <!-- FLAT CONTENT -->
         <div id="flat-content" class="tab-content hidden">
-          <div class="product-card">
-            <h2 class="search-category-title">Flat</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
-                </div>
+          <div class="spec-sheet-card">
+            <div class="spec-toolbar">
+              <div class="spec-section-badge">
+                <span class="badge-label">Flat Bar Specifications</span>
               </div>
-              <div class="table-body" id="flat-items"></div>
+            </div>
+            <div class="product-card">
+              <h2 class="search-category-title">Flat</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size (mm)</div>
+                    <div class="table-header cell-weight">Weight (kg/pc)</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
+                  </div>
+                </div>
+                <div class="table-body" id="flat-items"></div>
+              </div>
             </div>
           </div>
           <button class="add-to-cart-btn btn p-lg w-100" id="flat-add-btn">
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path></svg></span>
-            Add selected to enquiry
-          </button>
-        </div>
-        <div id="channel-content" class="tab-content hidden">
-          <div class="product-card">
-            <h2 class="search-category-title">Channel</h2>
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">Size (mm)</div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
-                </div>
-              </div>
-              <div class="table-body" id="channel-items"></div>
-            </div>
-          </div>
-          <button class="add-to-cart-btn btn p-lg w-100" id="channel-add-btn">
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path></svg></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check mr-2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
             Add selected to enquiry
           </button>
         </div>
 
-        <div id="sheet-content" class="tab-content hidden">
-          <div class="mb-2 mobile-only text-center text-muted-foreground">
-            8X4 Sheet
-          </div>
-          <div class="product-card">
-            <div class="product-table">
-              <div class="table-head">
-                <div class="table-row">
-                  <div class="table-header">Thickness (mm)</div>
-                  <div class="table-header">Weight</div>
-                  <div class="table-header text-center">Quantity</div>
-                </div>
+        <!-- CHANNEL CONTENT -->
+        <div id="channel-content" class="tab-content hidden">
+          <div class="spec-sheet-card">
+            <div class="spec-toolbar">
+              <div class="spec-section-badge">
+                <span class="badge-label">Structural Channel Specifications</span>
               </div>
-              <div class="table-body" id="sheet-items"></div>
+            </div>
+            <div class="product-card">
+              <h2 class="search-category-title">Channel</h2>
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Size (mm)</div>
+                    <div class="table-header cell-weight">Weight (kg/pc)</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
+                  </div>
+                </div>
+                <div class="table-body" id="channel-items"></div>
+              </div>
+            </div>
+          </div>
+          <button class="add-to-cart-btn btn p-lg w-100" id="channel-add-btn">
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check mr-2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
+            Add selected to enquiry
+          </button>
+        </div>
+
+        <!-- SHEET CONTENT -->
+        <div id="sheet-content" class="tab-content hidden">
+          <div class="spec-sheet-card">
+            <div class="spec-toolbar">
+              <div class="spec-section-badge">
+                <span class="badge-label">8 &times; 4 ft Industrial Sheet</span>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-table">
+                <div class="table-head">
+                  <div class="table-row table-header-row">
+                    <div class="table-header cell-size">Thickness (mm)</div>
+                    <div class="table-header cell-weight">Weight (kg/pc)</div>
+                    <div class="table-header cell-qty text-center">Quantity</div>
+                  </div>
+                </div>
+                <div class="table-body" id="sheet-items"></div>
+              </div>
             </div>
           </div>
           <button class="add-to-cart-btn btn p-lg w-100" id="sheet-add-btn">
-            <span
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-shopping-cart mr-2 h-5 w-5"
-                aria-hidden="true"
-              >
-                <circle cx="8" cy="21" r="1"></circle>
-                <circle cx="19" cy="21" r="1"></circle>
-                <path
-                  d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-                ></path></svg></span>
+            <span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-check mr-2" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></span>
             Add selected to enquiry
           </button>
         </div>
       </div>
     </main>
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <div class="footer-brand">
+            <img src="../assets/logo.svg" alt="Navkar Metals" class="footer-logo" width="24" height="20" />
+            <span class="footer-title">Navkar Metals</span>
+          </div>
+          <p class="footer-copy">© 2026 Navkar Metals. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <a
+            href="https://7level.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="powered-by-link"
+            aria-label="Powered by 7level"
+          >
+            <span class="powered-by-text">Powered by</span>
+            <div class="powered-by-badge">
+              <img
+                src="../assets/7level.png"
+                alt="7level"
+                class="powered-by-logo"
+                width="18"
+                height="18"
+              />
+              <span class="powered-by-name">7level</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <button class="floating-add-cart-btn btn p-lg hidden" id="floating-add-cart">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="32"
-        height="32"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
-        class="lucide lucide-shopping-cart h-5 w-5"
+        class="lucide lucide-clipboard-list h-5 w-5"
         aria-hidden="true"
       >
-        <circle cx="8" cy="21" r="1"></circle>
-        <circle cx="19" cy="21" r="1"></circle>
-        <path
-          d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
-        ></path>
+        <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        <path d="M12 11h4"/>
+        <path d="M12 16h4"/>
+        <path d="M8 11h.01"/>
+        <path d="M8 16h.01"/>
       </svg>
       Add to enquiry <span class="floating-cart-count" aria-hidden="true"></span>
     </button>
@@ -406,37 +415,27 @@
     <div class="cart-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="enquiry-title" aria-hidden="true">
       <div class="cart-header">
-          <div>
-            <h2 id="enquiry-title">Your enquiry <span class="enquiry-count" id="total-items">(0)</span></h2>
-          </div>
+        <div class="cart-header-title-wrap">
+          <h2 id="enquiry-title">Your enquiry</h2>
+          <span class="enquiry-count" id="total-items">(0)</span>
+        </div>
         <button class="close-btn" id="close-cart" type="button" aria-label="Close enquiry">&times;</button>
       </div>
-      <!-- <div class="item-attributes">
-        <span class="text-muted-foreground">Item</span>
-        <span class="text-muted-foreground">Weight</span>
-        <span class="text-muted-foreground text-center">Quantity</span>
-        <span class="text-muted-foreground">Total Item Weight</span>
-      </div> -->
       <div class="cart-content" id="cart-items"></div>
       <div class="cart-footer">
-        <button class="clear-cart-btn btn p-md w-100" id="clear-cart-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 6h18"></path>
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-            <line x1="10" y1="11" x2="10" y2="17"></line>
-            <line x1="14" y1="11" x2="14" y2="17"></line>
-          </svg>
-          Clear Cart
-        </button>
-        <div class="cart-total">
-          <span>Total Weight:</span>
-          <span><span id="total-weight">0</span> kg</span>
+        <div class="cart-footer-summary">
+          <div class="cart-total">
+            <span class="cart-total-label">Estimated Net Weight:</span>
+            <span class="cart-total-val"><strong id="total-weight">0</strong> kg</span>
+          </div>
+          <button class="clear-cart-btn btn" id="clear-cart-btn" type="button" title="Clear all items">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+            Clear Enquiry
+          </button>
         </div>
-
-        <button class="checkout-btn btn p-lg w-100" type="button">
-          <img class="whatsapp-icon" src="../assets/WhatsApp_icon.webp" alt="" aria-hidden="true" width="24" height="24" />
-          Whatsapp Enquiry
+        <button class="checkout-btn btn w-100" type="button">
+          <img class="whatsapp-icon" src="../assets/WhatsApp_icon.webp" alt="" aria-hidden="true" width="20" height="20" />
+          Send WhatsApp Enquiry
         </button>
         <p class="enquiry-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
       </div>

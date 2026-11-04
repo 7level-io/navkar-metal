@@ -1,5 +1,5 @@
 .HeroSection {
-  padding: 7.9rem 0;
+  padding: 5rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -7,16 +7,14 @@
 .HeroSection .lines-bg {
   width: 100%;
   pointer-events: none;
-
   position: absolute;
   top: 0;
-
   display: grid;
   grid-template-columns: 5fr 5fr 6fr 3fr;
 }
 
 .HeroSection .lines-bg .lines {
-  height: 7.7rem;
+  height: 6.5rem;
   border-right: none;
   transform-origin: top center;
   transform: scaleY(0);
@@ -26,7 +24,7 @@
 .HeroSection .lines-bg .lines:nth-child(4n + 2),
 .HeroSection .lines-bg .lines:nth-child(3),
 .HeroSection .lines-bg .lines:nth-child(7) {
-  border-right: 1.75px solid #1f1f1f;
+  border-right: var(--line-structural, 1.5px) solid var(--border-dark, #1f1f1f);
 }
 
 .hero-heading {
@@ -35,14 +33,14 @@
 
 .hero-heading .border {
   position: absolute;
-  background: #1f1f1f;
+  background: var(--border-dark, #1f1f1f);
   transform-origin: left top;
 }
 
 .hero-heading .border.top,
 .hero-heading .border.bottom {
   left: 0;
-  height: 1.5px;
+  height: var(--line-structural, 1.5px);
   width: 100%;
   transform: scaleX(0); /* collapsed */
 }
@@ -50,6 +48,7 @@
 .hero-heading .border.top {
   top: 0;
 }
+
 .hero-heading .border.bottom {
   bottom: 0;
 }
@@ -61,8 +60,8 @@
 
 .hero-heading h1 .border.right {
   top: 0;
-  right: -2px;
-  width: 2px;
+  right: calc(-1 * var(--line-structural, 1.5px));
+  width: var(--line-structural, 1.5px);
   height: 100%;
   transform: scaleY(0);
   position: absolute;
@@ -70,9 +69,10 @@
 
 .HeroSection .hero-heading h1 {
   max-width: fit-content;
-  padding: 0 2rem 0 5rem;
-  font-size: 6rem;
-  letter-spacing: -10px;
+  padding: 0.5rem 3rem;
+  font-size: clamp(3rem, 7vw, 6rem);
+  letter-spacing: -0.06em;
+  line-height: 1.1;
 }
 
 .HeroSection .hero-heading .grey-block {
@@ -80,41 +80,42 @@
   right: 0;
   top: 0;
   width: 15.6vw;
-  background-color: #306beb;
+  background-color: var(--border-accent, #306beb);
   height: 100%;
   z-index: -1;
 }
 
 @media screen and (max-width: 767px) {
   .HeroSection {
-    padding: 5rem 0 6.5rem;
+    padding: 3.5rem 0 4.5rem;
   }
 
   .HeroSection .hero-heading h1 {
-    padding: 0 1rem 0 1rem;
-    font-size: 4rem;
-    letter-spacing: -6px;
+    padding: 0.35rem 1.5rem;
+    letter-spacing: -0.05em;
     z-index: 1;
   }
+
   .HeroSection .lines-bg .lines {
-    height: 5rem;
+    height: 4.5rem;
   }
 }
 
 @media screen and (max-width: 526px) {
   .HeroSection {
-    padding: 2rem 0 8.25rem;
+    padding: 2.5rem 0 3.5rem;
   }
 
   .HeroSection .hero-heading h1 {
-    font-size: 3rem;
-    letter-spacing: -5px;
+    padding: 0.25rem 1rem;
+    letter-spacing: -0.04em;
   }
 
   .HeroSection .lines-bg .lines {
-    height: 2.85rem;
+    height: 3rem;
   }
+
   .HeroSection .lines-bg .lines:nth-last-child(-n + 4) {
-    height: 9rem;
+    height: 6rem;
   }
 }

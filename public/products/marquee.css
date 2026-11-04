@@ -1,6 +1,9 @@
 .marquee-container {
   background-color: #121212;
+  font-family: "Inter", sans-serif;
   font-size: 0.75rem;
+  letter-spacing: 0.01em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .marquee-inner {
@@ -11,7 +14,7 @@
 
 .marquee-label {
   padding: 0.5rem 1.5rem;
-  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   z-index: 1;
   flex-shrink: 0;
   white-space: nowrap;
@@ -21,7 +24,7 @@
   overflow: hidden;
   flex: 1;
   position: relative;
-  padding: 0.875rem 0;
+  padding: 0.625rem 0;
 }
 
 .marquee-content {
@@ -35,12 +38,13 @@
 .marquee-content span {
   display: inline-flex;
   gap: 0.5rem;
-  margin-right: 5rem;
+  margin-right: 4rem;
   align-items: center;
 }
 
 .marquee-content span svg {
-  fill-opacity: 0.82;
+  fill: #fff;
+  fill-opacity: 0.85;
 }
 
 .marquee-content:hover {
@@ -60,12 +64,4 @@
   .marquee-label {
     padding: 0.5rem 1rem;
   }
-}
-
-.marquee-container {
-  font-family: "Inter", sans-serif;
-}
-
-.marquee-track {
-  padding: 0.75rem 0;
 }
